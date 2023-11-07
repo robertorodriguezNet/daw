@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DAW02 - Tarea</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+  </head>
+  <body>
+    <h2>DAW02 - Tarea</h2>
+    <h1>Tabla de multiplicar usando diferentes bucles</h1>
+
+      <form onsubmit="mostrarTabla()">
+        <label for="numero">Introduce el número: </label>
+        <!-- <input type="number" name="numero" id="numero" required /> -->
+        <select name="numero" id="numero">
+          <option value="7" selected>7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+        </select>
+        <br>
+        <label for="bucle">Selecciona el tipo de bucle: </label>
+        <select name="bucle" id="bucle">
+          <option value="for" selected>for</option>
+          <option value="while">while</option>
+          <option value="doWhile">do while</option>
+        </select>
+        <br>
+        <input type="submit" name="submit" id="submit" value="Mostrar tabla" />
+      </form>
+      <div id="tabla"></div>
+
+
+    <hr />
+
+    <h2>Operaciones con operadores binarios</h2>
+
+    <dl>
+      <dt>
+        125 / 8 =
+        <span id="operacion1">
+          <button onclick="oprearEnBinario(125,8,'/',1)">calcular</button>
+        </span>
+      </dt>
+      <dd>
+        0111 1101 (125) >> 0011 1110 (62) >> 0001 1111 (31) >> 0000 1111 (15) >> 0000 0111 (7)
+      </dd>
+      <dt>
+        40 * 4 =
+        <span id="operacion2">
+          <button onclick="oprearEnBinario(40,4,'*',2)">calcular</button>
+        </span>
+      </dt>
+      <dd>
+        0010 1000 (40) << 0101 0000 (80) << 1010 0000 (160)
+      </dd>
+      <dt>
+        25 / 2 =
+        <span id="operacion3">
+          <button onclick="oprearEnBinario(25,2,'/',3)">calcular</button>
+        </span>
+      </dt>
+      <dd>
+        0001 1001 (25) >> 0000 1100 (12)
+      </dd>
+      <dt>
+        10 * 16 =
+        <span id="operacion4">
+          <button onclick="oprearEnBinario(10,16,'*',4)">calcular</button>
+        </span>
+      </dt>
+      <dd>
+        1010 (10) << 0001 0100 (20) << 0010 1000 (40) << 0101 0000 (80) << 1010 0000 (160) << 0001 0100 0000 (320) << 0010 1000 0000 (640) << 0101 0000 0000 (1280) << 1010 0000 0000 (2560)
+      </dd>
+    </dl>
+
+    <script type="text/javascript" src="js/tablaMultiplicar.js"></script>
+  </body>
+</html>

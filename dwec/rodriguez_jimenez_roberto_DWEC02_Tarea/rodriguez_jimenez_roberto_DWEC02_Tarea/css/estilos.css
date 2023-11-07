@@ -1,0 +1,17 @@
+body{
+    text-align: center;
+}
+
+form,
+#tabla{
+    width: 300px;
+    margin: 0 auto;
+}
+
+ul{
+    list-style: none;
+}
+dd{
+    margin-bottom: 20px;
+    font-size: 0.8rem;
+}

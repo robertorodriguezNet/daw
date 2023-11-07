@@ -1,0 +1,67 @@
+
+table {
+    width: 100%;
+    max-width: 1024px;
+    border: solid 1px #000;
+    margin: 0 auto;
+}
+
+#breadcrumbs,
+#footer{
+    font-size: 12px;
+}    
+
+td {
+    border: solid 1px #000;
+    padding: 10px;
+}
+
+#logo img{
+    width: 100px;
+}
+
+#nav {
+    text-align: center;
+}
+
+#nav ul li {
+    display: inline;
+    padding: 5px 10px;
+    border: solid 1px #000;
+    border-radius: 6px;
+}
+
+#switcher{
+    text-align: right;
+}
+#switcher img{
+    width: 30px;
+}
+
+#hero{
+    padding: 40px 0;
+    text-align: center;
+    background-image: url('assets/negocio.webp');
+    background-size: cover;
+    max-height: 370px;
+    background-position: center;
+}
+
+#sections{
+    text-align: center;
+    vertical-align: top;
+}
+#sections img{
+    width: 100px;
+}
+#sections p{
+    text-align: left;
+}
+
+#mapa ul li{
+    list-style-type: none;
+}
+
+#design{
+    text-align: right;
+}

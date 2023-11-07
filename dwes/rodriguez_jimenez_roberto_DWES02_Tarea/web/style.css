@@ -1,0 +1,42 @@
+h1{
+    text-align: center;
+}
+fieldset{
+    margin: 0 auto;
+    width: 300px;
+}
+
+.row{
+    display: flex;
+    margin: 10px 0;
+}
+
+.col.label{
+    width: 30%;
+}
+
+input[type="submit"],
+input[type="reset"]{
+    margin: 10px;
+}
+
+.error{
+    color: #f00;
+    text-align: center;
+}
+
+table{
+    width: 100%;
+}
+td{
+    width: 50%;
+}
+td.telefono{
+    text-align: center;
+}
+
+.botones{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
