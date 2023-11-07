@@ -127,3 +127,41 @@ DOMINIO="empresa-tarea-daw02";
 # # Habilitar el módulo authz_groupfile para evitar problemas
 # a2enmod authz_groupfile
 # systemctl restart apache2
+
+
+
+# # 5 Permitir el protocolo HTTPS en el virtualhost empresa-tarea-daw02
+# # Instalar y configurar SSL
+# apt-get install openssl
+# a2enmod ssl
+
+# # Modificar el archivo de configuración
+# echo -e "<IfModule mod_ssl.c>
+#         <VirtualHost www.${DOMINIO}.local:443>
+#                 ServerAdmin webmaster@localhost
+
+#                 DocumentRoot /var/www/todo-empresa-tarea-daw02
+
+#                 ErrorLog \${APACHE_LOG_DIR}/error.log
+#                 CustomLog \${APACHE_LOG_DIR}/access.log combined
+
+#                 SSLEngine on
+
+#                 SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
+#                 SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+#                 <FilesMatch \"\.(cgi|shtml|phtml|php)$\">
+#                                 SSLOptions +StdEnvVars
+#                 </FilesMatch>
+#                 <Directory /usr/lib/cgi-bin>
+#                                 SSLOptions +StdEnvVars
+#                 </Directory>
+
+
+
+#         </VirtualHost>
+# </IfModule>"  >> /etc/apache2/sites-available/$DOMINIO.conf
+
+# systemctl restart apache2
+
+# Funciona con los certificados generales
