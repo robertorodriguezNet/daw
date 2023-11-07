@@ -36,11 +36,11 @@ php -v
 
 # Estos comando se deben ejecutar manualmente, pues son de MySQL
 # alter user 'root'@'localhost' identified with auth_socket by '12345678';
-# alter user 'root'@'localhost' identified with mysql_native_password by '87654321';
+# alter user 'root'@'localhost' identified with mysql_native_password by '12345678';
 # select user, authentication_string, plugin, host from mysql.user;
 
 # Hay que volver a entrar como root con la clave
 # sudo mysql -u root -p
 
 # create user 'roberto'@'localhost' identified by '12345678';
-# grant all privileges on *.* to 'roberto'@'loclahost' with grant option;
+# grant all privileges on *.* to 'roberto'@'localhost' with grant option;
