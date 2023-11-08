@@ -133,7 +133,7 @@ clear
 # Instalar OpenSSL 
 apt-get install openssl
 
-Crear el durectorio para guardar los certificados
+# Crear el durectorio para guardar los certificados
 mkdir /etc/apache2/certs
 
 openssl req -new -nodes -keyout /etc/apache2/certs/empresa-tarea-daw02.key -out /etc/apache2/certs/empresa-tarea-daw02.csr
