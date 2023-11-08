@@ -122,7 +122,7 @@ clear
 # AuthUserFile acceso/passwords
 # AuthGroupFile acceso/grupos
 # #Require valid-user
-# #Require group admin" >> /var/www/todo-$DOMINIO/delimitado/.htaccess
+# Require group admin" >> /var/www/todo-$DOMINIO/delimitado/.htaccess
 
 # # Habilitar el módulo authz_groupfile para evitar problemas
 # a2enmod authz_groupfile
