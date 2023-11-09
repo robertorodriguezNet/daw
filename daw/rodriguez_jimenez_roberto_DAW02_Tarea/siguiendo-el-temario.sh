@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# # Borrar directorios si existirean
+# rm -rd /var/www/autofirmado.ssl.todo-empresa-tarea-daw02
+# rm /etc/apache2/sites-available/autofirmado.ssl.empresa-tarea-daw02.conf
+# rm -rd /etc/apache2/certs
+# sed '/10.0.2.15 autofirmado.ssl.empresa-tarea-daw02.local/d ' -i /etc/hosts
+# sed 's/apache2\/certs\/apache.pem/ssl\/certs\/ssl-cert-snakeoil.pem/' -i /etc/apache2/sites-available/default-ssl.conf
+# sed 's/apache2\/certs\/apache.pem/ssl\/private\/ssl-cert-snakeoil.key/' -i /etc/apache2/sites-available/default-ssl.conf
+
 clear
 
 # Instalar OpenSSL
@@ -7,6 +15,7 @@ apt install openssl
 
 # Crear los directorios para los certificados propios
 mkdir /etc/apache2/certs
+
 
 # Generar el certificado autofirmado para el servidor
 make-ssl-cert /usr/share/ssl-cert/ssleay.cnf /etc/apache2/certs/apache.pem
