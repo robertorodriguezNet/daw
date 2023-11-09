@@ -131,9 +131,13 @@ systemctl restart apache2
 
 
 # 5 Permitir el protocolo HTTPS en el virtualhost empresa-tarea-daw02
-# Instalar y configurar SSL
-apt-get install openssl
-a2enmod ssl
+
+# Crear el directorio en el que guardar los certificados
+mkdir /etc/apache2/certs
+openssl req -new -nodes -keyout /etc/apache2/certs/daw02.key -out /etc/apache2/certs/daw.csr
+
+# Realizar la autofirma
+openssl x509 -in /etc/apache2/certs/daw02.csr -out /etc/apache2/certs/daw02.crt -req -signkey /etc/apache2/certs/daw02.key -days 365
 
 # Modificar el archivo de configuración
 echo -e "<IfModule mod_ssl.c>
@@ -144,8 +148,8 @@ echo -e "<IfModule mod_ssl.c>
 
                 SSLEngine on
 
-                SSLCertificateFile      /etc/ssl/certs/ssl-cert-snakeoil.pem
-                SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+                SSLCertificateFile      /etc/apache2/certs/daw02.crt
+                SSLCertificateKeyFile  /etc/apache2/certs/daw02.key
 
                 ErrorLog \${APACHE_LOG_DIR}/error.log
                 CustomLog \${APACHE_LOG_DIR}/access.log combined
@@ -153,27 +157,6 @@ echo -e "<IfModule mod_ssl.c>
         </VirtualHost>
 </IfModule>"  >> /etc/apache2/sites-available/$DOMINIO.conf
 
-# Habilitamos default-ssl como configuración por defecto
-a2ensite default-ssl
-systemctl restart apache2
-
-# Funciona con los certificados generales
-
-# Generar el certificado
-
-# Crear el directorio en el que guardar los certificados
-mkdir /etc/apache2/certs
-openssl req -new -nodes -keyout /etc/apache2/certs/daw02.key -out /etc/apache2/certs/daw.csr
-
-# Realizar la autofirma
-openssl x509 -in /etc/apache2/certs/daw02.csr -out /etc/apache2/certs/daw02.crt -req -signkey /etc/apache2/certs/daw02.key -days 365
-
-# Modificar los archivos de default-ssl.conf
-sed 's/ssl\/certs\/ssl-cert-snakeoil.pem/apache2\/certs\/daw02.crt/' -i /etc/apache2/sites-available/default-ssl.conf
-sed 's/ssl\/private\/ssl-cert-snakeoil.key/apache2\/certs\/.key/' -i /etc/apache2/sites-available/default-ssl.conf
-
 # Hbilitar el módulo ssl
 a2enmod ssl
-a2ensite default-ssl
-
 systemctl restart apache2
