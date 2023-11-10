@@ -161,11 +161,20 @@ clear
 # a2enmod ssl
 # systemctl restart apache2
 
-# 6.- Confifurar los archivos de registro como sigue:
-# Mostrar el archivo log: tail -f nombre-archivo.log
-sed '/DocumentRoot/ a \
+# # 6.- Confifurar los archivos de registro como sigue:
+# # Mostrar el archivo log: tail -f nombre-archivo.log
+# sed '/DocumentRoot/ a \
+#     \
+#     LogFormat "%h %l %u \\"%r\\" %s> %O \\"%{User-Agent}i\\"" combined\
+#     CustomLog "empresa-tarea-daw02-access.log" combined\
+#     ErrorLog "empresa-tarea-daw02-error.log"\
+# ' -i /etc/apache2/sites-available/empresa-tarea-daw02.conf
+
+# 7.- Rotar logs por intervalos de 24 horas.
+sed '/ErrorLog "empresa-tarea-daw02-error.log"/ a \
     \
-    LogFormat "%h %l %u \\"%r\\" %s> %O \\"%{User-Agent}i\\"" combined\
-    CustomLog "empresa-tarea-daw02-access.log" combined\
-    ErrorLog "empresa-tarea-daw02-error.log"\
+   CustomLog "|\/usr\/bin\/rotatelogs \/etc\/apache2\/empresa-tarea-daw02-access.log 86400" common\
+    ErrorLog "|\/usr\/bin\/rotatelogs \/etc\/apache2\/empresa-tarea-daw02-error.log 86400"\
 ' -i /etc/apache2/sites-available/empresa-tarea-daw02.conf
+
+systemctl restart apache2
