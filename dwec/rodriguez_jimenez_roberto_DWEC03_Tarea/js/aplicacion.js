@@ -41,7 +41,6 @@ const iniciarApp = () => {
     // Llamar a la función que creará el contenido
     crearContenido();
     
-    
 }
 
 /**
