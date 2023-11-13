@@ -54,14 +54,26 @@ const cerrarApp = () => {
  * Función para dar contenido a la ventana abierta
  */
 function crearContenido() {
+
+  // Obtener los valores de los objetos.
+  // Algunas de estas propiedades, y algún método, están obsoletas (noviembre de 2023).
   let documento = app.document;
   let url = location.href;
   let protocolo = location.protocol;
+
+  // Para obtener la información del navegador se usa userAgent,
+  // que contiene la información que da appCodeName() (obsoleta).
   let navegador = navigator.userAgent;
+
+  // javaEnabled() en un método obsoleto.
+  // No se recomienda su uso y la alternativa es consultar
+  // la compatibilidad del navegador.
   let java = navigator.javaEnabled();
 
+  // Header con el título.
   documento.write("<h3>Ejemplo de nueva ventana</h3>");
 
+  // Lista de definiciones con los datos que se piden.
   documento.write("<dl>");
   documento.write(`<dt>URL:</dt><dd>${url}</dd>`);
   documento.write(`<dt>Protocolo:</dt><dd>${protocolo}</dd>`);
@@ -73,22 +85,12 @@ function crearContenido() {
   );
   documento.write("</dl>");
 
-  documento.write(crearFrame("www.google.com",800,600));
-}
-
-/**
- * Función que crea un frame a la URL indicada y con la dimensión que
- * se recibe como parámtro.
- * @param {String} url - La URL que se cargará en el frame.
- * @param {Number} width - Ancho del frame.
- * @param {Number} height - Alto del frame.
- */
-function crearFrame(url, width, height) {
-    return `<iframe
-    id="inlineFrameExample"
-    title="Inline Frame Example"
-    width="${width}"
-    height="${height}"
-    src="${url}">
-  </iframe>`;
+  // iframe solicitando una url que es rechazada.
+  documento.write(`<iframe
+  id="iframe-goole"
+  title="Google"
+  width="800"
+  height="600"
+  src="www.google.es">
+</iframe>`);
 }
