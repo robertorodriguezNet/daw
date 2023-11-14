@@ -11,8 +11,10 @@ const inicializar = () => {
 };
 
 /**
- * @param Date fecha es la fecha en tipo Date
- * @return int el año
+ * Deveulve los años resultantes de obtener la diferencia
+ * entre dos fechas.
+ * @param {Date} fecha la fecha de nacimiento
+ * @returns la fecha resultante en formato 'aaaa'
  */
 function getEdad(fecha) {
   // Obtener la edad en milisegundos
