@@ -1,4 +1,5 @@
-# https://www.youtube.com/watch?v=84y-qRFouK4
+# lampp: https://www.youtube.com/watch?v=84y-qRFouK4
+# phpmyadmin: https://youtu.be/AQxKGpWw2e8
 # cod: https://pastecode.io/s/8dnqiu76
 # 18/11/2023
 
@@ -35,3 +36,25 @@ mysql_secure_installation
 # Reload privilege tables now? [Y/n] y
 
 systemctl restart mariadb
+
+# ----------------------------------------------
+# -- PHPMYADMIN --------------------------------
+# ----------------------------------------------
+
+# Instalar dependencias
+apt install php-mbstring php-xml -y
+apt install php-fpm -y
+
+systemctl restart apache2
+
+# Descargar el archivo comprimido de phpMyAdmin en /var/www/html
+# Copiar el enlace desde https://www.phpmyadmin.net/downloads/
+wget -P /var/www/html https://files.phpmyadmin.net/phpMyAdmin/5.2.1/phpMyAdmin-5.2.1-all-languages.tar.gz 
+
+mkdir /var/www/html/phpmyadmin 
+tar -xvzf /var/www/html/phpMyAdmin-5.2.1-all-languages.tar.gz -C /var/www/html/phpmyadmin --strip-components 1
+
+rm /var/www/html/phpMyAdmin-5.2.1-all-languages.tar.gz
+systemctl restart mariadb
+# systemctl status mariadb
+
