@@ -1,0 +1,1 @@
+mysql -u root < /home/roberto/Documentos/daw/dwes/rodriguez_jimenez_roberto_DWES03_Tarea/proyecto.sql;
