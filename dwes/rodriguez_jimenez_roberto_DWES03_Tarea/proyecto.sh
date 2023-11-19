@@ -16,3 +16,5 @@ mkdir "/var/www/proyecto";
 echo "<?php 
     // Ejercicio 3.1.3
 ?>" > /var/www/proyecto/ejercicio-3-1-3.php
+
+chown roberto:roberto -R proyecto
