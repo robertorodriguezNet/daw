@@ -37,5 +37,5 @@ create table if not exists stocks(
 );
 
 -- Usuario
-create user admin@'*' identified by "0000";
-grant all on *.* to admin@'*';
+create user gestor@'localhost' identified by "secreto";
+grant all on *.* to gestor@'localhost';

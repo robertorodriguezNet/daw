@@ -5,3 +5,14 @@ mysql -u root < /home/roberto/Documentos/daw/dwes/rodriguez_jimenez_roberto_DWES
 # Ejercicio 2.2.2
 # Cargar datos
 mysql -u root < /home/roberto/Documentos/daw/dwes/rodriguez_jimenez_roberto_DWES03_Tarea/proyecto_datos.sql;
+
+# Ejercicio 3.1.3
+# Mover una unidad del producto 3DSNG de la tienda 1 a la 3
+# usando transacciones.
+
+# Para el ejercicio vamos a crear la web 'proyecto'
+mkdir "/var/www/proyecto";
+
+echo "<?php 
+    // Ejercicio 3.1.3
+?>" > /var/www/proyecto/ejercicio-3-1-3.php
