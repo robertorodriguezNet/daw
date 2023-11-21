@@ -108,17 +108,25 @@ $cnxDb->close();
                             <tr>
                                 <th class="text-center bg-light" scope="col">Tienda</th>
                                 <th class="text-center bg-light" scope="col">Uds.</th>
+                                <th class="text-center bg-light" scope="col">&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php while ($stockDeUnProducto != null): ?>
                                 <tr>
-                                    <td>
-                                        <?= $stockDeUnProducto->nombre ?>
-                                        </>
-                                    <td class="text-center">
-                                        <?= $stockDeUnProducto->unidades ?>
-                                    </td>
+
+                                    <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+                                        <td>
+                                            <?= $stockDeUnProducto->nombre ?>
+                                        </td>
+                                        <td class="text-center">
+                                            <?= $stockDeUnProducto->unidades ?>
+                                        </td>
+                                        <td>
+                                            <input type="submit" id="actualizar" name="actualizar" value="Actualizar">
+                                        </td>
+                                    </form>
+
                                 </tr>
                                 <?php $stockDeUnProducto = $resultadoDeUnProducto->fetch_object(); ?>
                             <?php endwhile; ?>
