@@ -1,36 +1,45 @@
 <?php
 
+// La conexión con la base de datos la tenemos que hacer aunque
+// no haya peticiones, ya que tenemos que mostrar el listado de productos.
+$host = 'localhost';
+$port = 3306;
+$user = 'gestor';
+$pass = 'secreto';
+$db = 'proyecto';
+
+$error = false;
+
+// Conectar con la base de datos
+@$cnxDb = mysqli_connect($host, $user, $pass, $db);
+
+// Si hay error se cierra la app
+if ($cnxDb->connect_error) {
+    die('Error en la conexión: ' . $cnxDb->connect_error);
+}
+
+// Obtener el listado de productos
+$consultaDeProductos = 'SELECT id, nombre FROM productos ORDER BY nombre';
+
+$resultadoDeProductos = $cnxDb->query($consultaDeProductos);
+$listadoDeProductos = $resultadoDeProductos->fetch_object();
+
 // Comprobamos que exista el producto
 if (isset($_POST["producto"])) {
 
-    $host = 'localhost';
-    $port = 3306;
-    $user = 'gestor';
-    $pass = 'secreto';
-    $db = 'proyecto';
-
-    $error = false;
-
-    // Conectar con la base de datos
-    @$cnxDb = mysqli_connect($host, $user, $pass, $db);
-
-    // Si hay error se cierra la app
-    if ($cnxDb->connect_error) {
-        die('Error en la conexión: ' . $cnxDb->connect_error);
-    }
-
     // Montamos las consultas
-    $query = 'SELECT * FROM stocks WHERE producto = ' . $_POST['producto'];
+    $ConsultaDeUnProducto = 'SELECT s.unidades, t.nombre FROM stocks as s, tiendas as t WHERE s.producto = ' . $_POST['producto'] . '  AND t.id = s.tienda';
+    //  'SELECT * FROM stocks WHERE producto = ' . $_POST['producto'];
+
 
     // Obtener un resultado
-    $result = $cnxDb->query($query);
+    $resultadoDeUnProducto = $cnxDb->query($ConsultaDeUnProducto);
 
     // Pasamos el resultado a un objeto
-    $stock = $result->fetch_object();
-
-    $cnxDb->close();
+    $stockDeUnProducto = $resultadoDeUnProducto->fetch_object();
 }
 
+$cnxDb->close();
 ?>
 
 <!DOCTYPE html>
@@ -66,9 +75,20 @@ if (isset($_POST["producto"])) {
                         <p class="mt-3 mb-3">
                             <label for="producto">Producto: </label>
                             <select name="producto" id="producto" class="rounded">
-                                <option value="1">producto 1</option>
-                                <option value="12">producto 12</option>
-                                <option value="132">producto 132</option>
+
+                                <?php while ($listadoDeProductos != null): ?>
+                                    <option value="<?= $listadoDeProductos->id ?>" 
+                                        <?php if(isset($_POST['producto']) && $_POST['producto'] == $listadoDeProductos->id):?>
+                                            selected
+                                            <?php endif; ?>
+                                            >
+                                        <?= $listadoDeProductos->nombre ?>
+                                    </option>
+                                    <?php
+                                    $listadoDeProductos = $resultadoDeProductos->fetch_object();
+                                endwhile;
+                                ?>
+
                             </select>
                         </p>
 
@@ -80,23 +100,27 @@ if (isset($_POST["producto"])) {
 
         <?php if (isset($_POST['producto'])): ?>
 
-            <div class="row mt-3 mb-3">
+            <div class="row justify-content-center mt-3 mb-3">
                 <div class="col-6">
                     <table class="table border border-gray rounded">
 
                         <thead>
                             <tr>
-                                <th class="text-center" scope="col">Tienda</th>
-                                <th class="text-center" scope="col">Uds.</th>
+                                <th class="text-center bg-light" scope="col">Tienda</th>
+                                <th class="text-center bg-light" scope="col">Uds.</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php while ($stock != null): ?>
+                            <?php while ($stockDeUnProducto != null): ?>
                                 <tr>
-                                    <td class="text-center"><?= $stock->tienda ?></>
-                                    <td class="text-center"><?= $stock->unidades ?></td>
+                                    <td>
+                                        <?= $stockDeUnProducto->nombre ?>
+                                        </>
+                                    <td class="text-center">
+                                        <?= $stockDeUnProducto->unidades ?>
+                                    </td>
                                 </tr>
-                                <?php $stock = $result->fetch_object(); ?>
+                                <?php $stockDeUnProducto = $resultadoDeUnProducto->fetch_object(); ?>
                             <?php endwhile; ?>
                         </tbody>
 
