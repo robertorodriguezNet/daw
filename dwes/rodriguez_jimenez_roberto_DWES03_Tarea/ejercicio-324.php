@@ -1,5 +1,4 @@
 <?php
-// Uso de PDO
 
 // La conexión con la base de datos la tenemos que hacer aunque
 // no haya peticiones, ya que tenemos que mostrar el listado de productos.
@@ -9,10 +8,7 @@ $user = 'gestor';
 $pass = 'secreto';
 $db = 'proyecto';
 
-// Nombre del origen de los datos (Data Source Name)
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
-
-// Conectar con la base de datos
 $cnxDb = new PDO($dsn,$user,$pass);
 
 $cnxDb->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
@@ -27,18 +23,12 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
     $producto = $_POST['producto'];
     $tienda = $_POST['tienda'];
 
-    $consultaParaActualizar = "UPDATE stocks SET unidades = $unidades  WHERE producto = $producto AND tienda = $tienda";
-        
-    // Iniciamos la trasacción
-    // Se desactiba autocommit al ejecutar beginTransaction()
     $cnxDb->beginTransaction();
-
-    // Ejecutar la cosulta
-    $isActualizacionOk = ($cnxDb->exec($consultaParaActualizar));
-    if($isActualizacionOk){
+    $stmt = $cnxDb->prepare('UPDATE stocks SET unidades = :unidades WHERE producto = :producto AND tienda = :tienda');
+    $isOk = ($stmt->execute([':unidades'=>$unidades,':producto'=>$producto, ':tienda'=>$tienda]));
+    if($isOk){
         $cnxDb->commit();
     }
-
 }
 
 ?>
@@ -76,12 +66,10 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
                         <p class="mt-3 mb-3">
                             <label for="producto">Producto: </label>
                             <select name="producto" id="producto" class="rounded">
-                                <?php 
-                                    $listado = $cnxDb->query('SELECT id, nombre FROM productos ORDER BY nombre');
-                                    // Obtner el primer objeto del resultado de la consulta
-                                    $producto = $listado->fetch(PDO::FETCH_OBJ);
-                                ?>
-                                <?php while ($producto != null): ?>
+                                <?php
+                                $listado = $cnxDb->query('SELECT id, nombre FROM productos ORDER BY nombre');
+                                $producto = $listado->fetch(PDO::FETCH_OBJ);
+                                while ($producto != null): ?>
                                     <option value="<?= $producto->id ?>" 
                                         <?php if(isset($_POST['producto']) && $_POST['producto'] == $producto->id):?>
                                             selected
@@ -93,8 +81,10 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
                                     $producto = $listado->fetch(PDO::FETCH_OBJ);
                                 endwhile;
                                 ?>
+
                             </select>
                         </p>
+
                         <button class="rounded">Mostrar</button>
                     </fieldset>
                 </form>
@@ -106,6 +96,7 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
             <div class="row justify-content-center mt-3 mb-3">
                 <div class="col-6">
                     <table class="table border border-gray rounded">
+
                         <thead>
                             <tr>
                                 <th class="text-center bg-light" scope="col">Tienda</th>
@@ -114,13 +105,10 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                                $listado = $cnxDb->query('SELECT s.tienda, s.unidades, t.nombre FROM stocks as s, tiendas as t WHERE s.producto = ' . $_POST['producto'] . '  AND t.id = s.tienda');
-
-                                // Primer objeto de la colección devuelta por la consulta
-                                $producto = $listado->fetch(PDO::FETCH_OBJ);
-                           
-                                while ($producto != null): ?>
+                            <?php 
+                            $listado = $cnxDb->query('SELECT s.tienda, s.unidades, t.nombre FROM stocks as s, tiendas as t WHERE s.producto = ' . $_POST['producto'] . '  AND t.id = s.tienda');
+                            $producto = $listado->fetch(PDO::FETCH_OBJ);
+                            while ($producto != null): ?>
                                 <tr>
 
                                     <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
@@ -138,10 +126,12 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
                                     </form>
 
                                 </tr>
-                                <?php $producto = $listado->fetch(PDO::FETCH_OBJ); 
-                                 endwhile; ?>
+                                <?php $producto = $listado->fetch(PDO::FETCH_OBJ); ?>
+                            <?php endwhile; ?>
                         </tbody>
+
                     </table>
+
                 </div>
             </div>
 
@@ -150,10 +140,7 @@ if(!empty($_POST) && isset($_POST['actualizar'])){
     </div>
 
     <script src="js/bootstrap.bundle.min.js"></script>
-    <?php 
-// Para cerrar una conexión hay que destruir el objeto
-$cnxDb = null;
-?>
 </body>
+<?php $cnxDb = null; ?>
 
 </html>
