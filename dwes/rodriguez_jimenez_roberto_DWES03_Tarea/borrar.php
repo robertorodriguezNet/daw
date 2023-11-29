@@ -15,20 +15,20 @@ try {
 }
 
 // Intentar ejecutar la consulta
-try{
+try {
 
     $cnx->beginTransaction();
-    ($cnx->exec('DELETE FROM productos WHERE id = ' . $_POST['id']))?
+    ($cnx->exec('DELETE FROM productos WHERE id = ' . $_POST['id'])) ?
         $cnx->commit() : $cnx->rollBack();
-    
-}catch(PDOException $e){
+
+} catch (PDOException $e) {
     echo 'Ocurrió un error y se puedo eliminar el producto: ' . $e->getMessage();
 }
 
 ?>
 
 <main class="container">
-    <div class="row">
+    <section class="row">
         <div class="col-12 text-center my-3">
             Producto con id
             <?= $_POST['id'] ?> borrado correctamente.
@@ -36,7 +36,7 @@ try{
         <div class="col-12 text-center my-3">
             <a href='listado.php' class='btn btn-primary'>Volver</a>
         </div>
-    </div>
+    </section>
 </main>
 
 <?php
