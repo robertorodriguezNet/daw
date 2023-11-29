@@ -1,5 +1,5 @@
 <?php
-$titulo = "Detalle de un producto";
+$titulo = "Detalle producto";
 include_once("includes/head.php");
 ?>
 
