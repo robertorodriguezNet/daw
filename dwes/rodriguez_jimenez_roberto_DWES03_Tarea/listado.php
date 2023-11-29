@@ -52,9 +52,12 @@ try {
                                     <td>
                                         <?= $producto->nombre ?>
                                     </td>
-                                    <td>
+                                    <td class="d-flex justify-content-around">
                                         <a href="update.php?id=<?=$producto->id?>" class="btn btn-warning">Actualizar</a>
-                                        <a href="borrar.php?id=<?=$producto->id?>" class="btn btn-danger">Borrar</a>
+                                        <form action="borrar.php" method="post">
+                                            <input type="hidden" name="id" id="id" value="<?=$producto->id?>">
+                                            <button type="submit" class="btn btn-danger">Borrar</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <?php
