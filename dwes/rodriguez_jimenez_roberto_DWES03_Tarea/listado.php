@@ -8,7 +8,7 @@ try {
     $cnx = @new PDO($dsn, $user, $pass);
     $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("No se ha podido conectar con la base ede datos.\n" . $e->getMessage());
+    die("No se ha podido conectar con la base de datos.\n" . $e->getMessage());
 }
 ?>
 
