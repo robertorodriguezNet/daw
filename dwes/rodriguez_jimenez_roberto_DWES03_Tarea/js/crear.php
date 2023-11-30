@@ -11,13 +11,13 @@ if (!empty($_POST)) {
 
     // -- Verificar los datos -----------------------------------------------------------
     // Si no se valida, se sale de la aplicación.
-    validarDatosCompletos();
+    validarDatosCompletos();  
 
     // Tenemos todos los campos
 
     // Validamos algunos campos y salimos  de la aplicación
     // si hay alguno que cumpla con el patrón
-    $datos = validarFormato();
+    $datos =validarFormato();
     $nombre = $datos['nombre'];
     $nombre_corto = $datos['nombre_corto'];
     $pvp = $datos['pvp'];
@@ -30,9 +30,7 @@ if (!empty($_POST)) {
 
     $consulta = "INSERT INTO productos (nombre, nombre_corto, descripcion, pvp, familia) VALUES ('$nombre', '$nombre_corto', '$descripcion', '$pvp', '$familia')";
 
-    $mensajeOk = 'Producto guardado correctamente.';
-    $mensajeKo = 'Ocurrió un error y no se pudo guardar el producto.';
-    ejecutarConsulta($cnx, $consulta,  $mensajeOk, $mensajeKo);
+    ejecutarConsulta($cnx, $consulta, 'Error al guardar el producto');
 
 }
 // -- Fin de insertar un producto ----------------------------------------------------------

@@ -4,14 +4,7 @@ include_once("includes/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
-// Intentar la conexión a la base de datos.
-// Los datos se encuentran en conxion.php
-try {
-    $cnx = @new PDO($dsn, $user, $pass);
-    $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die( mostrarExcepcion('No se ha podido conectar con la base de datos.',$e));
-}
+$cnx = getConexion($dsn, $user, $pass);
 ?>
 
 <main class="container">
@@ -44,25 +37,29 @@ try {
                             // Obtenemos los productos como objetos
                             $producto = $listado->fetch(PDO::FETCH_OBJ);
                             while ($producto != null):
-                                ?>
-                                <tr>
-                                    <td>
-                                        <a href="detalle.php?id=<?=$producto->id?>" class="btn btn-success bg-info">Detalle</a>
-                                    <td>
-                                        <?= $producto->id ?>
-                                    </td>
-                                    <td>
-                                        <?= $producto->nombre ?>
-                                    </td>
-                                    <td class="d-flex justify-content-around">
-                                        <a href="update.php?id=<?=$producto->id?>" class="btn btn-warning">Actualizar</a>
-                                        <form action="borrar.php" method="post">
-                                            <input type="hidden" name="id" id="id" value="<?=$producto->id?>">
-                                            <button type="submit" class="btn btn-danger">Borrar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                <?php
+                                    ?>
+                                    <tr>
+                                        <?php set_error_handler("gestionarError"); ?>
+                                        <td>
+                                            <a href="detalle.php?id=<?= $producto->id ?>"
+                                                class="btn btn-success bg-info">Detalle</a>
+                                        </td>
+                                        <td>
+                                            <?= $producto->id ?>
+                                        </td>
+                                        <td>
+                                            <?= $producto->nombre ?>
+                                        </td>
+                                        <td class="d-flex justify-content-around">
+                                            <a href="update.php?id=<?= $producto->id ?>" class="btn btn-warning">Actualizar</a>
+                                            <form action="borrar.php" method="post">
+                                                <input type="hidden" name="id" id="id" value="<?= $producto->id ?>">
+                                                <button type="submit" class="btn btn-danger">Borrar</button>
+                                            </form>
+                                        </td>
+                                        <?php restore_error_handler(); ?>
+                                    </tr>
+                                    <?php
                                 $producto = $listado->fetch(PDO::FETCH_OBJ);
                             endwhile;
                         } catch (PDOException $e) {

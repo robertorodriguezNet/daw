@@ -1,157 +1,48 @@
 <?php
+if (!isset($_GET['id'])) {
+    header('Location:listado.php');
+}
+
 $titulo = "Modificar producto";
 include_once("includes/head.php");
 include_once("includes/conexion.php");
+include_once("includes/utilidades.php");
 
-/**
- * Muestra un mensaje avisando de que ocurrió algún error.
- * 
- * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
- * @since 2023.11.29
- * @param string $nombre nombre del producto.
- * @param string $nombre_corto nombre corto del producto.
- * @param string $precio del producto, con formato d*.dd
- * @param string $familia a la que pertenece el producto. Es texto.
- * @param string $descripcion del producto.
- * @param string $mensaje que se muestra.
- */
-function mostrarElError($nombre, $nombre_corto, $precio, $familia, $descripcion, $mensaje)
-{
-    // Mostramos un mensaje de error si lo hubiera
-    echo "<div class='container'>
-        <div class='row justify-content-center'>
-            <div class='col text-center'>
-                <h1>Ocurrió algún error: $mensaje</h1>
-                <h2>Revisa los datos</h2>
-                <ul style='list-style: none' class='mx-0 px-0'>
-                    <li>$nombre (máx. 200 caracteres)</li>
-                    <li>$nombre_corto (máx. 50 caracteres)</li>
-                    <li>$precio</li>
-                    <li>$familia</li>
-                    <li>$descripcion</li>
-                </ul>
-                <a href='crear.php' class='btn btn-primary'>Volver</a>
-            </div>
-        </div>
-    </div>";
-}
-
-/**
- * FeedBack del resultado de la transacción.
- * 
- * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
- * @since 2023.11.29
- * @param boolean $resultado de la transacción.
- */
-function confirmarTransaccion($resultado)
-{
-    $mensaje = ($resultado) ? 'El producto se ha actualizado correctamente' :
-        'No se ha podido actualizar el producto';
-
-    echo "<div class='container'>
-        <div class='row justify-content-center'>
-            <div class='col text-center'>
-                <h1>$mensaje</h1>
-                <a href='listado.php' class='btn btn-primary'>Volver al listado</a>
-            </div>
-        </div>
-    </div>";
-}
-
-// Intentar la conexión a la base de datos
-try {
-    $cnx = @new PDO($dsn, $user, $pass);
-    $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("No se ha podido conectar con la base de datos.\n" . $e->getMessage());
-}
-
+$cnx = getConexion($dsn, $user, $pass);
 
 // -- Intentamos actualizar un producto ------------------------------------------------------
 if (!empty($_POST) && isset($_GET['id'])) {
 
-    $id = $_GET['id'];
+    $id = $_GET['id'];  // Guardar el id del producto para usarlo en la consulta
 
     // -- Verificar los datos -----------------------------------------------------------
-    $isOk = (isset($_POST['nombre']) && !empty($_POST['nombre'])) &&
-        (isset($_POST['nombre_corto']) && !empty($_POST['nombre_corto'])) &&
-        (isset($_POST['precio']) && !empty($_POST['precio'])) &&
-        (isset($_POST['familia']) && !empty($_POST['familia'])) &&
-        (isset($_POST['descripcion']) && !empty($_POST['descripcion']));
-
-    // Mostramos el error si no se han recibido los datos correctamente.
-    if (!$isOk) {
-        mostrarElError(
-            $_POST['nombre'],
-            $_POST['nombre_corto'],
-            $_POST['precio'],
-            $_POST['familia'],
-            $_POST['descripcion'],
-            "Falta algún dato."
-        );
-    }
+    // Si no se valida, se sale de la aplicación.
+    validarDatosCompletos(); 
 
     // Tenemos todos los campos
-    // El nombre corto lo convertimos en mayúsculas y eliminamos los espacios en blanco
-    $nombre = stripslashes(trim($_POST['nombre']));
-    $nombre_corto = stripslashes(
-        trim(
-            strtoupper(
-                str_replace(" ", "", $_POST['nombre_corto'])
-            )
-        )
-    );
-    $precio = stripslashes(trim($_POST['precio']));
-    $familia = stripslashes(trim($_POST['familia']));
-    $descripcion = stripslashes(trim($_POST['descripcion']));
 
-    // Comprobamos que el precio tenga el punto
-    if (!preg_match('/\./', $precio)) {
-        $precio .= ".00";
-    }
+    // Validamos algunos campos y salimos  de la aplicación
+    // si hay alguno que cumpla con el patrón
+    $datos =validarFormato();
+    $nombre = $datos['nombre'];
+    $nombre_corto = $datos['nombre_corto'];
+    $pvp = $datos['pvp'];
+    $familia = $datos['familia'];
+    $descripcion = $datos['descripcion'];
 
-    // Validamos algunos campos
-    $isOk = preg_match("/^[A-ZÁÉÍÓÚa-záéíóú0-9 ]{1,200}$/", $nombre) &&
-        preg_match("/^[A-Z0-9]{1,50}$/", $nombre_corto) &&
-        preg_match('/^[0-9]*\.[0-9]{2}$/', $precio);
-
-    if (!$isOk) {
-        die(
-            mostrarElError(
-                $nombre,
-                $nombre_corto,
-                $precio,
-                $familia,
-                $descripcion,
-                "Algún nombre no cumple con el patrón."
-            )
-        );
-    }
     // -- Fin de verificar los datos ----------------------------------------------------
 
-    // Hasta aquí, es correcto. Actualizamos los datos.
-    if ($isOk) {
+    // Si se encontró algún error se habría salido de la aplicación, por lo que si
+    // estamos aquí, es porque es correcto. Guardamos los datos.
 
-        try {
+    $consulta = @"UPDATE productos SET nombre = '$nombre', nombre_corto = '$nombre_corto', descripcion = '$descripcion', pvp = '$pvp', familia = '$familia' WHERE productos.id = $id";
 
-            // Tenemos la conexión, pues se obtiene al cargar el script.
-            $consulta = "UPDATE productos SET nombre = '$nombre', nombre_corto = '$nombre_corto', descripcion = '$descripcion', pvp = '$precio', familia = '$familia' WHERE productos.id = $id";
-
-            $cnx->beginTransaction();
-            if ($cnx->exec($consulta)) {
-                $cnx->commit();
-                confirmarTransaccion(true);
-            } else {
-                $cnx->rollBack();
-                confirmarTransaccion(false);
-            }
-        } catch (PDOException $e) {
-            echo 'Error al guardar: ' . $e->getMessage();
-        }
-    }
-
+    $mensajeOk = 'Producto actualizado correctamente.';
+    $mensajeKo = 'Ocurrió un error y no se pudo actualizar el producto.';
+    ejecutarConsulta($cnx, $consulta,  $mensajeOk, $mensajeKo);
 
 }
+
 // -- Fin de insertar un producto -------------------------------------------------------
 
 
@@ -171,21 +62,22 @@ try {
         <form method="post" class="row g-3">
             <div class="col-6">
                 <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" name="nombre" id="nombre" value="<?= @$caracteristicas->nombre ?>" class="form-control" placeholder="Nombre" maxlength="200"
-                    required>
+                <input type="text" name="nombre" id="nombre" value="<?= @$caracteristicas->nombre ?>" class="form-control"
+                    placeholder="Nombre" maxlength="200" required>
             </div>
             <div class="col-6">
                 <label for="nombre_corto" class="form-label">Nombre corto</label>
-                <input type="text" name="nombre_corto" id="nombre_corto" value="<?= @$caracteristicas->nombre_corto ?>"  class="form-control" placeholder="Nombre corto" maxlength="50" required>
+                <input type="text" name="nombre_corto" id="nombre_corto" value="<?= @$caracteristicas->nombre_corto ?>"
+                    class="form-control" placeholder="Nombre corto" maxlength="50" required>
             </div>
             <div class="col-6">
                 <label for="precio" class="form-label">Precio (€)</label>
-                <input type="number" name="precio" id="precio" value="<?= @$caracteristicas->pvp ?>" class="form-control" min="0" value="0" step=".01" required>
+                <input type="number" name="precio" id="precio" value="<?= @$caracteristicas->pvp ?>" class="form-control"
+                    min="0" value="0" step=".01" required>
             </div>
             <div class="col-6">
                 <label for="familia" class="form-label">Familia</label>
                 <select name="familia" id="familia" class="form-select" required>
-                    <option value="" selected></option>
                     <?php
                     try {
                         // Consulta a la base de datos
@@ -195,24 +87,26 @@ try {
                         $familia = $listado->fetch(PDO::FETCH_OBJ);
                         while ($familia != null):
                             ?>
-                            <option value="<?= $familia->cod ?>" <?php if($familia->cod == $caracteristicas->familia) echo 'selected';?>>
+                            <option value="<?= $familia->cod ?>" <?php if ($familia->cod == $caracteristicas->familia)
+                                  echo 'selected'; ?>>
                                 <?= $familia->nombre ?>
                             </option>
                             <?php
                             $familia = $listado->fetch(PDO::FETCH_OBJ);
                         endwhile;
                     } catch (PDOException $e) {
-                        echo 'Ocurrió algo inesperado y no se han podido recuperar las familias: \n' . $e->getMessage();
+                        echo '<option value="">Error</option>';
                     }
                     ?>
                 </select>
             </div>
             <div class="col-8">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <textarea class="form-control" id="descripcion" name="descripcion" rows="5" required><?= @$caracteristicas->descripcion ?></textarea>
+                <textarea class="form-control" id="descripcion" name="descripcion" rows="5"
+                    required><?= @$caracteristicas->descripcion ?></textarea>
             </div>
             <div class="col-12">
-                <input type="hidden" name="id" id="id" value="<?=$_GET['id']?>">
+                <input type="hidden" name="id" id="id" value="<?= $_GET['id'] ?>">
                 <button type="submit" class="btn btn-primary">Actualizar</button>
                 <a href="listado.php" class="btn btn-secondary">Volver</a>
             </div>
@@ -220,20 +114,9 @@ try {
     </main>
 
     <?php
-} catch (PDOException $e) { ?>
-
-    <main class="container">
-        <div class="row">
-            <div class="col-12 text-center my-3">
-                No se ha podido obtener los datos.
-            </div>
-            <div class="col-12 text-center my-3">
-                <a href='listado.php' class='btn btn-primary'>Volver</a>
-            </div>
-        </div>
-    </main>
-
-<?php } ?>
+} catch (PDOException $e) {    
+    mostrarExcepcion('No se ha podido obtener los datos', $e);
+} ?>
 
 
 <?php
