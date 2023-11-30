@@ -161,7 +161,7 @@ try {
 
     // Obtener los datos del producto a partir del id
     // La consulta nos devuelve un solo resultado
-    $producto = $cnx->query("SELECT * FROM productos WHERE id = " . $_GET['id']);
+    $producto = @$cnx->query("SELECT * FROM productos WHERE id = " . $_GET['id']);
 
     // Al devolver un solo rgistro, no es necesario recorrer con while
     $caracteristicas = $producto->fetch(PDO::FETCH_OBJ);

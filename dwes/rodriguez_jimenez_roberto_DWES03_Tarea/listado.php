@@ -2,13 +2,15 @@
 $titulo = "Gestión de productos";
 include_once("includes/head.php");
 include_once("includes/conexion.php");
+include_once("includes/utilidades.php");
 
-// Intentar la conexión a la base de datos
+// Intentar la conexión a la base de datos.
+// Los datos se encuentran en conxion.php
 try {
     $cnx = @new PDO($dsn, $user, $pass);
     $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
-    die("No se ha podido conectar con la base de datos.\n" . $e->getMessage());
+    die( mostrarExcepcion('No se ha podido conectar con la base de datos.',$e));
 }
 ?>
 
@@ -64,7 +66,7 @@ try {
                                 $producto = $listado->fetch(PDO::FETCH_OBJ);
                             endwhile;
                         } catch (PDOException $e) {
-                            echo 'Ocurrió algo inesperado y no se han podido recuperar los articulos: \n' . $e->getMessage();
+                            mostrarExcepcion('Ocurrió algo inesperado y no se han podido recuperar los articulos', $e);
                         }
                         ?>
                     </tbody>
