@@ -4,7 +4,7 @@ include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
-$cnx = getConexion($dsn, $user, $pass);
+$cnx = getConexion();
 ?>
 
 <main class="container">

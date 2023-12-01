@@ -13,8 +13,9 @@ $pass = "secreto";
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
 /**
- * Conecta con la base de datos mediante PDO y devuelve
- * el objeto.
+ * Conecta con la base de datos mediante PDO y devuelve el objeto.
+ * 
+ * Si la operación falla, se sale de la aplicación.
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.30
@@ -23,9 +24,14 @@ $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
  * @param $pass clave del usuario en la base de datos.
  * @return PDO objeto con la conexión a la base de datos.
  */
-function getConexion($dsn, $user, $pass)
+// function getConexion($dsn, $user, $pass)
+function getConexion()
 {
     // Intentar la conexión a la base de datos
+    $dsn = $GLOBALS['dsn'];
+    $user = $GLOBALS['user'];
+    $pass = $GLOBALS['pass'];
+
     try {
         $cnx = @new PDO($dsn, $user, $pass);
         $cnx->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

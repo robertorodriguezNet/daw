@@ -8,7 +8,7 @@ include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
-$cnx = getConexion($dsn, $user, $pass);
+$cnx = getConexion();
 
 // -- Intentamos actualizar un producto ------------------------------------------------------
 if (!empty($_POST) && isset($_GET['id'])) {
