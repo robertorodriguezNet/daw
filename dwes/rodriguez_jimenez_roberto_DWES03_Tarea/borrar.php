@@ -14,7 +14,8 @@ $cnx = getConexion($dsn, $user, $pass);
 $consulta = 'DELETE FROM productos WHERE id = ' . $_POST['id'];
 $mensajeOk =  'Producto borrado correctamente.';
 $mensajeKo =  'Ocurrió un error y no se pudo eliminar el producto.';
-ejecutarConsulta($cnx, $consulta, $mensajeOk, $mensajeKo);
+$mensaje = (ejecutarConsulta($cnx, $consulta))? $mensajeOk : $mensajeOk;
+require_once('vistas/mensaje.php');
 
 $cnx = null; // Eliminar la conexión con la base de datos
 include_once("vistas/footer.php");

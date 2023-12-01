@@ -39,7 +39,8 @@ if (!empty($_POST) && isset($_GET['id'])) {
 
     $mensajeOk = 'Producto actualizado correctamente.';
     $mensajeKo = 'Ocurrió un error y no se pudo actualizar el producto.';
-    ejecutarConsulta($cnx, $consulta,  $mensajeOk, $mensajeKo);
+    $mensaje = (ejecutarConsulta($cnx, $consulta))? $mensajeOk : $mensajeOk;
+    require_once('vistas/mensaje.php');
 
 }
 
@@ -116,7 +117,7 @@ try {
     <?php
 } catch (PDOException $e) {    
     $mensaje = 'No se ha podido obtener los datos';
-    require_once('vistas/excepcion.php');
+    require_once('vistas/mensaje.php');
 } ?>
 
 

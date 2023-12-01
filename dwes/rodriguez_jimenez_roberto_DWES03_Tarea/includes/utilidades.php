@@ -2,6 +2,8 @@
 
 /**
  * Muestra un mensaje avisando de que ocurrió algún error.
+ * Esta función se implkenta en utilidades.php porque puede 
+ * depender de otras funciones.
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.29

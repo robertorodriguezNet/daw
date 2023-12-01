@@ -59,7 +59,7 @@ $cnx = getConexion($dsn, $user, $pass);
             <?php
         } catch (PDOException $e) {
             $mensaje = 'No se encuentra el producto buscado';
-            require_once('vistas/excepcion.php');
+            require_once('vistas/mensaje.php');
         }
 
         ?>

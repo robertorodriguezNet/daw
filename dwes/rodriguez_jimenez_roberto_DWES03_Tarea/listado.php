@@ -64,7 +64,7 @@ $cnx = getConexion($dsn, $user, $pass);
                             endwhile;
                         } catch (PDOException $e) {
                             $mensaje = 'Ocurrió algo inesperado y no se han podido recuperar los articulos';
-                            require_once('vistas/excepcion.php');
+                            require_once('vistas/mensaje.php');
                         }
                         ?>
                     </tbody>

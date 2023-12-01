@@ -33,7 +33,7 @@ if (!empty($_POST)) {
     $mensajeOk = 'Producto guardado correctamente.';
     $mensajeKo = 'Ocurrió un error y no se pudo guardar el producto.';
     $mensaje = (ejecutarConsulta($cnx, $consulta))? $mensajeOk : $mensajeOk;
-    require_once('vistas/confirmar-transaccion.php');
+    require_once('vistas/mensaje.php');
 
 }
 // -- Fin de insertar un producto ----------------------------------------------------------
