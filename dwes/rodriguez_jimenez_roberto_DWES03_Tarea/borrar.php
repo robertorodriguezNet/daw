@@ -4,7 +4,7 @@ if (empty($_POST)) {
 }
 
 $titulo = "Borrar producto";
-include_once("includes/head.php");
+include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
@@ -17,5 +17,5 @@ $mensajeKo =  'Ocurrió un error y no se pudo eliminar el producto.';
 ejecutarConsulta($cnx, $consulta, $mensajeOk, $mensajeKo);
 
 $cnx = null; // Eliminar la conexión con la base de datos
-include_once("includes/footer.php");
+include_once("vistas/footer.php");
 ?>

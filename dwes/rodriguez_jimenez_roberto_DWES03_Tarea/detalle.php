@@ -4,7 +4,7 @@ if (!isset($_GET['id'])) {
 }
 
 $titulo = "Detalle producto";
-include_once("includes/head.php");
+include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
@@ -58,7 +58,8 @@ $cnx = getConexion($dsn, $user, $pass);
 
             <?php
         } catch (PDOException $e) {
-            mostrarExcepcion('No se encuentra el producto buscado', $e);
+            $mensaje = 'No se encuentra el producto buscado';
+            require_once('vistas/excepcion.php');
         }
 
         ?>
@@ -68,5 +69,5 @@ $cnx = getConexion($dsn, $user, $pass);
 
 <?php
 $cnx = null; // Eliminar la conexión con la base de datos
-include_once("includes/footer.php");
+include_once("vistas/footer.php");
 ?>

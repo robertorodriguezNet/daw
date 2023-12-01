@@ -50,20 +50,20 @@ function getConexion($dsn, $user, $pass)
  * @since 2023.11.30
  * @param PDO $cnx objeto con la conexión a la base de datos.
  * @param string $consulta que se debe ejecutar.
- * @param string $mensaje que se muestra en caso de error.
+ * @return boolean resultado de la transacción
  */
-function ejecutarConsulta($cnx, $consulta, $mensajeOk, $mensajeKo)
+function ejecutarConsulta($cnx, $consulta)
 {
     try {
         $cnx->beginTransaction();
         if ($cnx->exec($consulta)) {
             $cnx->commit();
-            confirmarTransaccion($mensajeOk);
+            return true;
         } else {
             $cnx->rollBack();
-            confirmarTransaccion($mensajeKo);
+            return false;
         }
     } catch (PDOException $e) {
-        mostrarExcepcion($mensajeKo, $e);        
+        return false;        
     }
 }

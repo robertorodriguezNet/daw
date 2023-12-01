@@ -1,6 +1,6 @@
 <?php
 $titulo = "Gestión de productos";
-include_once("includes/head.php");
+include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
@@ -63,7 +63,8 @@ $cnx = getConexion($dsn, $user, $pass);
                                 $producto = $listado->fetch(PDO::FETCH_OBJ);
                             endwhile;
                         } catch (PDOException $e) {
-                            mostrarExcepcion('Ocurrió algo inesperado y no se han podido recuperar los articulos', $e);
+                            $mensaje = 'Ocurrió algo inesperado y no se han podido recuperar los articulos';
+                            require_once('vistas/excepcion.php');
                         }
                         ?>
                     </tbody>
@@ -77,5 +78,5 @@ $cnx = getConexion($dsn, $user, $pass);
 
 <?php
 $cnx = null; // Eliminar la conexión con la base de datos
-include_once("includes/footer.php");
+include_once("vistas/footer.php");
 ?>

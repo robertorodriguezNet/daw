@@ -4,7 +4,7 @@ if (!isset($_GET['id'])) {
 }
 
 $titulo = "Modificar producto";
-include_once("includes/head.php");
+include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
@@ -115,11 +115,12 @@ try {
 
     <?php
 } catch (PDOException $e) {    
-    mostrarExcepcion('No se ha podido obtener los datos', $e);
+    $mensaje = 'No se ha podido obtener los datos';
+    require_once('vistas/excepcion.php');
 } ?>
 
 
 <?php
 $cnx = null; // Eliminar el objeto con la conexión a la bd.
-include_once("includes/footer.php");
+include_once("vistas/footer.php");
 ?>

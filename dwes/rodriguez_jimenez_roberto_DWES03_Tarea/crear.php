@@ -1,6 +1,6 @@
 <?php
 $titulo = "Crear producto";
-include_once("includes/head.php");
+include_once("vistas/head.php");
 include_once("includes/conexion.php");
 include_once("includes/utilidades.php");
 
@@ -32,7 +32,8 @@ if (!empty($_POST)) {
 
     $mensajeOk = 'Producto guardado correctamente.';
     $mensajeKo = 'Ocurrió un error y no se pudo guardar el producto.';
-    ejecutarConsulta($cnx, $consulta,  $mensajeOk, $mensajeKo);
+    $mensaje = (ejecutarConsulta($cnx, $consulta))? $mensajeOk : $mensajeOk;
+    require_once('vistas/confirmar-transaccion.php');
 
 }
 // -- Fin de insertar un producto ----------------------------------------------------------
@@ -93,5 +94,5 @@ if (!empty($_POST)) {
 
 <?php
 $cnx = null; // Eliminar el objeto con la conexión a la bd.
-include_once("includes/footer.php");
+include_once("vistas/footer.php");
 ?>

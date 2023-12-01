@@ -1,26 +1,6 @@
 <?php
 
 /**
- * Muestra un mensaje de error cuando se produce una excepción.
- * 
- * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
- * @since 2023.11.30
- * @param string $mensaje que se muestra.
- * @param PDOException excepción que se ha lanzado.
- */
-function mostrarExcepcion($mensaje, $excepcion)
-{
-    echo "<div class='container my-3'>
-        <div class='row justify-content-center'>
-            <div class='col text-center'>
-                <h2>$mensaje</h2>
-                <a href='listado.php' class='btn btn-primary'>Volver al listado</a>
-            </div>
-        </div>
-    </div>";
-}
-
-/**
  * Muestra un mensaje avisando de que ocurrió algún error.
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
@@ -48,25 +28,6 @@ function mostrarElError($nombre, $nombre_corto, $precio, $familia, $descripcion,
                     <li>$descripcion</li>
                 </ul>
                 <a href='crear.php' class='btn btn-primary'>Volver</a>
-            </div>
-        </div>
-    </div>";
-}
-
-/**
- * FeedBack del resultado de la transacción.
- * 
- * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
- * @since 2023.11.29
- * @param boolean $resultado de la transacción.
- */
-function confirmarTransaccion($mensaje)
-{
-    echo "<div class='container'>
-        <div class='row justify-content-center'>
-            <div class='col text-center'>
-                <h1>$mensaje</h1>
-                <a href='listado.php' class='btn btn-primary'>Volver al listado</a>
             </div>
         </div>
     </div>";
