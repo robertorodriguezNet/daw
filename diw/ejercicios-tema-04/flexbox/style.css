@@ -1,0 +1,55 @@
+body{
+    background-color: beige;
+}
+
+section{
+    display: flex;
+    border: solid 1px #000;
+    padding: 20px;
+    background-color: #ccc;
+
+    /* flex-flow combina flex-wrap con flex-direction */
+    flex-flow: wrap row;
+    /* 
+    flex-wrap: [ nowrap | wrap | wrap-reverse ];
+    nowrap: amontan los elementos.
+    wrap: salta de línea cuando se llena.
+    */
+    /* flex-direction: [ row | column | reverse ];  */
+
+    justify-content: space-between;
+
+    /* 
+        Alineación vertical de las cajas.
+        Es útil cuando la altura del contendor padre es mayor que los 
+        componentes hijos.
+        Si los componentes hijo no tienen especificada la altura, toman
+        la del padre (align-item: strech), a no se que es especifique align-items.
+    */
+    align-items: center;
+
+    /* Agrupa todos los elementos en el contenedor padre. */
+    align-content: center;
+}
+
+section>div{
+    border: solid 1px #ccc;
+    background-color: white;
+    color: black;
+    font-family: 'Courier New', 'Courier New', Courier, monospace;
+    font-weight: bold;
+    width: 120px;
+    height: 120px;
+    line-height: 120px;
+    text-align: center;
+    margin: 5px;
+
+    /*
+     Expande los elementos repartiendo el espacio entre todos. 
+     A cada uno de los elementos se le puede dar un valor diferente.
+    */
+    flex-grow: 1;
+
+    /* Equivale a width para flexbox. */
+    /* flex-basis: 50%; */
+}
