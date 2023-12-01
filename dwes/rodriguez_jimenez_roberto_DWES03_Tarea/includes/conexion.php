@@ -19,9 +19,7 @@ $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.30
- * @param $sdn es el nombre del origen de los datos.
- * @param $user nombre del usuario de la base de datos.
- * @param $pass clave del usuario en la base de datos.
+ *
  * @return PDO objeto con la conexión a la base de datos.
  */
 // function getConexion($dsn, $user, $pass)
@@ -54,12 +52,14 @@ function getConexion()
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.30
- * @param PDO $cnx objeto con la conexión a la base de datos.
  * @param string $consulta que se debe ejecutar.
  * @return boolean resultado de la transacción
  */
-function ejecutarConsulta($cnx, $consulta)
+function ejecutarConsulta($consulta)
 {
+    // Obtener la conexión
+    $cnx = getConexion();
+    
     try {
         $cnx->beginTransaction();
         if ($cnx->exec($consulta)) {

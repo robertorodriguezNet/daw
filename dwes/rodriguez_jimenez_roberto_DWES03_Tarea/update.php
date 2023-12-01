@@ -39,7 +39,7 @@ if (!empty($_POST) && isset($_GET['id'])) {
 
     $mensajeOk = 'Producto actualizado correctamente.';
     $mensajeKo = 'Ocurrió un error y no se pudo actualizar el producto.';
-    $mensaje = (ejecutarConsulta($cnx, $consulta))? $mensajeOk : $mensajeOk;
+    $mensaje = (ejecutarConsulta($consulta))? $mensajeOk : $mensajeOk;
     require_once('vistas/mensaje.php');
 
 }
