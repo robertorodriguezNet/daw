@@ -2,11 +2,13 @@
 
 /**
  * Muestra un mensaje avisando de que ocurrió algún error.
- * Esta función se implkenta en utilidades.php porque puede 
- * depender de otras funciones.
+ * 
+ * Esta función se implementa en utilidades.php en lugar de crear 
+ * una vista porque puede depender de otras funciones.
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.29
+ * 
  * @param string $nombre nombre del producto.
  * @param string $nombre_corto nombre corto del producto.
  * @param string $precio del producto, con formato d*.dd
@@ -37,6 +39,7 @@ function mostrarElError($nombre, $nombre_corto, $precio, $familia, $descripcion,
 
 /**
  * Valida que los datos del formulario estén completos.
+ * 
  * Si falta algún dato o está en blanco, se sale de la aplicación.
  * Se asume que conocemos los campos del formulario.
  * 
@@ -124,7 +127,7 @@ function validarFormato()
 }
 
 /**
- * Personaliza los errores capturados.
+ * Personaliza los errores capturados con set_herror_handler().
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.30

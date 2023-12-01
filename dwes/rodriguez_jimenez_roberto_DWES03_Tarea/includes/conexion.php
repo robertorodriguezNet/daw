@@ -16,13 +16,16 @@ $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
  * Conecta con la base de datos mediante PDO y devuelve el objeto.
  * 
  * Si la operación falla, se sale de la aplicación.
+ * Usa variables globales para obtener los datos de conexión a la BD.
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.30
- *
+ *  
+ * @global string dsn es nombre del origen de los datos.
+ * @global string user autorizado en la base de datos.
+ * @global string pass clave del usuario.
  * @return PDO objeto con la conexión a la base de datos.
  */
-// function getConexion($dsn, $user, $pass)
 function getConexion()
 {
     // Intentar la conexión a la base de datos
@@ -52,6 +55,8 @@ function getConexion()
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @since 2023.11.30
+ * @see getConexion() obtiene la conexión con la base de datos.
+ * 
  * @param string $consulta que se debe ejecutar.
  * @return boolean resultado de la transacción
  */
