@@ -1,0 +1,89 @@
+/*
+    Ancho cabecera: 920px, con padding superior, izquierda y derecha de 20px.
+    Las opciones del menú están programadas como una lista. Cada opción es un hiperenlace cuyo color de fondo cambia al pasar el ratón por encima
+    Columna izquierda: ancho de 220px.
+    Columna central : 480px, padding left 20px.
+    Columna derecha: 180px, padding left 20px.
+    Pie de página: 960px de ancho.
+    Fijarse en los bordes de las cajas, de la página principal y del pie de página.
+
+*/
+/* Colores */
+:root {
+    --color-gris: #666666;
+    --color-osucro: #333333;
+    --color-verde: #3e9722;
+    --color-naranja: #e58c24;
+    --color-azul: #3c74e6;
+    --color-lima: #cae646;
+
+    --ancho-total: 960px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: grid;
+    width: 960px;
+    margin: 0 auto;
+
+    /* Establecer 3 columnas*/
+    grid-template-areas: 'header'
+        'section'
+        'footer';
+    grid-template-rows: 100px auto 80px;
+
+    /* strech para que la columana auto se mantenga en su medida
+       y no se ajuste al contenido. */
+    justify-content: stretch;
+
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Áreas */
+header {
+    grid-area: header;
+    background: linear-gradient(           
+            var(--color-lima),
+            white
+        );
+    border-radius: 15px;
+}
+
+section {
+    box-sizing: border-box;
+    border: solid 2px transparent;
+    border-radius: 15px;
+
+    background-image: 
+        linear-gradient(white, white),
+        linear-gradient(var(--color-lima) 100px, transparent 100px);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+}
+
+
+#aside-i {
+    grid-area: aside-i;
+}
+
+section {
+    grid-area: section;
+}
+
+#aside-d {
+    grid-area: aside-d;
+}
+
+footer {
+    grid-area: footer;
+    border: solid 2px var(--color-lima);
+    border-radius: 15px 15px 0 0;
+    border-bottom-width: 0;
+    font-size: .8em;
+    padding: 10px 0 0 0;
+}
