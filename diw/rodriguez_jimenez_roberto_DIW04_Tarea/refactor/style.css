@@ -27,7 +27,7 @@ h1{
     line-height: 0.6em;
 }
 
-body {
+main {
     display: grid;
     width: 960px;
     margin: 0 auto;
@@ -90,7 +90,7 @@ header a{
 }
 
 /* ** section **************************************************** */
-main {
+content {
     grid-area: content;
     box-sizing: border-box;
     border: solid 2px transparent;
