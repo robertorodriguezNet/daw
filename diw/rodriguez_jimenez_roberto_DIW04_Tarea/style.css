@@ -18,6 +18,11 @@
     --color-lima: #cae646;
 }
 
+body{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
 h1{
     padding: 0;
     margin: 0;
@@ -63,7 +68,7 @@ header li{
     padding: 5px 0 5px 0;
     border-radius: 4px;
     font-weight: bold;
-    font-size: .9em;
+    text-align: center;
 }
 header li:first-child,
 header li:hover{
@@ -77,7 +82,6 @@ header li:hover{
 header a{
     color: black;
     text-decoration: none;
-    font-size: 0.9em;
     font-weight: bold;
 }
 
@@ -101,19 +105,65 @@ main {
 }
 
 #aside-i,article,#aside-d{
-    padding: 20px 0 0 20px;
+    padding: 20px;
 }
+
 #aside-i{
     grid-area: aside-i;
-    border-right: solid 1px #3c74e6;
 }
+.bloque h2{
+    background-color: var(--color-azul);
+    color: white;
+    font-size: .8em;
+    font-weight: normal;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+.bloque{
+    margin-bottom: 30px;
+}
+.bloque form, .bloque div{
+    padding: 0 10px;
+}
+.bloque input, .bloque button{
+    margin-bottom: 10px;
+}
+.bloque .banner{
+    text-align: center;
+}
+.bloque img{
+    max-width: 80%;
+}
+.unidad, .titulo-unidad, .bloque a{
+    font-size: 0.9em;
+}
+.unidad{
+    font-weight: bold;
+}
+.titulo-unidad{
+    color: var(--color-verde);
+}
+.bloque ul{
+    padding-left: 20px;
+}
+.bloque a{
+    color: var(--color-verde);
+}
+
+
+
 article{
     grid-area: article;
     border-right: solid 1px #3c74e6;
+    background-color: #3c74e6;
 }
 #aside-d{
     grid-area: aside-d;
 }
+
+
+
+
 
 /* ** footer ****************************************************** */
 footer {
@@ -121,7 +171,7 @@ footer {
     border: solid 2px var(--color-lima);
     border-radius: 15px 15px 0 0;
     border-bottom-width: 0;
-    font-size: .8em;
     text-align: center;
     padding: 10px 0 0 0;
 }
+
