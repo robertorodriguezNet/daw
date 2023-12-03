@@ -16,8 +16,6 @@
     --color-naranja: #e58c24;
     --color-azul: #3c74e6;
     --color-lima: #cae646;
-
-    --ancho-total: 960px;
 }
 
 h1{
@@ -38,12 +36,6 @@ body {
         'footer';
     grid-template-rows: 100px auto 80px;
 
-    /* strech para que la columana auto se mantenga en su medida
-       y no se ajuste al contenido. */
-    justify-content: stretch;
-
-    text-align: center;
-    min-height: 100vh;
 }
 
 /* Áreas */
@@ -92,6 +84,11 @@ header a{
 /* ** section **************************************************** */
 main {
     grid-area: content;
+    display: grid;
+    grid-template-columns: 220px auto 180px;
+    grid-template-areas: 'aside-i article aside-d';
+    width: 100%;
+    min-height: 110px;
     box-sizing: border-box;
     border: solid 2px transparent;
     border-radius: 15px;
@@ -103,6 +100,21 @@ main {
     background-clip: content-box, border-box;
 }
 
+#aside-i,article,#aside-d{
+    padding: 20px 0 0 20px;
+}
+#aside-i{
+    grid-area: aside-i;
+    border-right: solid 1px #3c74e6;
+}
+article{
+    grid-area: article;
+    border-right: solid 1px #3c74e6;
+}
+#aside-d{
+    grid-area: aside-d;
+}
+
 /* ** footer ****************************************************** */
 footer {
     grid-area: footer;
@@ -110,5 +122,6 @@ footer {
     border-radius: 15px 15px 0 0;
     border-bottom-width: 0;
     font-size: .8em;
+    text-align: center;
     padding: 10px 0 0 0;
 }
