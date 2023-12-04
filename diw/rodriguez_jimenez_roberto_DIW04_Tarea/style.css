@@ -1,13 +1,3 @@
-/*
-    Ancho cabecera: 920px, con padding superior, izquierda y derecha de 20px.
-    Las opciones del menú están programadas como una lista. Cada opción es un hiperenlace cuyo color de fondo cambia al pasar el ratón por encima
-    Columna izquierda: ancho de 220px.
-    Columna central : 480px, padding left 20px.
-    Columna derecha: 180px, padding left 20px.
-    Pie de página: 960px de ancho.
-    Fijarse en los bordes de las cajas, de la página principal y del pie de página.
-
-*/
 /* Colores */
 :root {
     --color-gris: #666666;
