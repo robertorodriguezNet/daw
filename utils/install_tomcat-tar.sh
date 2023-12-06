@@ -12,9 +12,10 @@ chmod -R g+r conf
 chmod g+x conf
 chown -R tomcat webapps/ work/ tem/ logs/
 
-[Unit]
-Description=Apache Tomcat Web Application Container
-After=network.target
+
+# [Unit]
+# Description=Apache Tomcat Web Application Container
+# After=network.target
 
 # [Service]
 # Type=forking
