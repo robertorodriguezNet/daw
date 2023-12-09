@@ -7,4 +7,6 @@ apt update && apt -y upgrade
 apt install -y git
 apt install snap
 apt install curl
-snap install --classic node
+snap install --classic code
+apt install -y default-jdk
+apt install vim
