@@ -88,16 +88,29 @@ main {
     display: grid;
     grid-template-columns: 220px auto 180px;
     grid-template-areas: 'aside-i article aside-d';
+    margin: 5px 0;
     width: 100%;
     min-height: 110px;
     box-sizing: border-box;
     border: solid 2px transparent;
     border-radius: 15px;
 
+    /* -- Dibujar el borde superior -----------*/
+
+    /* El primer argumento se corresponde con el contenido y
+       el segundo con el borde. */
     background-image: 
         linear-gradient(white, white),
         linear-gradient(var(--color-lima) 100px, transparent 100px);
+
+    /* Especifica el área de origen del fondo.
+       En este caso el área se extiende al borde exterior.*/
     background-origin: border-box;
+
+    /* Especifica si el fondo se extiende por debajo del borde. 
+        content-box: el fonde se inicia desde donde inicia el contenido.
+        border-box: el fondo se extiende hasta el borde exterior del contenedor.
+    */
     background-clip: content-box, border-box;
 }
 
