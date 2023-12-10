@@ -39,10 +39,33 @@ class GestorDeEdificios {
    * Agrega un edificio a la colección
    * @param {Edificio} edificio que se agrega a la colección.
    */
-  addEdificio(edificio) {
+  setEdificio(edificio) {
     this._gestor[this._gestor.length] = edificio;
   }
+
+/**
+ * Devuelve el edificio que se corresponde con los datos
+ * 
+ * @param {string} calle del edificio
+ * @param {string} numro del edificio
+ * @param {number} cp C.P. del edificio
+ * @returns { Edificio } edificio solicitado
+ */
+  getEdificio(calle,numero,cp){
+
+    /**
+     * Utilizo la función filter para obtener el edificio pedidio.
+     * 
+     * @see https://youtu.be/Ek81Oa9rlwY
+     * @type Edificio
+     */
+    let edificio = this._gestor.filter( e => e._calle == calle && 
+                                              e._numero == numero && 
+                                              e._cp == cp);
+    return edificio[0];
+  }
 }
+// -- Fin de clase GestorDeEdificios ---------------------------------
 
 /**
  * Clase que representa un edificio.
@@ -58,7 +81,7 @@ class Edificio {
    * Constructor de la clase.
    *
    * @param {string} calle en la que se situa el edificio
-   * @param {number} numero del edificio
+   * @param {string} numero del edificio, string para poder llevar letras (s/n, 21bis, ...)
    * @param {number} cp del edificio
    */
   constructor(calle, numero, cp = 1000) {
@@ -69,7 +92,7 @@ class Edificio {
     this._calle = calle;
 
     /**
-     * @type {number}
+     * @type {string}
      */
     this._numero = numero;
 
@@ -89,12 +112,14 @@ class Edificio {
   }
 
   /**
-   * Agrega las plantas y las puertas por planta.
+   * Agrega las plantas y las puertas por planta al edificio.
    *
    * @param {number} numplantas del edificio.
    * @param {number} puertas de cada planta.
    */
-  agregarPlantasYPuertas(numplantas, puertas) {}
+  agregarPlantasYPuertas(numplantas, puertas) {
+    alert(`pl: ${numplantas}, pu: ${puertas}`);
+  }
 
   /**
    * Modifica el número del edificio.
@@ -192,10 +217,16 @@ class Edificio {
 }
 // Fin de la clase edificios ----------------------
 
+// -- Funcionalidad de la aplicacion ----------------------------------
+
 // Crear el gestor de edificios sin pasarle ningún edificio
 let gestorDeEdificios = new GestorDeEdificios();
 
 // Crear edificios y añadirlos a la colección
-gestorDeEdificios.addEdificio(new Edificio("Pepino", 32, 99002));
-gestorDeEdificios.addEdificio(new Edificio("Cebolla", 43, 99001));
-gestorDeEdificios.addEdificio(new Edificio("Calabacín", 2, 99012));
+gestorDeEdificios.setEdificio(new Edificio("Pepino", 32, 99002));
+gestorDeEdificios.setEdificio(new Edificio("Cebolla", 43, 99001));
+gestorDeEdificios.setEdificio(new Edificio("Calabacín", 2, 99012));
+
+// Agregar plantas y puertas a un edificio.
+// Obtener el edificio de la calle pepino
+let edificio = gestorDeEdificios.getEdificio("Pepino", 32, 99002);
