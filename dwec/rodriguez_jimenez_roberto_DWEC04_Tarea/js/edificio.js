@@ -43,25 +43,24 @@ class GestorDeEdificios {
     this._gestor[this._gestor.length] = edificio;
   }
 
-/**
- * Devuelve el edificio que se corresponde con los datos
- * 
- * @param {string} calle del edificio
- * @param {string} numro del edificio
- * @param {number} cp C.P. del edificio
- * @returns { Edificio } edificio solicitado
- */
-  getEdificio(calle,numero,cp){
-
+  /**
+   * Devuelve el edificio que se corresponde con los datos
+   *
+   * @param {string} calle del edificio
+   * @param {string} numro del edificio
+   * @param {number} cp C.P. del edificio
+   * @returns { Edificio } edificio solicitado
+   */
+  getEdificio(calle, numero, cp) {
     /**
      * Utilizo la función filter para obtener el edificio pedidio.
-     * 
+     *
      * @see https://youtu.be/Ek81Oa9rlwY
      * @type Edificio
      */
-    let edificio = this._gestor.filter( e => e._calle == calle && 
-                                              e._numero == numero && 
-                                              e._cp == cp);
+    let edificio = this._gestor.filter(
+      (e) => e._calle == calle && e._numero == numero && e._cp == cp
+    );
     return edificio[0];
   }
 }
@@ -106,19 +105,33 @@ class Edificio {
     this._plantas = [];
 
     // Imprime en el documento HTML el mensaje pasado como parámetro.
-    this.imprimirTarea(
-        this.mostrarMensajeDeEdificioConstruido(this)
-      );
+    this.imprimirTarea(this.mostrarMensajeDeEdificioConstruido(this));
   }
 
   /**
    * Agrega las plantas y las puertas por planta al edificio.
    *
-   * @param {number} numplantas del edificio.
+   * La planta 0 es la planta baja.
+   *
+   * @param {number} plantas del edificio.
    * @param {number} puertas de cada planta.
    */
-  agregarPlantasYPuertas(numplantas, puertas) {
-    alert(`pl: ${numplantas}, pu: ${puertas}`);
+  agregarPlantasYPuertas(plantas = 1, puertas = 1) {
+
+    // Recorrer las plantas.
+    for( let i = 0; i < plantas; i++ ){
+
+      // Cada planta contiene un array con las puertas.
+      this._plantas.push( new Array(puertas) );
+
+      // Recorrer las puertas en cada planta.
+      for( let j = 0; j < puertas; j++){
+
+        // A cada puerta se le asigna un propietario en blanco.
+        this._plantas[i][j] = 'Sin propietario';
+      }
+    }
+
   }
 
   /**
@@ -180,11 +193,32 @@ class Edificio {
 
   /**
    * Recorre el edificio e imprime todos los propietarios de cada puerta.
-   *
-   * @returns
    */
-  imprimePlantas() {
-    return null;
+  imprimirPlantas() {
+
+    // Iniciamos el texto que se va a mostrar, creando una lista
+    // para cada planta y otra para cada colección de puertas.
+    let texto = '<li><strong>Plantas</strong>';
+
+    // Recorrer las plantas
+    for(let planta in this._plantas){
+      texto += `<ul>
+        <li>Planta ${planta}
+          <ul>`;
+
+        // Recorrer cada puerta de la planta
+        for(let puerta in this._plantas[planta]){
+          texto += `<li>Puerta ${puerta}: ${this._plantas[planta][puerta]}</li>`;
+        }
+        
+      texto += `</ul>
+          </li>
+        </ul>`;
+    }
+
+    texto += '</li>';
+
+    this.imprimirTarea(texto);
   }
 
   /**
@@ -209,8 +243,8 @@ class Edificio {
    * @param { string } tarea que se debe imprimir
    */
   imprimirTarea(tarea) {
-    let ul = document.getElementById('tareas');
-    let li = document.createElement('li');
+    let ul = document.getElementById("tareas");
+    let li = document.createElement("li");
     li.innerHTML = tarea;
     ul.appendChild(li);
   }
@@ -223,10 +257,20 @@ class Edificio {
 let gestorDeEdificios = new GestorDeEdificios();
 
 // Crear edificios y añadirlos a la colección
-gestorDeEdificios.setEdificio(new Edificio("Pepino", 32, 99002));
-gestorDeEdificios.setEdificio(new Edificio("Cebolla", 43, 99001));
-gestorDeEdificios.setEdificio(new Edificio("Calabacín", 2, 99012));
+let edificio = new Edificio("Pepino", 32, 99002);
+gestorDeEdificios.setEdificio(edificio);
+edificio.agregarPlantasYPuertas(3, 3);
+edificio.imprimirPlantas();
+edificio.imprimirTarea('<hr>');
 
-// Agregar plantas y puertas a un edificio.
-// Obtener el edificio de la calle pepino
-let edificio = gestorDeEdificios.getEdificio("Pepino", 32, 99002);
+edificio = new Edificio("Cebolla", 43, 99001);
+gestorDeEdificios.setEdificio(edificio);
+edificio.agregarPlantasYPuertas(5, 2);
+edificio.imprimirPlantas();
+edificio.imprimirTarea('<hr>');
+
+edificio = new Edificio("Calabacín", 2, 99012);
+gestorDeEdificios.setEdificio(edificio);
+edificio.agregarPlantasYPuertas(2, 3);
+edificio.imprimirPlantas();
+
