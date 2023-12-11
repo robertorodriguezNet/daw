@@ -16,7 +16,7 @@ class Edificio {
    * @param {string} numero del edificio, string para poder llevar letras (s/n, 21bis, ...)
    * @param {number} cp del edificio
    */
-  constructor(calle, numero, cp = 1000) {
+  constructor(calle, numero, cp) {
     // Es una buena práctica comenzar el nombre del atributo con _
     /**
      * @type {string}
@@ -38,7 +38,7 @@ class Edificio {
     this._plantas = [];
 
     // Imprime en el documento HTML el mensaje pasado como parámetro.
-    document.write(this.mostrarMensajeDeEdificioConstruido(this));
+    this.mostrarMensajeDeEdificioConstruido(this);
     
   }
 
@@ -179,7 +179,7 @@ class Edificio {
    * @returns { string } mensaje de confirmación.
    */
   mostrarMensajeDeEdificioConstruido(edificio) {
-    return `<li>Construido un nuevo edificio en la calle ${edificio._calle}, n.º ${edificio._numero}, CP: ${edificio._cp}</li>`;
+    document.write(`<li>Construido un nuevo edificio en la calle ${edificio._calle}, n.º ${edificio._numero}, CP: ${edificio._cp}</li>`);
   }
 
 /**
