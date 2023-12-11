@@ -10,22 +10,6 @@
 class Edificio {
 
   /**
-   * Imprime la tarea en el documento HTML.
-   * 
-   * Es un método estático para que pueda ser usado desde fuera de la clase.
-   * Se declara antes del constructor para que la clase pueda tener acceso 
-   * al método, si se declarares después, no se reconocería.
-   * 
-   * @param { string } tarea que se debe imprimir
-   */
-  static imprimirTarea(tarea) {
-    let ul = document.getElementById("tareas");
-    let li = document.createElement("li");
-    li.innerHTML = tarea;
-    ul.appendChild(li);
-  }
-
-  /**
    * Constructor de la clase.
    *
    * @param {string} calle en la que se situa el edificio
@@ -54,7 +38,7 @@ class Edificio {
     this._plantas = [];
 
     // Imprime en el documento HTML el mensaje pasado como parámetro.
-    Edificio.imprimirTarea(this.mostrarMensajeDeEdificioConstruido(this));
+    document.write(this.mostrarMensajeDeEdificioConstruido(this));
     
   }
 
@@ -157,7 +141,7 @@ class Edificio {
     this._plantas[planta][puerta] = nombre;
 
     // Mostrar el mensaje
-    Edificio.imprimirTarea(this.mostrarMensajeDePropietario(planta, puerta));
+    document.write(this.mostrarMensajeDePropietario(planta, puerta));
   }
 
   /**
@@ -195,7 +179,7 @@ class Edificio {
    * @returns { string } mensaje de confirmación.
    */
   mostrarMensajeDeEdificioConstruido(edificio) {
-    return `Construido un nuevo edificio en la calle ${edificio._calle}, n.º ${edificio._numero}, CP: ${edificio._cp}`;
+    return `<li>Construido un nuevo edificio en la calle ${edificio._calle}, n.º ${edificio._numero}, CP: ${edificio._cp}</li>`;
   }
 
 /**
@@ -205,39 +189,40 @@ class Edificio {
  * @returns {string} mensaje que se imprimirá.
  */
   mostrarMensajeDePropietario(planta, puerta) {
-    return `${this._plantas[planta][puerta]} es ahora el propietario de la puerta ${puerta} de la planta ${planta}`;
+    return `<li>${this._plantas[planta][puerta]} es ahora el propietario de la puerta ${puerta} de la planta ${planta}</li>`;
   }
 
 
 }
 // Fin de la clase edificios ----------------------
 
-// -- Funcionalidad de la aplicacion ----------------------------------
-
 // Declarar los edificios
-Edificio.imprimirTarea("<strong>Crear 3 edificios: A, B, C</strong>");
+document.write('<h2>Crear 3 edificios: A, B, C</h2><ul>');
 let edificioA = new Edificio("Cebolla", 43, 99001);
 let edificioB = new Edificio("Calabacín", 2, 99012);
 let edificioC = new Edificio("Pepino", 22, 99002);
+document.write('</ul>')
 
 // Imprimir algunos datos de cada edificio
-Edificio.imprimirTarea('<br><strong>Algunos datos:</strong>');
-Edificio.imprimirTarea(`El código postal del edificioA es: ${edificioA.imprimeCodigoPostal()}`);
-Edificio.imprimirTarea(`La calle del edificio C es: ${edificioC.imprimeCalle()}`);
-Edificio.imprimirTarea(`El edificio B está situado en la calle ${edificioB.imprimeCalle()} número ${edificioB.imprimeNumero()}`);
+document.write('<h2>Algunos datos:</h2><ul>');
+document.write(`<li>El código postal del edificioA es: ${edificioA.imprimeCodigoPostal()}</li>`);
+document.write(`<li>La calle del edificio C es: ${edificioC.imprimeCalle()}</li>`);
+document.write(`<li>El edificio B está situado en la calle ${edificioB.imprimeCalle()} número ${edificioB.imprimeNumero()}</li>`);
+document.write('</ul>')
 
 // Cambiar algunos datos de cada edificio
-Edificio.imprimirTarea('<br><strong>Cambiamos los datos:</strong>');
+document.write('<h2>Cambiamos los datos:</h2><ul>');
 edificioA.modificarCodigoPostal(88001);
 edificioC.modificarCalle('Pepinillo');
 edificioB.modificarNumero(79);
 edificioB.modificarCalle('Calabaza');
-Edificio.imprimirTarea(`El nuvo código postal del edificioA es: ${edificioA.imprimeCodigoPostal()}`);
-Edificio.imprimirTarea(`Ahora, la calle del edificio C es: ${edificioC.imprimeCalle()}`);
-Edificio.imprimirTarea(`La nueva situación del edificio B es la calle ${edificioB.imprimeCalle()} número ${edificioB.imprimeNumero()}`);
+document.write(`<li>El nuevo código postal del edificioA es: ${edificioA.imprimeCodigoPostal()}</li>`);
+document.write(`<li>Ahora, la calle del edificio C es: ${edificioC.imprimeCalle()}</li>`);
+document.write(`<li>La nueva situación del edificio B es la calle ${edificioB.imprimeCalle()} número ${edificioB.imprimeNumero()}</li>`);
+document.write('</ul>');
 
 // Agregar plantas y puertas
-Edificio.imprimirTarea(`<br><strong>Agregar plantas y puertas (planta baja es 0):</strong>
+document.write(`<h2>Agregar plantas y puertas (planta baja es 0):</h2>
   <ul >
     <li>Edifico A.: 3 plantas y 3 puertas por planta.</li>
     <li>Edifico B.: 2 plantas y 4 puertas por planta.</li>
@@ -248,7 +233,7 @@ edificioB.agregarPlantasYPuertas(2,4);
 edificioC.agregarPlantasYPuertas(4,2);
 
 // Agregar propietarios
-Edificio.imprimirTarea('<br><strong>Agregar propietarios:</strong>');
+document.write('<h2>Agregar propietarios:</h2><ul>');
 edificioA.agregarPropietario('Benito Boniato', 2, 2);
 edificioA.agregarPropietario('Lorenza Coto',1,1);
 edificioA.agregarPropietario('Aitor Tilla',0,1);
@@ -256,20 +241,24 @@ edificioA.agregarPropietario('Andrés Trozado',2,1);
 edificioA.agregarPropietario('Lola Mento',2,0);
 edificioA.agregarPropietario('Encarna Vales',1,2);
 edificioA.agregarPropietario('Ana Tomía',0,2);
+document.write('</ul>');
 
 // Imprimir una lista de propietarios
-Edificio.imprimirTarea(`<br><strong>Lista de propietarios de la calle ${edificioA.imprimeCalle()} número ${edificioA.imprimeNumero()} :</strong>`);
-Edificio.imprimirTarea(edificioA.imprimePlantas());
+document.write(`<h2>Lista de propietarios de la calle ${edificioA.imprimeCalle()} número ${edificioA.imprimeNumero()} :</h2><ul>`);
+document.write(edificioA.imprimePlantas());
+document.write('</ul>');
 
 // Agregar plantas
-Edificio.imprimirTarea('<br><strong>Agregar 2 plantas, con 2 puertas cada una, al edificio A.</strong>');
+document.write('<h2>Agregar 2 plantas, con 2 puertas cada una, al edificio A.</h2>');
 edificioA.agregarPlantasYPuertas(2,2);
 
 // Agregar propietarios a las plantas nuevas
-Edificio.imprimirTarea('<br><strong>Agregar propietarios a las plantas nuevas:</strong>');
+document.write('<h2>Agregar propietarios a las plantas nuevas:</h2><ul>');
 edificioA.agregarPropietario('Matías Queroso', 3, 1);
 edificioA.agregarPropietario('Igor Dito',4,0);
+document.write('</ul>');
 
 // Listar nuevamente las plantas
-Edificio.imprimirTarea('<br><strong>Así quedan las viviendas del edificio A:</strong>');
-Edificio.imprimirTarea(edificioA.imprimePlantas());
+document.write('<h2>Así quedan las viviendas del edificio A:</h2><ul>');
+document.write(edificioA.imprimePlantas());
+document.write('</ul>');
