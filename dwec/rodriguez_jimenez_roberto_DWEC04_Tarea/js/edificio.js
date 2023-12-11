@@ -52,7 +52,7 @@ class Edificio {
    * @param {number} plantas del edificio.
    * @param {number} puertas de cada planta.
    */
-  agregarPlantasYPuertas(plantas = 1, puertas = 1) {
+  agregarPlantasYPuertas(plantas, puertas) {
     // El edificio puede tener a alguna planta
     let plantasActuales = this._plantas.length;
 
