@@ -1,71 +1,3 @@
-/*
-Se pide:
-•	Crear un objeto que nos permita instanciar edificios. 
-  Cada vez que instanciemos un edificio le pasaremos la calle, número y código postal como parámetros. 
-  Se pide además crear los siguientes métodos para el objeto Edificio: 
-  o	agregarPlantasYPuertas(numplantas, puertas) // Se le pasa el número de plantas que queremos crear en el piso y el número de puertas por planta. Cada vez que se llame a este método, añadirá el número de plantas y puertas indicadas en los parámetros, a las que ya están creadas en el edificio.
-  o	modificarNumero(numero) // Se le pasa el nuevo número del edificio para que lo actualice.
-  o	modificarCalle(calle) // Se le pasa el nuevo nombre de la calle para que lo actualice.
-  o	modificarCodigoPostal(codigo) // Se le pasa el nuevo número de código postal del edificio.
-  o	imprimeCalle // Devuelve el nombre de la calle del edificio.
-  o	imprimeNumero // Devuelve el número del edificio.
-  o	imprimeCodigoPostal // Devuelve el código postal del edificio.
-  o	agregarPropietario(nombre,planta,puerta) // Se le pasa un nombre de propietario, un número de planta y un número de puerta y lo asignará como propietario de ese piso.
-  o	imprimePlantas // Recorrerá el edificio e imprimirá todos los propietarios de cada puerta.
-•	Cada vez que se crea un edificio que muestre automáticamente un mensaje del estilo: 
-  o	construido nuevo edificio en calle: xxxxxx, nº: xx, CP: xxxxx.
-•	Cada vez que se añada un propietario a un piso de un edificio que muestre un mensaje del estilo: 
-  o	xxxxxxxx es ahora el propietario de la puerta x de la planta x.
-
-*/
-
-/**
- * Clase que gestiona una colección de edificios.
- *
- * GestorDeEdificios tiene una colección de Edificio.
- * Debe tener funciones para trabajar con la colección.
- *
- * @author Roberto Rodríguez <roberto.rod.jim.1@educa.jcyl.es>
- * @class Representa una colección de edificios.
- */
-class GestorDeEdificios {
-  // Si se instancia el gestro de edificios sin un edificio,
-  // se crea una colección vacía
-  constructor(edificio = null) {
-    this._gestor = edificio == null ? [] : [edificio];
-  }
-
-  /**
-   * Agrega un edificio a la colección
-   * @param {Edificio} edificio que se agrega a la colección.
-   */
-  setEdificio(edificio) {
-    this._gestor[this._gestor.length] = edificio;
-  }
-
-  /**
-   * Devuelve el edificio que se corresponde con los datos
-   *
-   * @param {string} calle del edificio
-   * @param {string} numro del edificio
-   * @param {number} cp C.P. del edificio
-   * @returns { Edificio } edificio solicitado
-   */
-  getEdificio(calle, numero, cp) {
-    /**
-     * Utilizo la función filter para obtener el edificio pedidio.
-     *
-     * @see https://youtu.be/Ek81Oa9rlwY
-     * @type Edificio
-     */
-    let edificio = this._gestor.filter(
-      (e) => e._calle == calle && e._numero == numero && e._cp == cp
-    );
-    return edificio[0];
-  }
-}
-// -- Fin de clase GestorDeEdificios ---------------------------------
-
 /**
  * Clase que representa un edificio.
  *
@@ -76,6 +8,23 @@ class GestorDeEdificios {
  * @class representa un edificio.
  */
 class Edificio {
+
+  /**
+   * Imprime la tarea en el documento HTML.
+   * 
+   * Es un método estático para que pueda ser usado desde fuera de la clase.
+   * Se declara antes del constructor para que la clase pueda tener acceso 
+   * al método, si se declarares después, no se reconocería.
+   * 
+   * @param { string } tarea que se debe imprimir
+   */
+  static imprimirTarea(tarea) {
+    let ul = document.getElementById("tareas");
+    let li = document.createElement("li");
+    li.innerHTML = tarea;
+    ul.appendChild(li);
+  }
+
   /**
    * Constructor de la clase.
    *
@@ -105,14 +54,16 @@ class Edificio {
     this._plantas = [];
 
     // Imprime en el documento HTML el mensaje pasado como parámetro.
-    this.imprimirTarea(this.mostrarMensajeDeEdificioConstruido(this));
+    Edificio.imprimirTarea(this.mostrarMensajeDeEdificioConstruido(this));
+    
   }
 
   /**
    * Agrega las plantas y las puertas por planta al edificio.
+   * 
    * Las plantas se suman a las ya creadas en el edificio.
-   *
-   * La planta 0 es la planta baja.
+   * La planta 0 es la planta baja, por lo tanto, un edificio
+   * de 3 plantas tendrá: bajo, 1º y 2º.
    *
    * @param {number} plantas del edificio.
    * @param {number} puertas de cada planta.
@@ -134,7 +85,7 @@ class Edificio {
       for (let j = 0; j < puertas; j++) {
         // A la planta se le asignan las puertas
         // A cada puerta se le asigna un propietario en blanco.
-        this._plantas[i][j] = "Sin propietario";
+        this._plantas[i][j] = "";
       }
     }
   }
@@ -144,21 +95,27 @@ class Edificio {
    *
    * @param {number} numero nuevo del edificio.
    */
-  modificarNumero(numero) {}
+  modificarNumero(numero) {
+    this._numero = numero;
+  }
 
   /**
    * Actualiza el nombre de la calle del edificio.
    *
    * @param {string} calle nueva.
    */
-  modificarCalle(calle) {}
+  modificarCalle(calle) {
+    this._calle = calle;
+  }
 
   /**
    * Modifica el CP del edificio.
    *
    * @param {number} codigo
    */
-  modificarCodigoPostal(codigo) {}
+  modificarCodigoPostal(codigo) {
+    this._cp = codigo;
+  }
 
   /**
    * Devuelve el nombre de la calle del edificio.
@@ -194,15 +151,22 @@ class Edificio {
    * @param {number} planta en la que está la puerta.
    * @param {number} puerta del propietario.
    */
-  agregarPropietario(nombre, planta, puerta) {}
+  agregarPropietario(nombre, planta, puerta) {
+
+    // Asignar el propietario
+    this._plantas[planta][puerta] = nombre;
+
+    // Mostrar el mensaje
+    Edificio.imprimirTarea(this.mostrarMensajeDePropietario(planta, puerta));
+  }
 
   /**
    * Recorre el edificio e imprime todos los propietarios de cada puerta.
    */
-  imprimirPlantas() {
+  imprimePlantas() {
     // Iniciamos el texto que se va a mostrar, creando una lista
     // para cada planta y otra para cada colección de puertas.
-    let texto = "<li><strong>Plantas</strong>";
+    let texto = "";
 
     // Recorrer las plantas
     for (let planta in this._plantas) {
@@ -222,7 +186,7 @@ class Edificio {
 
     texto += "</li>";
 
-    this.imprimirTarea(texto);
+    return texto;
   }
 
   /**
@@ -234,47 +198,78 @@ class Edificio {
     return `Construido un nuevo edificio en la calle ${edificio._calle}, n.º ${edificio._numero}, CP: ${edificio._cp}`;
   }
 
-  /**
-   * Cada vez que se añada un propietario a un piso de un edificio que muestre un mensaje.
-   * @returns
-   */
-  mostrarMensajeDePropietario() {
-    return `${_propietario} es ahora el propietario de la puerta ${this._puertas} de la planta ${this._plantas}`;
+/**
+ * Cada vez que se añada un propietario a un piso de un edificio que muestre un mensaje.
+ * @param {number} planta a la que petenece la puerta buscada.
+ * @param {number} puerta buscada
+ * @returns {string} mensaje que se imprimirá.
+ */
+  mostrarMensajeDePropietario(planta, puerta) {
+    return `${this._plantas[planta][puerta]} es ahora el propietario de la puerta ${puerta} de la planta ${planta}`;
   }
 
-  /**
-   * Imprime la tarea en el documento HTML.
-   * @param { string } tarea que se debe imprimir
-   */
-  imprimirTarea(tarea) {
-    let ul = document.getElementById("tareas");
-    let li = document.createElement("li");
-    li.innerHTML = tarea;
-    ul.appendChild(li);
-  }
+
 }
 // Fin de la clase edificios ----------------------
 
 // -- Funcionalidad de la aplicacion ----------------------------------
 
-// Crear el gestor de edificios sin pasarle ningún edificio
-let gestorDeEdificios = new GestorDeEdificios();
+// Declarar los edificios
+Edificio.imprimirTarea("<strong>Crear 3 edificios: A, B, C</strong>");
+let edificioA = new Edificio("Cebolla", 43, 99001);
+let edificioB = new Edificio("Calabacín", 2, 99012);
+let edificioC = new Edificio("Pepino", 22, 99002);
 
-// Crear edificios y añadirlos a la colección
-let edificio = new Edificio("Pepino", 32, 99002);
-gestorDeEdificios.setEdificio(edificio);
-edificio.agregarPlantasYPuertas(3, 3);
-edificio.agregarPlantasYPuertas(2, 2);
-edificio.imprimirPlantas();
-edificio.imprimirTarea("<hr>");
+// Imprimir algunos datos de cada edificio
+Edificio.imprimirTarea('<br><strong>Algunos datos:</strong>');
+Edificio.imprimirTarea(`El código postal del edificioA es: ${edificioA.imprimeCodigoPostal()}`);
+Edificio.imprimirTarea(`La calle del edificio C es: ${edificioC.imprimeCalle()}`);
+Edificio.imprimirTarea(`El edificio B está situado en la calle ${edificioB.imprimeCalle()} número ${edificioB.imprimeNumero()}`);
 
-// edificio = new Edificio("Cebolla", 43, 99001);
-// gestorDeEdificios.setEdificio(edificio);
-// edificio.agregarPlantasYPuertas(5, 2);
-// edificio.imprimirPlantas();
-// edificio.imprimirTarea('<hr>');
+// Cambiar algunos datos de cada edificio
+Edificio.imprimirTarea('<br><strong>Cambiamos los datos:</strong>');
+edificioA.modificarCodigoPostal(88001);
+edificioC.modificarCalle('Pepinillo');
+edificioB.modificarNumero(79);
+edificioB.modificarCalle('Calabaza');
+Edificio.imprimirTarea(`El nuvo código postal del edificioA es: ${edificioA.imprimeCodigoPostal()}`);
+Edificio.imprimirTarea(`Ahora, la calle del edificio C es: ${edificioC.imprimeCalle()}`);
+Edificio.imprimirTarea(`La nueva situación del edificio B es la calle ${edificioB.imprimeCalle()} número ${edificioB.imprimeNumero()}`);
 
-// edificio = new Edificio("Calabacín", 2, 99012);
-// gestorDeEdificios.setEdificio(edificio);
-// edificio.agregarPlantasYPuertas(2, 3);
-// edificio.imprimirPlantas();
+// Agregar plantas y puertas
+Edificio.imprimirTarea(`<br><strong>Agregar plantas y puertas (planta baja es 0):</strong>
+  <ul >
+    <li>Edifico A.: 3 plantas y 3 puertas por planta.</li>
+    <li>Edifico B.: 2 plantas y 4 puertas por planta.</li>
+    <li>Edifico c.: 4 plantas y 2 puertas por planta.</li>
+  </ul>`);
+edificioA.agregarPlantasYPuertas(3,3);
+edificioB.agregarPlantasYPuertas(2,4);
+edificioC.agregarPlantasYPuertas(4,2);
+
+// Agregar propietarios
+Edificio.imprimirTarea('<br><strong>Agregar propietarios:</strong>');
+edificioA.agregarPropietario('Benito Boniato', 2, 2);
+edificioA.agregarPropietario('Lorenza Coto',1,1);
+edificioA.agregarPropietario('Aitor Tilla',0,1);
+edificioA.agregarPropietario('Andrés Trozado',2,1);
+edificioA.agregarPropietario('Lola Mento',2,0);
+edificioA.agregarPropietario('Encarna Vales',1,2);
+edificioA.agregarPropietario('Ana Tomía',0,2);
+
+// Imprimir una lista de propietarios
+Edificio.imprimirTarea(`<br><strong>Lista de propietarios de la calle ${edificioA.imprimeCalle()} número ${edificioA.imprimeNumero()} :</strong>`);
+Edificio.imprimirTarea(edificioA.imprimePlantas());
+
+// Agregar plantas
+Edificio.imprimirTarea('<br><strong>Agregar 2 plantas, con 2 puertas cada una, al edificio A.</strong>');
+edificioA.agregarPlantasYPuertas(2,2);
+
+// Agregar propietarios a las plantas nuevas
+Edificio.imprimirTarea('<br><strong>Agregar propietarios a las plantas nuevas:</strong>');
+edificioA.agregarPropietario('Matías Queroso', 3, 1);
+edificioA.agregarPropietario('Igor Dito',4,0);
+
+// Listar nuevamente las plantas
+Edificio.imprimirTarea('<br><strong>Así quedan las viviendas del edificio A:</strong>');
+Edificio.imprimirTarea(edificioA.imprimePlantas());
