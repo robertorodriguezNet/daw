@@ -110,6 +110,7 @@ class Edificio {
 
   /**
    * Agrega las plantas y las puertas por planta al edificio.
+   * Las plantas se suman a las ya creadas en el edificio.
    *
    * La planta 0 es la planta baja.
    *
@@ -117,21 +118,25 @@ class Edificio {
    * @param {number} puertas de cada planta.
    */
   agregarPlantasYPuertas(plantas = 1, puertas = 1) {
+    // El edificio puede tener a alguna planta
+    let plantasActuales = this._plantas.length;
 
-    // Recorrer las plantas.
-    for( let i = 0; i < plantas; i++ ){
-
+    // Recorrer las plantas del edificio que queremos agregar.
+    // OJO! i contiene el índice de la planta pero, si ya hay
+    // plantas, i se puede corresponder con plantas ya creadas.
+    // Para evitar esto, i debe partir del último elemento de
+    // de la lista de plantas.
+    for (let i = plantasActuales; i < plantasActuales + plantas; i++) {
       // Cada planta contiene un array con las puertas.
-      this._plantas.push( new Array(puertas) );
+      this._plantas.push(new Array(puertas));
 
       // Recorrer las puertas en cada planta.
-      for( let j = 0; j < puertas; j++){
-
+      for (let j = 0; j < puertas; j++) {
+        // A la planta se le asignan las puertas
         // A cada puerta se le asigna un propietario en blanco.
-        this._plantas[i][j] = 'Sin propietario';
+        this._plantas[i][j] = "Sin propietario";
       }
     }
-
   }
 
   /**
@@ -195,28 +200,27 @@ class Edificio {
    * Recorre el edificio e imprime todos los propietarios de cada puerta.
    */
   imprimirPlantas() {
-
     // Iniciamos el texto que se va a mostrar, creando una lista
     // para cada planta y otra para cada colección de puertas.
-    let texto = '<li><strong>Plantas</strong>';
+    let texto = "<li><strong>Plantas</strong>";
 
     // Recorrer las plantas
-    for(let planta in this._plantas){
+    for (let planta in this._plantas) {
       texto += `<ul>
         <li>Planta ${planta}
           <ul>`;
 
-        // Recorrer cada puerta de la planta
-        for(let puerta in this._plantas[planta]){
-          texto += `<li>Puerta ${puerta}: ${this._plantas[planta][puerta]}</li>`;
-        }
-        
+      // Recorrer cada puerta de la planta
+      for (let puerta in this._plantas[planta]) {
+        texto += `<li>Puerta ${puerta}: ${this._plantas[planta][puerta]}</li>`;
+      }
+
       texto += `</ul>
           </li>
         </ul>`;
     }
 
-    texto += '</li>';
+    texto += "</li>";
 
     this.imprimirTarea(texto);
   }
@@ -260,17 +264,17 @@ let gestorDeEdificios = new GestorDeEdificios();
 let edificio = new Edificio("Pepino", 32, 99002);
 gestorDeEdificios.setEdificio(edificio);
 edificio.agregarPlantasYPuertas(3, 3);
+edificio.agregarPlantasYPuertas(2, 2);
 edificio.imprimirPlantas();
-edificio.imprimirTarea('<hr>');
+edificio.imprimirTarea("<hr>");
 
-edificio = new Edificio("Cebolla", 43, 99001);
-gestorDeEdificios.setEdificio(edificio);
-edificio.agregarPlantasYPuertas(5, 2);
-edificio.imprimirPlantas();
-edificio.imprimirTarea('<hr>');
+// edificio = new Edificio("Cebolla", 43, 99001);
+// gestorDeEdificios.setEdificio(edificio);
+// edificio.agregarPlantasYPuertas(5, 2);
+// edificio.imprimirPlantas();
+// edificio.imprimirTarea('<hr>');
 
-edificio = new Edificio("Calabacín", 2, 99012);
-gestorDeEdificios.setEdificio(edificio);
-edificio.agregarPlantasYPuertas(2, 3);
-edificio.imprimirPlantas();
-
+// edificio = new Edificio("Calabacín", 2, 99012);
+// gestorDeEdificios.setEdificio(edificio);
+// edificio.agregarPlantasYPuertas(2, 3);
+// edificio.imprimirPlantas();
