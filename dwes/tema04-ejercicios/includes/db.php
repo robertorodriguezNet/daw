@@ -6,6 +6,11 @@ $pass = 'secreto';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
+/*
+    admin/secreto
+    gestor/pass
+*/
+
 /**
  * Conecta con la base de datos mediante PDO y devuelve el objeto.
  * 
@@ -38,55 +43,67 @@ function getConexion()
 /**
  * Comprueba si un usuario existe en la tabla usuarios
  * 
- * @param string $user es el usuario buscado.
  * @return boolean [true|false] si el usuario existe o no.
  */
-function existsUser($user)
+function existsUser()
 {
     $cnx = getConexion();
 
-    $consulta = "SELECT count(*) as existe FROM usuarios WHERE usuario = '$user'";
+    $consulta = "SELECT * FROM usuarios WHERE usuario = :u";
 
-    try {
-        // Como no vamos a modificar ningún dato, no necesitamos 
-        // beginTransaction()
+    $stmt = $cnx->prepare($consulta);
+    try{
 
-        // La consulta devuelve un solo registro, con la cantidad de 
-        // registros encontrados que coinciden con el parámetro buscado.
-        $result = $cnx->query($consulta);
-        $count = $result->fetch(PDO::FETCH_OBJ);
+        $stmt->execute([
+            ':u' =>$_SERVER['PHP_AUTH_USER']
+        ]);
 
-        // Eliminar el objeto
+    }catch(PDOException $e){
         $cnx = null;
-        return $count->existe >= 1;
-
-    } catch (PDOException $e) {
-        return false;
+        die('No se ha podido ejecutar la consulta: ' . $e->getMessage());
     }
+
+    $exist = $stmt->rowCount() > 0;
+
+    $cnx = null;
+    $stmt = null;
+
+    return $exist;
 }
 
-function isPassValid($user, $pass)
+/**
+ * Validar un usuario a través del nombre de usuario y de la clave.
+ * 
+ * @return boolean true|false si el usuario existe o no.
+ */
+function isUserValid()
 {
     $cnx = getConexion();
 
-    $consulta = "SELECT count(*) as existe FROM usuarios WHERE usuario = '$user' AND pass = sha2('$pass',256)";
+    $consulta = "SELECT * FROM usuarios WHERE usuario = :u AND pass = :p";
 
+    // Crear el statement
+    $stmt = $cnx->prepare($consulta);
+
+    // Ejecutar la consulta
     try {
-        // Como no vamos a modificar ningún dato, no necesitamos 
-        // beginTransaction()
-
-        // La consulta devuelve un solo registro, con la cantidad de 
-        // registros encontrados que coinciden con el parámetro buscado.
-        $result = $cnx->query($consulta);
-        $count = $result->fetch(PDO::FETCH_OBJ);
-
-        // Eliminar el objeto
-        $cnx = null;
-        return $count->existe >= 1;
-
+        $stmt->execute([
+            ':u' => $_SERVER['PHP_AUTH_USER'],
+            ':p' => hash('sha256', $_SERVER['PHP_AUTH_PW'])
+        ]);
     } catch (PDOException $e) {
-        return false;
+        $cnx =null;
+        die("Error al recuperar los datos: " . $e->getMessage());
     }
+
+    // Comprobar el resultado de la consulta
+    $isValid = ( $stmt->rowCount() > 0);
+     
+    $cnx = null;
+    $stmt = null;
+
+    return $isValid;
+     
 }
 
 ?>

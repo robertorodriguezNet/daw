@@ -9,7 +9,7 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 include_once('includes/db.php');
 
 // Comprobar el usuario
-if (!existsUser($_SERVER['PHP_AUTH_USER']) || !isPassValid($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW'])) {
+if (!existsUser() || !isUserValid()) {
     header('WWW-Authenticate: Basic Realm="Contenido Protegido"');
     header('HTTP/1.0 401 Unauthorized');
     echo "Datos Incorrectos o Usuario NO reconocido!!!";
