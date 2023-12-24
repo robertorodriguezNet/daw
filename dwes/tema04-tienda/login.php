@@ -22,8 +22,7 @@ function error($mensaje)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tema 04 - Tienda</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- css Fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -71,11 +70,11 @@ function error($mensaje)
 
         // La consulta se ha ejecutado con éxito
         cerrarTodo($conProyecto, $stmt);
-        
+
         $_SESSION['nombre'] = $nombre;
         header('location:listado.php');
 
-        
+
     } else { ?>
 
         <header class="container text-center my-5">
@@ -84,26 +83,21 @@ function error($mensaje)
 
         <main class="container my-5">
             <div class="d-flex justify-content-center">
+
+                <!-- card ------------------------------------- -->
                 <div class="card">
                     <div class="card-header">
                         <h2>Login</h2>
                     </div>
                     <div class="card-body">
                         <form action="<?= $_SERVER['PHP_SELF'] ?>" name="login" method="post">
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
+                            <div class="input-group form-group mb-3">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
                             </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-key"></i>
-                                    </span>
-                                </div>
-                                <input type="password" name="pass" id="pass" class="form-control" placeholder="contraseña"
-                                    required>
+                            <div class="input-group form-group mb-3">
+                                <span class="input-group-text"> <i class="fas fa-key"></i> </span>
+                                <input type="password" name="pass" id="pass" class="form-control" placeholder="contraseña" required>
                             </div>
                             <div class="form-group my-3 text-end">
                                 <input type="submit" value="Login" name="login" class="btn btn-success">
@@ -111,6 +105,8 @@ function error($mensaje)
                         </form>
                     </div>
                 </div>
+                <!-- Fin de card ----------------------------- -->
+
             </div>
 
             <?php if (isset($_SESSION['error'])): ?>

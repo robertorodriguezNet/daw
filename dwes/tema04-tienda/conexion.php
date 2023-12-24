@@ -29,7 +29,7 @@ try{
  */
 function consultarProducto($id){
     global $conProyecto;  // Es varable global para poder tener acceso.
-    $consulta = "SELECT * FROM producos WHERE id = :i";
+    $consulta = "SELECT * FROM productos WHERE id = :i";
     $stmt1 = $conProyecto->prepare($consulta);
     try{
         $stmt1->execute([':i' => $id]);
