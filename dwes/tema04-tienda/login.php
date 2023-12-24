@@ -22,7 +22,8 @@ function error($mensaje)
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tema 04 - Tienda</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- css Fontawesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
         integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -62,14 +63,22 @@ function error($mensaje)
             error("Error al validar el usuario: " . $e->getMessage());
         }
 
+        if ($stmt->rowCount() == 0) {
+            unset($_POST['login']);
+            cerrarTodo($conProyecto, $stmt);
+            error("Error: nombre de usuario o password incorrecto");
+        }
+
         // La consulta se ha ejecutado con éxito
         cerrarTodo($conProyecto, $stmt);
+        
         $_SESSION['nombre'] = $nombre;
         header('location:listado.php');
 
+        
     } else { ?>
 
-        <header class="container my-5">
+        <header class="container text-center my-5">
             <h1>Tema 4 - Tienda</h1>
         </header>
 
@@ -81,15 +90,14 @@ function error($mensaje)
                     </div>
                     <div class="card-body">
                         <form action="<?= $_SERVER['PHP_SELF'] ?>" name="login" method="post">
-                            <div class="input-group form-group my-3">
-                                <div class="input-group-prepend d-flex align-items-center">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                                 </div>
                                 <input type="text" class="form-control" placeholder="usuario" name='usuario' required>
                             </div>
-                            
-                            <div class="input-group form-group my-3">
-                                <div class="input-group-prepend d-flex align-items-center">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
                                     <span class="input-group-text">
                                         <i class="fas fa-key"></i>
                                     </span>
