@@ -26,7 +26,7 @@
                 <div class="input-group form-group mb-3">                    
                     <span class="input-group-text"><i class="fas fa-language"></i></span>
                     <select name="idioma" id="idioma" class="form-control">
-                        <option value="espanol">Español</option>
+                        <option value="espanol" Selected>Español</option>
                         <option value="ingles">Inglés</option>
                     </select>
                 </div>
@@ -34,7 +34,7 @@
                 <div class="input-group form-group mb-3">                    
                     <span class="input-group-text"><i class="fas fa-users"></i></span>
                     <select name="publico" id="publico" class="form-control">
-                        <option value="si">Sí</option>
+                        <option value="si" Selected>Sí</option>
                         <option value="no">No</option>
                     </select>
                 </div>
@@ -45,7 +45,7 @@
                         <option value="gtm-2">GMT-2</option>
                         <option value="gtm-1">GMT-1</option>
                         <option value="gtm">GMT</option>
-                        <option value="gtm+1">GMT+1</option>
+                        <option value="gtm+1" selected>GMT+1</option>
                         <option value="gtm+2">GMT+2</option>
                     </select>
                 </div>
