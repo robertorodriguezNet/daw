@@ -1,3 +1,22 @@
+<?php
+// Inicio de la sesión
+session_start();
+
+// Aún no existen preferencias
+
+// Venimos del formulario
+if (
+    isset($_POST["idioma"]) &&
+    isset($_POST["zona-horaria"]) &&
+    isset($_POST['perfil-publico'])
+) {
+    $_SESSION["idioma"] = $_POST["idioma"];
+    $_SESSION["perfil-publico"] = $_POST["perfil-publico"];
+    $_SESSION["zona-horaria"] = $_POST["zona-horaria"];
+    
+    $guardado = true;  // Comunicamos que se ha guardado
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -21,40 +40,43 @@
                 <h3>Preferencias de usuario</h3>
             </div>
             <div class="card-body">
-            <form action="<?= $_SERVER["PHP_SELF"] ?>" name="establecer" method="post">
-                <div><label for="idioma">Idioma</label></div>
-                <div class="input-group form-group mb-3">                    
-                    <span class="input-group-text"><i class="fas fa-language"></i></span>
-                    <select name="idioma" id="idioma" class="form-control">
-                        <option value="espanol" Selected>Español</option>
-                        <option value="ingles">Inglés</option>
-                    </select>
-                </div>
-                <div><label for="publico">Perfil público</label></div>
-                <div class="input-group form-group mb-3">                    
-                    <span class="input-group-text"><i class="fas fa-users"></i></span>
-                    <select name="publico" id="publico" class="form-control">
-                        <option value="si" Selected>Sí</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-                <div><label for="hora">Zona horaria</label></div>
-                <div class="input-group form-group mb-3">                    
-                    <span class="input-group-text"><i class="fa-regular fa-clock"></i></span>
-                    <select name="hora" id="hora" class="form-control">
-                        <option value="gtm-2">GMT-2</option>
-                        <option value="gtm-1">GMT-1</option>
-                        <option value="gtm">GMT</option>
-                        <option value="gtm+1" selected>GMT+1</option>
-                        <option value="gtm+2">GMT+2</option>
-                    </select>
-                </div>
-                <div class="d-flex justify-content-between">                    
-                    <a href="mostrar.php" class="btn btn-primary">Mostar preferencias</a>
-                    <input type="submit" value="Establecer Preferencias" class="btn btn-success">
-                </div>
-            </form>
-        </div>
+                <?php if (isset($guardado) && $guardado): ?>
+                    <p class="card-text text-primary">Preferencias de usuario guardadas.</p>
+                <?php endif; ?>
+                <form action="<?= $_SERVER["PHP_SELF"] ?>" name="establecer-preferencias" method="post">
+                    <div><label for="idioma">Idioma</label></div>
+                    <div class="input-group form-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-language"></i></span>
+                        <select name="idioma" id="idioma" class="form-control">
+                            <option value="Español" Selected>Español</option>
+                            <option value="Inglés">Inglés</option>
+                        </select>
+                    </div>
+                    <div><label for="perfil-publico">Perfil público</label></div>
+                    <div class="input-group form-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-users"></i></span>
+                        <select name="perfil-publico" id="perfil-publico" class="form-control">
+                            <option value="si" Selected>Sí</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div><label for="zona-horaria">Zona horaria</label></div>
+                    <div class="input-group form-group mb-3">
+                        <span class="input-group-text"><i class="fa-regular fa-clock"></i></span>
+                        <select name="zona-horaria" id="zona-horaria" class="form-control">
+                            <option value="GMT-2">GMT-2</option>
+                            <option value="GMT-1">GMT-1</option>
+                            <option value="GMT">GMT</option>
+                            <option value="GMT+1" selected>GMT+1</option>
+                            <option value="GMT+2">GMT+2</option>
+                        </select>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <a href="mostrar.php" class="btn btn-primary">Mostar preferencias</a>
+                        <input type="submit" value="Establecer Preferencias" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
         </section>
     </main>
 
