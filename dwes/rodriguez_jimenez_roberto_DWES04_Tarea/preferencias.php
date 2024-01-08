@@ -1,21 +1,6 @@
 <?php
 // Inicio de la sesión
 session_start();
-
-// Aún no existen preferencias
-
-// Venimos del formulario
-if (
-    isset($_POST["idioma"]) &&
-    isset($_POST["zona-horaria"]) &&
-    isset($_POST['perfil-publico'])
-) {
-    $_SESSION["idioma"] = $_POST["idioma"];
-    $_SESSION["perfil-publico"] = $_POST["perfil-publico"];
-    $_SESSION["zona-horaria"] = $_POST["zona-horaria"];
-    
-    $guardado = true;  // Comunicamos que se ha guardado
-}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -29,9 +14,6 @@ if (
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
-<!-- <body class="bg-secondary d-flex justify-content-center align-items-center my-auto"> -->
-
 <body class="bg-secondary">
 
     <main class="container d-flex justify-content-center">
@@ -40,9 +22,25 @@ if (
                 <h3>Preferencias de usuario</h3>
             </div>
             <div class="card-body">
-                <?php if (isset($guardado) && $guardado): ?>
-                    <p class="card-text text-primary">Preferencias de usuario guardadas.</p>
+
+                <!-- Mensaje de confirmación de guardar las preferencias -->
+                <?php 
+                // Si venimos del formulario, establecemos las variables de sesión 
+                // y mostramos el mensaje.
+                if (
+                    isset($_POST["idioma"]) &&
+                    isset($_POST["zona-horaria"]) &&
+                    isset($_POST['perfil-publico'])
+                ):
+                    $_SESSION["idioma"] = $_POST["idioma"];
+                    $_SESSION["perfil-publico"] = $_POST["perfil-publico"];
+                    $_SESSION["zona-horaria"] = $_POST["zona-horaria"];
+                    ?>
+                    <h4 class="card-text text-primary">Preferencias de usuario guardadas.</h4>
                 <?php endif; ?>
+                <!-- Fin del mensjae de confirmación -->
+
+                <!-- Formulario ------------------------------------------------- -->
                 <form action="<?= $_SERVER["PHP_SELF"] ?>" name="establecer-preferencias" method="post">
                     <div><label for="idioma">Idioma</label></div>
                     <div class="input-group form-group mb-3">
@@ -76,6 +74,8 @@ if (
                         <input type="submit" value="Establecer Preferencias" class="btn btn-success">
                     </div>
                 </form>
+                <!-- Fin del formulario -------------------------------------- -->
+
             </div>
         </section>
     </main>
