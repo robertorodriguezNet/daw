@@ -1,0 +1,13 @@
+# AuthzLDAPAuthoritative está obsoleta
+Order deny,allow
+Deny from All
+AuthName "Only members"
+AuthType Basic
+AuthBasicProvider ldap
+AuthLDAPBindAuthoritative on
+# AuthzLDAPAuthoritative on
+AuthLDAPUrl ldaps://localhost/dc=ldap,dc=daw,dc=local?uid
+AuthLDAPGroupAttribute memberUid
+AuthLDAPGroupAttributeIsDN off
+Require ldap-group cn=example,ou=group,dc=ldap,dc=example,dc=com
+Satisfy any
