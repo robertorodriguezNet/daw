@@ -1,0 +1,25 @@
+*{
+    box-sizing: border-box; /*Calcular las dimensiones con los bordes */
+}
+
+/* Quitar los estilos por defecto del navegador */
+h1, h2,p{
+    margin: 0;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 90%;
+    grid-template-rows: 150px * 100px;
+    grid-row-gap: 1rem;
+    min-height: 100vh;
+    margin: 0 auto;
+    width: min(1140px, 95%);
+}
+
+footer{
+    border-top: solid 1px #000;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}

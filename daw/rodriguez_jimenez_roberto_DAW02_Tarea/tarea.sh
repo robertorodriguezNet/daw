@@ -134,6 +134,11 @@ systemctl restart apache2
 
 # Crear el directorio en el que guardar los certificados
 mkdir /etc/apache2/certs
+
+# Generamos dos archivos:
+# .- La clave privada con la que firmar los certificados: *.key
+# .- El certificado con la clave pública de la AC: *.csr
+# Este comando solicitará datos
 openssl req -new -nodes -keyout /etc/apache2/certs/daw02.key -out /etc/apache2/certs/daw.csr
 
 # Realizar la autofirma
