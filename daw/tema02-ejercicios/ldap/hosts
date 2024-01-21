@@ -1,12 +1,12 @@
 127.0.0.1	localhost
 127.0.1.1	ubuntu-daw
 
-10.0.2.15	panel-de-control.com
-10.0.2.15	www.panel-de-control.com
-10.0.2.15	empresa1.com
-10.0.2.15	www.empresa1.com
-10.0.2.15	empresa2.com
-10.0.2.15	www.empresa2.com
+10.0.2.15	panel-de-control.local
+10.0.2.15	www.panel-de-control.local
+10.0.2.15	empresa1.local
+10.0.2.15	www.empresa1.local
+10.0.2.15	empresa2.local
+10.0.2.15	www.empresa2.local
 
 # The following lines are desirable for IPv6 capable hosts
 ::1     ip6-localhost ip6-loopback
