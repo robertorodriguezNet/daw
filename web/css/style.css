@@ -1,0 +1,84 @@
+/* Puntos de ruptura 
+ *   Extra pequeño  |  móvil   |   tablet   |   portátil   |   escritorio  |  Extra grande
+ *              575 | 576  767 | 768    991 | 992     1199 | 1200     1399 | 1400
+ */
+
+/** Colores ********************************************* **/
+:root {
+    --active: #c60;
+    --blanco: #fff;
+    --emphasis: #393;
+    --negro: #000;
+    --primary: #333;
+}
+html{
+
+    /* Establecemos el borde como parte de los bloques */
+    box-sizing: border-box;
+    font-size: 62.5%; /* Iguala 10px a 1rem */
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+    color: var(--primary);
+}
+
+body{
+    font-size: 16px;
+    font-size: 1.6rem;
+    margin: 0 auto;
+    width: min(95%, 120rem);
+}
+
+
+/** Header ********************************************* **/
+header{
+    border-bottom: solid .1rem var(--primary);
+    padding: 0 0 2rem 0;
+}
+h1{
+    font-size: 2.4rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+@media (min-width: 576px){
+    h1{
+        font-size: 3.6rem;
+    }
+}
+/** Navegador ********************************************** **/
+nav#navegador-principal ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+nav#navegador-principal ul li {
+    display: inline;
+    list-style: none;
+    margin: 0 10px;
+}
+nav#navegador-principal ul li a {
+    font-weight: 600;
+    letter-spacing: .2rem;
+    text-decoration: none;
+}
+nav#navegador-principal ul li a:hover {
+    color: var(--emphasis);
+    text-decoration: underline;
+}
+.active{
+    color: var(--active);
+}
+/** Footer ****************************** **/
+footer{
+    border-top: solid .1rem var(--primary);
+    margin: 2rem 0;
+    padding: 2rem 0;
+    text-align: center;
+}
+@media (min-width: 576px){
+    footer{
+        display: flex;
+        justify-content: space-between;
+    }
+}
