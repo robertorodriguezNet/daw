@@ -6,13 +6,14 @@
 /** Colores ********************************************* **/
 :root {
     --active: #c60;
-    --blanco: #fff;
+    --black: #000;
     --emphasis: #393;
-    --negro: #000;
+    --lightgray: #cccccc;
+    --lightyellow: #ffc;
     --primary: #333;
+    --white: #fff;
 }
 html{
-
     /* Establecemos el borde como parte de los bloques */
     box-sizing: border-box;
     font-size: 62.5%; /* Iguala 10px a 1rem */
@@ -23,6 +24,25 @@ html{
     color: var(--primary);
 }
 
+h1{
+    font-size: 2.4rem;
+}
+h2{
+    font-size: 2.2rem;
+}
+h3{
+    font-size: 2rem;
+}
+h4,h5,h6{
+    font-size: 1.8rem;
+}
+pre{
+    background-color: var(--lightgray);
+    display: inline;
+    font-size: 1.2rem;
+    padding: 0 .5rem;
+}
+
 body{
     font-size: 16px;
     font-size: 1.6rem;
@@ -30,14 +50,17 @@ body{
     width: min(95%, 120rem);
 }
 
+article{
+    margin: 4rem 0;
+}
 
 /** Header ********************************************* **/
 header{
     border-bottom: solid .1rem var(--primary);
+    margin-bottom: 2rem;
     padding: 0 0 2rem 0;
 }
 h1{
-    font-size: 2.4rem;
     text-align: center;
     text-transform: uppercase;
 }
@@ -72,6 +95,7 @@ nav#navegador-principal ul li a:hover {
 /** Footer ****************************** **/
 footer{
     border-top: solid .1rem var(--primary);
+    font-size: 1.4rem;
     margin: 2rem 0;
     padding: 2rem 0;
     text-align: center;
@@ -81,4 +105,41 @@ footer{
         display: flex;
         justify-content: space-between;
     }
+}
+
+/** Utilidades globales ******************** **/
+
+form{
+    border: solid 1px var(--black);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+    padding: 2rem;
+}
+
+.code{
+    background-color: var(--black);
+    color: var(--white);
+    font-family: monospace;
+    font-size: 1.2rem;
+    padding: .5rem;
+}
+
+.text-center{
+    text-align: center;
+}
+.text-right{
+    text-align: right;
+}
+
+.enunciado{
+    background-color: var(--lightyellow);
+    border: solid 1px var(--black);
+    border-radius: 12px;
+    padding: 1rem;
+}
+.enunciado h4{
+    padding: 0;
+    margin: 0;
 }

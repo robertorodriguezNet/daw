@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteBase /
+
+# RewriteRule URL_FALSA URL_VERDADERA
+# ^ antes de esto no puede haber nada
+# $ no puede haber nada después
+Rewriterule ^daw$   /daw.php [L,NC,NS]
