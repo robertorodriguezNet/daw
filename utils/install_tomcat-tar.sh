@@ -41,7 +41,7 @@ RestartSec=10
 Restart=always
 
 [Install]
-WantedBy=multi-user.target" > /etc/systemd/system/tomcat-service
+WantedBy=multi-user.target" > /etc/systemd/system/tomcat.service
 
 systemctl daemon-reload
 systemctl start tomcat
