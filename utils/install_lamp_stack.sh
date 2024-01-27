@@ -24,7 +24,7 @@ mysql_secure_installation
 
 # PHP 8.1 ------------------------
 apt-get install software-properties-common
-add-apt-repository ppa:onderj/php
+add-apt-repository ppa:ondrej/php
 appt-get update
 apt install php8.1 libapache2-mod-php8.1 php8.1-cli php8.1-mysql php8.1-gd php8.1-imagick php*-recode php8.1-tidy php8.1-xmlrpc
 
