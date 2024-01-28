@@ -1,0 +1,71 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 16px;
+    font-size: 1.6rem;
+    margin: 0 auto;
+    width: min(1140px, 90%);
+}
+
+h1 {
+    font-size: 2.6rem;
+}
+h2 {
+    font-size: 2.2rem;
+}
+h3 {
+    font-size: 2rem;
+}
+
+pre{
+    font-size: 1.2rem;
+}
+
+header{
+   text-align: center; 
+}
+
+fieldset{
+    border-radius: 8px;
+    padding: 2rem 1rem;
+}
+form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+input{
+    border-radius: 4px;
+}
+section#ejercicio{
+    border-color: #999;
+    border-width: 1px 0;
+    border-style: solid;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+#ejercicio #btn-borrar{
+    align-self: center;
+    width: min(300px, 80%);
+}
+
+section#solucion pre{
+    background-color: #000;
+    color: #fff !important;
+    padding: 1rem;
+}
+
+/** Botón para borrar **/
+#borrar{
+    text-align: center;
+}
