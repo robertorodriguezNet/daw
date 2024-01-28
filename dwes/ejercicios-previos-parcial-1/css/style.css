@@ -59,7 +59,7 @@ section#ejercicio{
     width: min(300px, 80%);
 }
 
-section#solucion pre{
+pre{
     background-color: #000;
     color: #fff !important;
     padding: 1rem;

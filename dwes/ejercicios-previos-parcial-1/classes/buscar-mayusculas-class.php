@@ -8,7 +8,7 @@
  * @param string $cadena cadena en la que buscar las mayúsculas
  * @return array con la colección de letras mayúsculas encontradas
  */
-function buscarMayusculas($cadena): array
+function buscarMayusculas(string $cadena): array
 {
     /**
      * Convierte el texto de la cadena en un array.

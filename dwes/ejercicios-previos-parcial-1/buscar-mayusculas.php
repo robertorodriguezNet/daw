@@ -21,17 +21,19 @@ require_once('classes/buscar-mayusculas-class.php');
     <section id="enunciado">
         <h3>Enunciado</h3>
         <p>
-            Completa la función buscarMayusculas para que devuelva un array con las letras mayúsculas presentes en una
+            Completa la función <strong>buscarMayusculas</strong> para que devuelva un array con las letras mayúsculas presentes en una
             cadena.
         </p>
         <pre>
-                    &lt;?php
-                    function buscarMayusculas($cadena) {
-                    // Completa el código aquí
-                    }
-                    $resultado = buscarMayusculas("Hola, Mundo");
-                    // Muestra el resultado
-                    ?>
+&lt;?php
+function buscarMayusculas($cadena) {
+    // Completa el código aquí
+}
+
+$resultado = buscarMayusculas("Hola, Mundo");
+
+// Muestra el resultado
+?>
                 </pre>
     </section>
 
@@ -67,11 +69,33 @@ require_once('classes/buscar-mayusculas-class.php');
     <section id="solucion">
         <h3>Solución</h3>
         <pre>
-function buscarMayusculas($cadena): array
-{
-    $letras = str_split($cadena, 1); // Convertir la cadena en array
+&lt;?php
 
-    // Recorrer la cadena en busca de mayúsculas
+/**
+ * Devuelve un array con los letras mayúsculas encontradas
+ * en la cadena pasada como parámetro.
+ * 
+ * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
+ * @param string $cadena cadena en la que buscar las mayúsculas
+ * @return array con la colección de letras mayúsculas encontradas
+ */
+function buscarMayusculas(string $cadena): array
+{
+    /**
+     * Convierte el texto de la cadena en un array.
+     * El segundo parámetro indica cuántos caracteres entran en cada corte.
+     * 
+     * @var mixed 
+     * @access private
+     */
+    $letras = str_split($cadena, 1); 
+
+    /*
+     * Recorremos la colección de letras obteniendo el índice para poder
+     * referenciar el elemento.
+     * Si ctype_upper($letra) devuelve false es porque no es una letra mayúscula
+     * y, por lo tanto, la eliminanos de la colección con unset(índice del elemento),
+     */
     foreach ($letras as $k => $letra) {
         if (!ctype_upper($letra)) {
             unset($letras[$k]);
@@ -85,7 +109,7 @@ function buscarMayusculas($cadena): array
     </section>
 
 
-    <script src="js/functions.js"></script>
+    <script src="js/buscar-mayusculas-funtions.js"></script>
 </body>
 
 </html>
