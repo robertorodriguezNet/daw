@@ -7,7 +7,7 @@ require_once('classes/calcular-promedio-class.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar mayúsculas</title>
+    <title>Calcular promedio</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
 

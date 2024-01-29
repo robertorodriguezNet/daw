@@ -1,0 +1,18 @@
+#solucion-caja{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+#solucion-caja .caja{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #cccc;
+    border: solid 1px #333;
+    box-shadow: 10px 10px 10px #cccc;
+    overflow: hidden;
+}
+.caja p{
+    margin: 0;
+} 
