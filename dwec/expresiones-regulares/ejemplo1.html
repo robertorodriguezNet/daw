@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expresiones regulares</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js"></script>
+</head>
+
+<body>
+
+    <h1>Expresiones regulares I</h1>
+
+    <p>
+        Los nombres que aparecen precedidos de '@' se deben convertir en enlaces.
+    </p>
+
+    <p id="parrafo">
+        <i>El día de hoy el instructor @Eduardo va a subir un nuevo curso con su compañera @Carla al canal Kodoti sobre
+            expresiones regulares.</i>
+    </p>
+    
+<h2 id="codigo">Código</h2>
+<pre>
+window.onload = () => {
+
+    // La cadena buscada comienza con @ y continúa con letras.
+    // A-z no equivale a A-Za-z ¿? pues comienza en 65 (A) y termina en 122 (z)
+    // A-Za-z busca dos rangos: del 65 al 90 y del 97 al 122
+    // + indica que debe aparecer al menos una vez y puede aparecer varias.
+    // '*' indica que puede no aparecer
+    // El modificador 'g' (global) indica que no debe dejar de buscar aunque encuentr alguno.
+    const pattern = /@[A-z]+/g;
+    
+    const parrafo = document.getElementById('parrafo');
+    
+    let text = parrafo.innerText;
+    
+    // match() espera una expresión regular.
+    // Devuelve un array con las apariciones
+    let resultado = text.match(pattern);
+        
+    resultado.forEach( value => {
+        text = text.replace(value, `&lt;a href="http://foo.com/?user=${value}">${value}</a>`);
+    });
+    
+    let nuevoP = document.createElement('p');
+    nuevoP.innerHTML = text;
+    document.body.insertBefore(nuevoP, document.getElementById('codigo'));
+        
+}
+</pre>
+
+</body>
+
+</html>
