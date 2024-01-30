@@ -1,10 +1,11 @@
 :root{
-    --braket: #f1d710;
+    --bracket: #f1d710;
     --condition: #c586c0; 
     --class: #33bbb0;
     --comment: #5e9949;
     --default: #569cd6;
     --name: #dcdcaa;
+    --number: #b5cea8;
     --string: #ce834a;
     --symbol: #fff;
     --variable: #8cdcfe;
@@ -60,7 +61,8 @@ fieldset{
 form{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 2rem;
 }
 input{
     border-radius: 4px;
@@ -79,6 +81,10 @@ section#ejercicio{
 #ejercicio #btn-borrar{
     align-self: center;
     width: min(300px, 80%);
+}
+
+article{
+    padding: 2rem 0;
 }
 
 pre{
@@ -103,11 +109,20 @@ pre{
 }
 
 /** Texto ********************** **/
+.bracket{
+    color: var(--bracket);
+}
 .comment{
     color: var(--comment);
 }
 .error{
     color: var(--error);
+}
+.name{
+    color: var(--name);
+}
+.number{
+    color: var(--number);
 }
 .string{
     color: var(--string);
@@ -117,4 +132,8 @@ pre{
 }
 .variable{
     color: var(--variable);
+}
+
+.text-center{
+    text-align: center;
 }
