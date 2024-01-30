@@ -1,9 +1,6 @@
 <?php
-require_once 'classes/factorial-class.php';
-
 date_default_timezone_set('Europe/Madrid');
 setlocale(LC_ALL, 'es');
-
 ?>
 <!DOCTYPE html>
 <html lang="es">

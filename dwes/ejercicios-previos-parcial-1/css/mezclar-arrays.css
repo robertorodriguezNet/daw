@@ -1,0 +1,8 @@
+#arrays{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+#arrays div{
+    width: 50%;
+}
