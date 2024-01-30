@@ -137,3 +137,8 @@ pre{
 .text-center{
     text-align: center;
 }
+
+.justify-center{
+    display: flex;
+    justify-content: center;
+}

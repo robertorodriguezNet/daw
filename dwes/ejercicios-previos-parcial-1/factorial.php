@@ -92,8 +92,6 @@ function getFactorial(int $number){
 
     </section>
 
-
-    <script src="js/rectangulo.js"></script>
 </body>
 
 </html>
