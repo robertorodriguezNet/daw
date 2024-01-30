@@ -1,5 +1,16 @@
 :root{
-    --green: #0f0;
+    --braket: #f1d710;
+    --condition: #c586c0; 
+    --class: #33bbb0;
+    --comment: #5e9949;
+    --default: #569cd6;
+    --name: #dcdcaa;
+    --string: #ce834a;
+    --symbol: #fff;
+    --variable: #8cdcfe;
+
+    --white: #fff;
+    --error: #900;
 }
 
 html {
@@ -29,6 +40,10 @@ h2 {
 h3 {
     font-size: 2rem;
 }
+
+p{
+    margin: .5rem;
+} 
 
 pre{
     font-size: 1.2rem;
@@ -71,13 +86,35 @@ pre{
     color: #fff !important;
     padding: 1rem;
 }
+.pre{
+    display: block;
+    overflow: auto;
+    padding: 1rem;
+    white-space: pre;
+    font-family: monospace;
+    font-size: 1.2rem;
+    background-color: #000;
+    color: var(--default);
+}
 
 /** Botón para borrar **/
 #borrar{
     text-align: center;
 }
 
-/** Propiedades ************************************ **/
-.text-green{
-    color: var(--green) !important;
+/** Texto ********************** **/
+.comment{
+    color: var(--comment);
+}
+.error{
+    color: var(--error);
+}
+.string{
+    color: var(--string);
+}
+.symbol{
+    color: var(--symbol);
+}
+.variable{
+    color: var(--variable);
 }
