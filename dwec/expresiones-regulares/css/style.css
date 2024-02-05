@@ -12,10 +12,10 @@ body{
     box-sizing: border-box;
 }
 
-pre{
-    background-color: #000;
-    color: #fff !important;
-    padding: 1rem;
-    overflow: auto;
-    font-size: 1.2rem;
+header, fieldset{
+    text-align: center;
+}
+header, section{
+    margin: 0 auto;
+    width: min(90%,120rem);
 }

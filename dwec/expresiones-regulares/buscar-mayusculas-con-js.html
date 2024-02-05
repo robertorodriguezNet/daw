@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar mayúsculas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Buscar mayúsculas</h1>
+        <h2>DWES - Ejercicios previos al primer parcial</h2>
+    </header>
+
+    <section id="enunciado">
+        <h3>Enunciado</h3>
+        <p>
+            Completa la función <strong>buscarMayusculas</strong> para que devuelva un array con las letras mayúsculas presentes en una
+            cadena.
+        </p>
+    </section>
+
+
+    <section id="ejercicio">
+
+        <fieldset>
+            <legend>Introduce un texto</legend>
+                <label for="texto">Texto: </label>
+                <input type="text" name="inp-texto" id="inp-texto" size="40" required placeholder="Aquí el texto">
+                <button name="btn-comprobar" id="btn-comprobar">Comprobar</button>
+        </fieldset>
+
+    </section>
+
+    <section>
+        <pre>
+
+            window.onload = () => {
+
+                // Inicializar componentes
+                inp_texto = document.getElementById('inp-texto');
+                btn_comprobar = document.getElementById('btn-comprobar');
+            
+                // Sección en la que escribir el resultado
+                seccion = document.getElementById("ejercicio");
+            
+                // Eventos para los botones
+                btn_comprobar.addEventListener('click', comprobar);
+            
+            
+            }
+            
+            // Componentes
+            let inp_texto;
+            let btn_comprobar;
+            
+            // Sección en la que escribir el resultado
+            let seccion;
+            
+            const PATTERN = "[A-Z]";
+            
+            /** FUNCIONES *************************************** **/
+            const comprobar = () => {
+                let texto = inp_texto.value;
+                let mayusculas = [];
+            
+                // Recorrer la cadena de texto comprobando cada carácter
+                for (let i in texto) {
+            
+                    if (texto[i].match(PATTERN)) {
+                        mayusculas.push(texto[i])
+                    }
+                }
+            
+                let ul = document.createElement('ul');
+            
+                mayusculas.forEach(e => {
+                    // console.log(e);
+                    let li = document.createElement('li');
+                    let texto = document.createTextNode(e);
+                    li.appendChild(texto);
+                    ul.appendChild(li);
+                });
+            
+                seccion.appendChild(ul);
+            }
+
+        </pre>
+    </section>
+
+
+ 
+    <script src="js/buscar-mayusculas.js"></script>
+</body>
+
+</html>

@@ -1,61 +1,85 @@
 <?php 
 
-$host = 'localhost';
-$port = 3306;
-$user = 'gestor';
-$pass = 'secreto';
-$db = 'proyecto';
+function getConnection(): mysqli{
 
-$producto = '3DSNG';
-$moverDe = 1;
-$moverA = 3;
+    global $host, $db, $user, $pass;
+    @$connection = mysqli_connect($host,$user,$pass,$db);
 
-$error = false;
+    // Hay que comprobar que la conexión sea correcta
+    $error = $connection->connect_errno;
+    
+    // Si se ha producido un error, lanzamos una excepción
+    if($error != null ){
+        throw new Exception("Error al conectar con la base de datos: " . $connection->connect_error);
+    }
 
-// Conectar con la base de datos
-@$cnxDb = mysqli_connect($host,$user,$pass,$db);
-
-// Si hay error se cierra la app
-if($cnxDb->connect_error){
-    die('Error en la conexión: '.$cnxDb->connect_error);
+    return $connection;
 }
 
-// Continuamos
-
-// Desactivar el autocommit
-$cnxDb->autocommit(FALSE);
-
-// Consulta para eliminar un producto de la tienda 1
-$query = "UPDATE stocks SET unidades = 1 
-            WHERE 
-            producto = (SELECT id FROM productos WHERE nombre_corto = '$producto')
-            AND tienda = " . $moverDe;
-
-// Ejecutar la consulta
-if(!$cnxDb->query($query)){
-    $error = true;
-}
-
-// Insertar en stocks un producto 3DSNG en la tienda 3
-// SELECT devuelve el id, y los valores 3 y 1
-$query = "INSERT INTO stocks (producto, tienda, unidades)
-            SELECT id, $moverA, 1 FROM
-                productos  WHERE nombre_corto ='$producto'";
-        
-// Ejecutar la consulta
-if(!$cnxDb->query($query)){
-    $error = true;
-}
-
-// Se han ejecutado las consultas, pero no se han confirmado.
-// Si no hay error, se confirman.
-if($error){
-    $cnxDb->rollback();
-}else{
-    $cnxDb->commit();
-}
-
-// Si hemos llegado hasta aquí, es que la conexión fue correcta
-$cnxDb->close();
-
+// Datos de conexión
+$host = "localhost";
+$db = "proyecto";
+$user = "gestor";
+$pass = "secreto";
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEWS - Ejercicio 3.1.3</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <h1 class="text-center">Transacciones</h1>
+    <h2 class="text-center">Tema 3.1.3</h2>
+
+    <section class="container d-flex justify-content-center p-2">
+        <div class="card bg-warning-subtle border-2">
+            <div class="card-body">
+                <div class="card-title">
+                    Enunciado
+                </div>
+
+            </div>
+            <div class="card-text p-2">
+                <p>
+                    Según la información que figura en la tabla stock de la base de datos proyecto, la tienda 1
+                    (CENTRAL)
+                    tiene 2 unidades del producto de código 3DSNG y la tienda 3 (SUCURSAL2) ninguno. Suponiendo que los
+                    datos son esos (no hace falta que los compruebes en el código), utiliza una transacción para mover
+                    una
+                    unidad de ese producto de la tienda 1 a la tienda 3.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <article>
+            <p>
+                La operación se va realizar con MySQL.
+            </p>
+            <p>
+                Mostrar los datos de los productos antes de la transacción.
+            </p>
+            
+            <?php 
+                
+                try{
+                    $connection = getConnection();
+                }catch(Exception $e){
+                    echo 'Error al conectar con la base de datos: ' . $e->getMessage();
+                }
+
+            ?>
+        </article>
+    </section>
+
+</body>
+
+</html>

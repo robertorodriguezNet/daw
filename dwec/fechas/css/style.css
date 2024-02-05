@@ -1,0 +1,67 @@
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 16px;
+    font-size: 1.6rem;
+}
+
+h1 {
+    text-align: center;
+}
+
+nav {
+    text-align: center;
+    border-bottom: solid 1px #ccc;
+    padding-bottom: 2rem;
+}
+
+section {
+    margin: 2rem auto;
+    padding: 0 1rem;
+    width: min(90%, 120rem);
+}
+
+article{
+    margin: 2rem 0;
+}
+
+article.card {
+    background-color: #ffc;
+    border: solid 1px #000;
+    border-radius: 1.2rem;
+    padding: 0 1rem;
+}
+
+article.form{
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+footer{
+    margin: 3rem auto;
+    border-top: solid 1px #ccc;
+    padding-top: 3rem;
+    text-align: center;
+    width: min(90%, 120rem);
+}
+
+footer a{
+    background-color: #ccc;
+    border: solid 1px #000;
+    border-radius: 8px;
+    color: #000;
+    font-weight: 600;
+    letter-spacing: .2rem;
+    text-decoration: none;
+    padding: 1rem 2rem;
+}
