@@ -1,0 +1,16 @@
+@import url(style.css);
+
+section#desarrollo{
+    display: flex;
+    flex-direction: row;
+}
+
+section#desarrollo article{
+    padding: 1rem;
+}
+
+fieldset{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
