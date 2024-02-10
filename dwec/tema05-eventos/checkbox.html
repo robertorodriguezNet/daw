@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWEC 05 - Formularios y eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/checkbox.js"></script>
+</head>
+
+<body>
+
+    <h1>Checkbox</h1>
+    <form>
+        <label for="verano">¿Te gusta el verano?</label>
+        <input type="checkbox" id="verano" name="verano" value="Si" />
+    </form>
+    <button name="marcar" id="marcar">Marcar Checkbox</button>
+    <button name="desmarcar" id="desmarcar">Desmarcar Checkbox</button>
+
+    <p>
+        La propiedad <strong>value</strong> devuelve el texto del botón.<br>Por ejemplo:
+    </p>
+
+    <pre>
+&lt;label  for="cantidad">Si desea recibir 20 Kg marque esta opción: &lt;/label>
+&lt;input  type="checkbox" id="cantidad" name="cantidad" value="20 Kg"></pre>
+    <p>
+        Cuando se envía el formulario, se envía el <i>name/value</i> del checkbox marcado.
+    </p>
+
+    <p>Para saber si un campo está márcado, se usa la propiedad <i>checked</i>.</p>
+
+</body>
+
+</html>

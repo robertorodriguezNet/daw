@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWEC 05 - Formularios y eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/referencia-this.js"></script>
+</head>
+
+<body>
+
+    <h1>Referenciando con <i>this</i></h1>
+
+    <form id="formulario" class="flex-c">
+
+        <label for="nombre">Nombre: </label>
+        <input type="text" name="nombre" id="nombre" value="Bob" onclick="identificar(this)" />
+        <label for="apellidos">Apellidos: </label>
+        <input type="text" name="apellidos" id="apellidos" value="Esponja" onclick="identificar(this)" />
+        <label for="edad">Edad: </label>
+        <input type="number" name="edad" id="edad" value="18" onclick="identificar(this)" />
+        <label for="pais">Pais: </label>
+        <label for="pais1">España: </label>
+        <input type="radio" name="pais" id="pais1" value="ES" onclick="identificar(this)" />
+        <label for="pais2">Francia: </label>
+        <input type="radio" name="pais" id="pais2" value="FR" onclick="identificar(this)" />
+
+        <p>
+            Haga click en cada uno de los campos para ver más información.
+        </p>
+    </form>
+
+
+    <h2>Código</h2>
+
+<pre>
+&lt;form id="formulario" class="flex-c">
+
+    &lt;label for="nombre">Nombre: </label>
+    &lt;input type="text" name="nombre" id="nombre" value="Bob" onclick="identificar(this)" />
+    &lt;label for="apellidos">Apellidos: </label>
+    &lt;input type="text" name="apellidos" id="apellidos" value="Esponja" onclick="identificar(this)" />
+    &lt;label for="edad">Edad: </label>
+    &lt;input type="number" name="edad" id="edad" value="18" onclick="identificar(this)" />
+    &lt;label for="pais">Pais: </label>
+    &lt;label for="pais1">España: </label>
+    &lt;input type="radio" name="pais" id="pais1" value="ES" onclick="identificar(this)" />
+    &lt;label for="pais2">Francia: </label>
+    &lt;input type="radio" name="pais" id="pais2" value="FR" onclick="identificar(this)" />
+
+    &lt;p>
+        Haga click en cada uno de los campos para ver más información.
+    &lt;/p>
+&lt;/form>
+</pre>
+
+    <pre>
+const identificar = (objeto) => {
+
+    // Objeto hace referencia al control que llama a la función.
+        
+    let nombre = objeto.name;
+    let id = objeto.id;
+    let valor = objeto.value;
+    let tipo = objeto.type;
+        
+    alert(`Datos del campo pulsado:\n\nNombre: ${nombre}\nID: ${id}\nValor: ${valor}\nTipo: ${tipo}`);
+}        
+    </pre>
+
+</body>
+
+</html>

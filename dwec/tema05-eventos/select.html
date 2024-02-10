@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWEC 05 - Formularios y eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/select.js"></script>
+</head>
+
+<body>
+
+    <h1>Input de tipo select</h1>
+
+    <form id="formulario">
+        <p>
+            <label for="provincias">Seleccione provincia: </label>
+            <select name="provincias" id="provincias">
+                <option value="AL">Almería</option>
+                <option value="JA">Jaen</option>
+                <option value="GR">Granada</option>
+                <option value="MA">Málaga</option>
+                <option value="SE">Sevilla</option>
+                <option value="CO">Córdoba</option>
+                <option value="CA">Cádiz</option>
+                <option value="HU">Huelva</option>
+            </select>
+        </p>
+        <p>
+            Selecciona una opción y pulsa el botón.
+        </p>
+        <input type="button" id="boton" name="boton" value="Consultar información de la opción"/>
+    </form>
+
+    <hr>
+
+    <p>
+        Un objeto <span class="code">select</span> está compuesto por una array de opjetos <span
+            class="code">option</span>.<br>
+        Pueden seleccionarse una o varias opciones.<br>
+        Hay opciones para <span class="code">select</span> y para <span class="code">option</span> Para detectar la
+        opción seleccionada habrá que utilar opciones de ambos objetos.<br>
+        La propiedad más importante de <span class="code">select</span> es <span class="code">selectedIndex</span>.
+    </p>
+
+    <pre>
+objetoFormulario.nombreCampoSelect.selectedIndex;
+documento.getElementById("objetoSelected").selectedIndex;
+</pre>
+
+    <p>
+        El valor devuelto por esta propiedad es el índice de la opción seleccionada.<br>
+        Las opciones tienen dos propiedades accesibles: <span class="code">text</span> y <span
+            class="code">value</span>.
+    </p>
+
+    <pre>
+objetoFormuario.nombreCampoSelect.option[n].text;
+objetoFormuario.nombreCampoSelect.option[n].value;
+</pre>
+
+    <p>
+        También puede usarse
+    </p>
+
+<pre>
+document.getElementById("objetoSelect").options[n].text|value;
+</pre>
+
+<h2>Código</h2>
+
+<pre>
+window.onload = () => {
+
+    btn_consultar = document.getElementById('boton');
+    btn_consultar.addEventListener('click', () =>{
+    
+        // Obtener el select provincias
+        let provincias = document.getElementById('provincias');
+    
+        let texto = provincias.options[provincias.selectedIndex].text;
+        let valor = provincias.options[provincias.selectedIndex].value
+    
+        alert(`Datos de la opción seleccionada:\n\nTexto; ${texto}\nValor: ${valor}`);
+    
+    });
+    
+    
+}
+    
+let btn_consultar;
+</pre>
+
+</body>
+
+</html>

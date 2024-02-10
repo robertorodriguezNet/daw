@@ -1,0 +1,27 @@
+html{
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body{
+    font-size: 16px;
+    font-size: 1.6rem;
+    padding: 2rem;
+}
+
+h1{
+text-align: center;    
+}
+
+pre{
+    background-color: #000;
+    color: #fff;
+    font-size: 1.2rem;
+    overflow: auto;
+    padding: 0.5rem;
+}
+
+.code{
+    font-style: italic;
+    font-weight: bold;
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DWEC 05 - Formularios y eventos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/radio.js"></script>
+</head>
+
+<body>
+
+<h1>Input de tipo radio</h1>
+
+<p>
+    Cada radio del grupo debe tener el mismo valor de <i>name</i>.<br>
+    El navegador crea un array con los elementos que comparte el mismo <i>name</i>.<br>
+    Hay propiedades que se asignan a todo el grupo y propiedades para cada elemento.
+</p>
+
+<p>
+    Para obtener la opción chequeada, se accede a cada elemento del array y a su propiedad <i><strong>checked</strong></i>.
+</p>
+
+<form name="formulario">
+    <fieldset>
+        <legend>Selecciona tu actor favorito:</legend>
+        <label for="actor1">Willis</label>
+        <input type="radio" name="actores" id="actor1"value="Walter Bruce Willis - 19 de Marzo de 1955" checked>
+        <label for="actor2">Carrey</label>
+        <input type="radio" name="actores" id="actor-2" value="James Eugene Jim Carrey - 17 de Enero de 1962">
+        <label for="actor3">Tosar</label>
+        <input type="radio" name="actores" id="actor-3" value="Luis Tosar - 13 de Octubre de 1971">
+        <input type="button" id="consultar" name="consultar" value="Consultar Más Datos">
+    </fieldset>
+</form>
+
+<pre>
+window.onload = () => {
+
+    let btn_consultar = document.getElementById('consultar');
+    btn_consultar.onclick = () => {
+    
+        document.formulario.actores.forEach(actor => {
+            if(actor.checked){
+                alert(actor.value);
+            }
+        });
+    
+    }
+    
+}
+</pre>
+
+</body>
+
+</html>
