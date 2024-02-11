@@ -6,7 +6,7 @@ window.onload = () => {
     // Inputs
     const INP_NOMBRE = document.getElementById('nombre');
     const INP_APELLIDOS = document.getElementById('apellidos');
-    const INP_NIF = document.getElementById('nif');
+    const INP_EMAIL = document.getElementById('email');
 
     // Botones
     const BTN_LIMPIAR = document.getElementById('button');
@@ -19,6 +19,10 @@ window.onload = () => {
 
     INP_APELLIDOS.addEventListener('blur', (e) => {
         toUpper(e);
+    });
+
+    INP_EMAIL.addEventListener('blur', (e) => {
+        validarEmail(e);
     });
 
     BTN_ENVIAR.addEventListener('click', procesarFormulario);
@@ -155,6 +159,49 @@ const validarEdad = (e) => {
 }
 
 /**
+ * Validar el E-MAIL. Utilizar una expresión regular que nos permita comprobar 
+ * que el e-mail sigue un formato correcto. 
+ * Si se produce algún error mostrar el mensaje en el contenedor "errores" 
+ * y poner el foco en el campo E-MAIL. 
+ * @param {Event} e 
+ */
+const validarEmail = (e) => {
+
+    // Limpiamos los caracteres blancos que pudiera haber al principo y al final
+    let email = e.target.value.trim();
+
+    // Se divide el email en cuatro grupos: usuario, @ dominio y extensión de dominio.
+    // Grupo 1: usuario
+    //      Se compone de letras, mayúsculas o minúsculas, guión alto y bajo y punto.
+    //      Debe aparecer, como mínimo, una vez.
+    // Grupo 2: @
+    //      Es obligatorio que aparezca
+    // Grupo 3: Dominio
+    //      Grupo de letras, mayúsculas y minúsculas, números y guiones alto y bajo.
+    //      Solo aparece una vez.
+    // Grupo 4: Niveles de dominio.
+    //      Compuesto por un punto seguido por entre 2 y 4 letras munúsculas o mayúsculas.
+    //      Este grupo puede aparecer 1 o 2 veces.
+    // Antes y después de la cadena, no puede haber nada: ^ ... $
+
+    // Patrón buscado
+    let pattern = /^[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_]+(\.[a-zA-Z]{2,4}){1,2}$/;
+    
+    if(!email.match(pattern)){
+        e.target.style.color = '#f00';
+
+        let message = `El correo ${email} tiene un formato incorrecto`;
+        let container = document.getElementById('errores');
+        let p = document.createElement('p');
+        let text = document.createTextNode(message);
+        p.appendChild(text);
+        container.appendChild(p);
+        
+    }
+
+}
+
+/**
  * Validar el NIF. Utilizar una expresión regular que permita solamente 8 números 
  * un guión y una letra. Si se produce algún error mostrar el mensaje en el contenedor 
  * "errores" y poner el foco en el campo NIF. No es necesario validar que la letra 
@@ -166,7 +213,7 @@ const validarNif = (e) =>{
 
     // Limpiamos los caracteres blancos que pudiera haber al principo y al final
     let nif = e.target.value.trim();
-    
+
     // Patrón buscado
     // Grupo de números: \d{8} indica que debe contener exactamente 8 dígitos
     // Grupo de letras: [a-z]{1} debe haber exactamente una letra, entre a y z.
