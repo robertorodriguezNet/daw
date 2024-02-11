@@ -6,7 +6,7 @@ window.onload = () => {
     // Inputs
     const INP_NOMBRE = document.getElementById('nombre');
     const INP_APELLIDOS = document.getElementById('apellidos');
-    const INP_EDAD = document.getElementById('edad');
+    const INP_NIF = document.getElementById('nif');
 
     // Botones
     const BTN_LIMPIAR = document.getElementById('button');
@@ -20,11 +20,6 @@ window.onload = () => {
     INP_APELLIDOS.addEventListener('blur', (e) => {
         toUpper(e);
     });
-
-    INP_EDAD.addEventListener('blur', (e) => {
-        validarEdad(e);
-    });
-
 
     BTN_ENVIAR.addEventListener('click', procesarFormulario);
     BTN_LIMPIAR.addEventListener('click', limpiar);
@@ -109,6 +104,92 @@ const toUpper = (e) => {
     e.target.value = e.target.value.toUpperCase();
 }
 
+
+
+/**
+ * Valida la edad con los requerimientos: 
+ *  - Sólo valores numéricos.
+ *  - Valores entre 0 y 105 años.
+ *  - Si hay error, mostrar mensaje y poner el foco en el campo.
+ * 
+ * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
+ * @param {Event} e valor del campo edad 
+ */
+const validarEdad = (e) => {
+    let edad = e.target.value;
+    let error = null;  // Nos aseguramos de que error tenga un valor no válido
+    
+    // Hay dos tipos de error: valor numérico y rango
+    let message = [
+        `${edad} no es un valor numérico`,
+        `${edad} está fuera del rango entre 0 y 105 años`
+    ];
+
+    // Usamos el método isFinite(valor) que comprueba si el argumento es número finito.
+    // Convierte el argumento en entero.
+    // ¿Por qué no 'parseInt()'? parseInt convierte a entero el argumento hasta que
+    // encuentra un carácter no válido.
+    // parseInt y isFinite devuelven:
+    //      parseInt("a35") NaN   isFinite("a35") false
+    //      parseInt("35a")  35   isFinite("35a") false
+    if(isFinite(edad)){
+        if(edad < 0 || edad > 105){
+            error = 1;
+        }
+    }else{
+        error = 0;
+    }
+
+    if(error != null){
+        e.target.style.color = '#f00';
+
+        let container = document.getElementById('errores');
+        let p = document.createElement('p');
+        let text = document.createTextNode(message[error]);
+        p.appendChild(text);
+        container.appendChild(p);
+        
+    }
+
+
+}
+
+/**
+ * Validar el NIF. Utilizar una expresión regular que permita solamente 8 números 
+ * un guión y una letra. Si se produce algún error mostrar el mensaje en el contenedor 
+ * "errores" y poner el foco en el campo NIF. No es necesario validar que la letra 
+ * sea correcta. 
+ * 
+ * @param {Event} e 
+ */
+const validarNif = (e) =>{
+
+    // Limpiamos los caracteres blancos que pudiera haber al principo y al final
+    let nif = e.target.value.trim();
+    
+    // Patrón buscado
+    // Grupo de números: \d{8} indica que debe contener exactamente 8 dígitos
+    // Grupo de letras: [a-z]{1} debe haber exactamente una letra, entre a y z.
+    // Antes de los números no puede haber nada: ^
+    // Después de la letra no puede haber nada: $
+    // Entre los números y las letras debe haber un guión, sin espacios: -
+    // El flag i indica que se no se distinguen mayúsculas y minúsculas.
+    let pattern = /^\d{8}-[a-z]{1}$/gi;
+
+
+    if(!nif.match(pattern)){
+        e.target.style.color = '#f00';
+
+        let message = `El NIF ${nif} tiene un formato incorrecto`;
+        let container = document.getElementById('errores');
+        let p = document.createElement('p');
+        let text = document.createTextNode(message);
+        p.appendChild(text);
+        container.appendChild(p);
+        
+    }
+}
+
 /**
  * Validar los campos nombre y apellido.
  */
@@ -154,54 +235,6 @@ const validarNombreApellido = (e) => {
         container.appendChild(p);
         
     }
-}
-
-/**
- * Valida la edad con los requerimientos: 
- *  - Sólo valores numéricos.
- *  - Valores entre 0 y 105 años.
- *  - Si hay error, mostrar mensaje y poner el foco en el campo.
- * 
- * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
- * @param {string} e valor del campo edad 
- */
-const validarEdad = (e) => {
-    let edad = e.target.value;
-    let error = null;  // Nos aseguramos de que error tenga un valor no válido
-    
-    // Hay dos tipos de error: valor numérico y rango
-    let message = [
-        `${edad} no es un valor numérico`,
-        `${edad} está fuera del rango entre 0 y 105 años`
-    ];
-
-    // Usamos el método isFinite(valor) que comprueba si el argumento es número finito.
-    // Convierte el argumento en entero.
-    // ¿Por qué no 'parseInt()'? parseInt convierte a entero el argumento hasta que
-    // encuentra un carácter no válido.
-    // parseInt y isFinite devuelven:
-    //      parseInt("a35") NaN   isFinite("a35") false
-    //      parseInt("35a")  35   isFinite("35a") false
-    if(isFinite(edad)){
-        if(edad < 0 || edad > 105){
-            error = 1;
-        }
-    }else{
-        error = 0;
-    }
-
-    if(error != null){
-        e.target.style.color = '#f00';
-
-        let container = document.getElementById('errores');
-        let p = document.createElement('p');
-        let text = document.createTextNode(message[error]);
-        p.appendChild(text);
-        container.appendChild(p);
-        
-    }
-
-
 }
 
 const limpiar = () => {
