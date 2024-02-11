@@ -20,9 +20,9 @@ window.onload = () => {
         toUpper(e);
     });
 
-    const validar = document.getElementById('fecha');
+    const validar = document.getElementById('hora');
     validar.addEventListener('blur', (e) => {
-        validarFecha(e);
+        validarHora(e);
     });
 
     BTN_ENVIAR.addEventListener('click', procesarFormulario);
@@ -206,7 +206,7 @@ const validarEmail = (e) => {
  */
 const validarFecha = (e) => {
 
-    let fecha = e.target.value.trim();
+    let valor = e.target.value.trim();
 
     // Hay que tener en cuenta que se exige un 0 a la izquierda para cumplir la especificación.
     // Grupo día:  ( 0[1-9] | [1-2]\d | 3[0-1] )
@@ -223,10 +223,32 @@ const validarFecha = (e) => {
 
     let pattern = /^(0[1-9]|[1-2]\d|3[0-1])(\/(0[1-9]|1[0-2])\/|-(0[1-9]|1[0-2])-)([0-1]\d{3}|20\d[0-5])$/;
 
-    if (!fecha.match(pattern)) {
-        imprimirError(`La fecha ${fecha} tiene un formato incorrecto`, e.target);
+    if (!valor.match(pattern)) {
+        imprimirError(`La fecha ${valor} tiene un formato incorrecto`, e.target);
     }
     
+}
+
+/**
+ * Validar el campo HORA utilizando una expresión regular. 
+ * Debe seguir el patrón de hh:mm. No es necesario validar que sea una hora correcta.
+ * @param {Event} e 
+ */
+const validarHora = (e) => {
+    let valor = e.target.value.trim();
+
+    // Se admite formato 24h, pues no hay selector de modo 12/24h.
+    // Las horas van de 00:00 a 23:59
+    // Hora: ( [0-1]\d | 2[0-3] )
+    //      De 0 a 19: se elige entre 0 y 1 y un dígito (0 a 9).
+    //      De 20 a 23: esta opción exige un 2 seguido de un número entre 0 y 3.
+    // Minutos: [0-5]\d
+    //      El primer dígito está comprendido entre 0 y 5, el segundo, entre 0 y 9.
+    let pattern = /^([0-1]\d|2[0-3]):[0-5]\d$/;
+
+    if (!valor.match(pattern)) {
+        imprimirError(`La Hora ${valor} tiene un formato incorrecto`, e.target);
+    }
 }
 
 /**
@@ -289,10 +311,10 @@ const validarNombreApellido = (e) => {
     let pattern = /^([a-záéíóú]{3,12}){1}(( (de|la|del|de la|de las|de los|y){1}){0,1} [a-záéíóú]{1,12})?$/gi;
 
     // Valor del campo
-    let texto = e.target.value.trim();
+    let valor = e.target.value.trim();
 
-    if (!texto.match(pattern)) {
-        imprimirError(`El correo ${texto} tiene un formato incorrecto`, e.target);
+    if (!valor.match(pattern)) {
+        imprimirError(`El correo ${valor} tiene un formato incorrecto`, e.target);
     }
 }
 
@@ -306,6 +328,24 @@ const validarProvincia = (e) => {
         imprimirError("Debes seleccionar una provincia", e.target);
     }
 
+}
+
+/**
+ * Validar el campo TELEFONO utilizando una expresión regular. Debe permitir 9 dígitos obligatorios.
+ * @param {Event} e 
+ */
+const validarTelefono = (e) => {
+
+        // Valor del campo
+        let valor = e.target.value.trim();
+
+        // Se exigen 9 dígitos: \d{9}
+        // No puede haber nada delante (^) ni detrás($).
+        let pattern = /^\d{9}$/;
+
+        if (!valor.match(pattern)) {
+            imprimirError(`El teléfono ${valor} tiene un formato incorrecto`, e.target);
+        }
 }
 
 const limpiar = () => {
