@@ -6,6 +6,7 @@ window.onload = () => {
     // Inputs
     const INP_NOMBRE = document.getElementById('nombre');
     const INP_APELLIDOS = document.getElementById('apellidos');
+    const INP_EDAD = document.getElementById('edad');
 
     // Botones
     const BTN_LIMPIAR = document.getElementById('button');
@@ -15,15 +16,15 @@ window.onload = () => {
     INP_NOMBRE.addEventListener('blur', (e) => {
         toUpper(e);
     });
-    INP_NOMBRE.addEventListener('blur', (e) => {
-        validarNombreApellido(e);
-    });
+
     INP_APELLIDOS.addEventListener('blur', (e) => {
         toUpper(e);
     });
-    INP_APELLIDOS.addEventListener('blur', (e) => {
-        validarNombreApellido(e);
+
+    INP_EDAD.addEventListener('blur', (e) => {
+        validarEdad(e);
     });
+
 
     BTN_ENVIAR.addEventListener('click', procesarFormulario);
     BTN_LIMPIAR.addEventListener('click', limpiar);
@@ -153,6 +154,54 @@ const validarNombreApellido = (e) => {
         container.appendChild(p);
         
     }
+}
+
+/**
+ * Valida la edad con los requerimientos: 
+ *  - Sólo valores numéricos.
+ *  - Valores entre 0 y 105 años.
+ *  - Si hay error, mostrar mensaje y poner el foco en el campo.
+ * 
+ * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
+ * @param {string} e valor del campo edad 
+ */
+const validarEdad = (e) => {
+    let edad = e.target.value;
+    let error = null;  // Nos aseguramos de que error tenga un valor no válido
+    
+    // Hay dos tipos de error: valor numérico y rango
+    let message = [
+        `${edad} no es un valor numérico`,
+        `${edad} está fuera del rango entre 0 y 105 años`
+    ];
+
+    // Usamos el método isFinite(valor) que comprueba si el argumento es número finito.
+    // Convierte el argumento en entero.
+    // ¿Por qué no 'parseInt()'? parseInt convierte a entero el argumento hasta que
+    // encuentra un carácter no válido.
+    // parseInt y isFinite devuelven:
+    //      parseInt("a35") NaN   isFinite("a35") false
+    //      parseInt("35a")  35   isFinite("35a") false
+    if(isFinite(edad)){
+        if(edad < 0 || edad > 105){
+            error = 1;
+        }
+    }else{
+        error = 0;
+    }
+
+    if(error != null){
+        e.target.style.color = '#f00';
+
+        let container = document.getElementById('errores');
+        let p = document.createElement('p');
+        let text = document.createTextNode(message[error]);
+        p.appendChild(text);
+        container.appendChild(p);
+        
+    }
+
+
 }
 
 const limpiar = () => {
