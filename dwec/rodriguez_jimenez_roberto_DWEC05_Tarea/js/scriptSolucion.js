@@ -101,14 +101,27 @@ function escribirIntentos() {
 }
 
 /**
+ * Imprime los mensajes de error en la pantalla.
+ * 
+ * @param {string} message 
+ */
+function imprimirError(message, component) {
+    component.style.color = '#f00';
+
+    let container = document.getElementById('errores');
+    let p = document.createElement('p');
+    let text = document.createTextNode(message);
+    p.appendChild(text);
+    container.appendChild(p);
+}
+
+/**
  * Transforma el texto del input en mayúsclas
  * @param {object} e componente que recibe la acción 
  */
 const toUpper = (e) => {
     e.target.value = e.target.value.toUpperCase();
 }
-
-
 
 /**
  * Valida la edad con los requerimientos: 
@@ -122,7 +135,7 @@ const toUpper = (e) => {
 const validarEdad = (e) => {
     let edad = e.target.value;
     let error = null;  // Nos aseguramos de que error tenga un valor no válido
-    
+
     // Hay dos tipos de error: valor numérico y rango
     let message = [
         `${edad} no es un valor numérico`,
@@ -136,25 +149,17 @@ const validarEdad = (e) => {
     // parseInt y isFinite devuelven:
     //      parseInt("a35") NaN   isFinite("a35") false
     //      parseInt("35a")  35   isFinite("35a") false
-    if(isFinite(edad)){
-        if(edad < 0 || edad > 105){
+    if (isFinite(edad)) {
+        if (edad < 0 || edad > 105) {
             error = 1;
         }
-    }else{
+    } else {
         error = 0;
     }
 
-    if(error != null){
-        e.target.style.color = '#f00';
-
-        let container = document.getElementById('errores');
-        let p = document.createElement('p');
-        let text = document.createTextNode(message[error]);
-        p.appendChild(text);
-        container.appendChild(p);
-        
+    if (error != null) {
+        imprimirError(message[error], e.target);
     }
-
 
 }
 
@@ -186,17 +191,9 @@ const validarEmail = (e) => {
 
     // Patrón buscado
     let pattern = /^[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_]+(\.[a-zA-Z]{2,4}){1,2}$/;
-    
-    if(!email.match(pattern)){
-        e.target.style.color = '#f00';
 
-        let message = `El correo ${email} tiene un formato incorrecto`;
-        let container = document.getElementById('errores');
-        let p = document.createElement('p');
-        let text = document.createTextNode(message);
-        p.appendChild(text);
-        container.appendChild(p);
-        
+    if (!email.match(pattern)) {
+        imprimirError(`El correo ${email} tiene un formato incorrecto`, e.target);
     }
 
 }
@@ -209,7 +206,7 @@ const validarEmail = (e) => {
  * 
  * @param {Event} e 
  */
-const validarNif = (e) =>{
+const validarNif = (e) => {
 
     // Limpiamos los caracteres blancos que pudiera haber al principo y al final
     let nif = e.target.value.trim();
@@ -224,16 +221,8 @@ const validarNif = (e) =>{
     let pattern = /^\d{8}-[a-z]{1}$/gi;
 
 
-    if(!nif.match(pattern)){
-        e.target.style.color = '#f00';
-
-        let message = `El NIF ${nif} tiene un formato incorrecto`;
-        let container = document.getElementById('errores');
-        let p = document.createElement('p');
-        let text = document.createTextNode(message);
-        p.appendChild(text);
-        container.appendChild(p);
-        
+    if (!nif.match(pattern)) {
+        imprimirError(`El correo ${nif} tiene un formato incorrecto`, e.target);
     }
 }
 
@@ -271,16 +260,8 @@ const validarNombreApellido = (e) => {
     // Valor del campo
     let texto = e.target.value.trim();
 
-    if(!texto.match(pattern)){
-        e.target.style.color = '#f00';
-
-        let message = `Se ha producido un error en el campo ${e.target.id}`;
-        let container = document.getElementById('errores');
-        let p = document.createElement('p');
-        let text = document.createTextNode(message);
-        p.appendChild(text);
-        container.appendChild(p);
-        
+    if (!texto.match(pattern)) {
+        imprimirError(`El correo ${texto} tiene un formato incorrecto`, e.target);
     }
 }
 
