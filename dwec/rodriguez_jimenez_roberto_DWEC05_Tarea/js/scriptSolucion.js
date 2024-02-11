@@ -6,7 +6,6 @@ window.onload = () => {
     // Inputs
     const INP_NOMBRE = document.getElementById('nombre');
     const INP_APELLIDOS = document.getElementById('apellidos');
-    const INP_EMAIL = document.getElementById('email');
 
     // Botones
     const BTN_LIMPIAR = document.getElementById('button');
@@ -21,8 +20,9 @@ window.onload = () => {
         toUpper(e);
     });
 
-    INP_EMAIL.addEventListener('blur', (e) => {
-        validarEmail(e);
+    const validar = document.getElementById('fecha');
+    validar.addEventListener('blur', (e) => {
+        validarFecha(e);
     });
 
     BTN_ENVIAR.addEventListener('click', procesarFormulario);
@@ -199,6 +199,37 @@ const validarEmail = (e) => {
 }
 
 /**
+ * Validar el campo FECHA utilizando una expresión regular. 
+ * Debe cumplir alguno de los siguientes formatos: dd/mm/aaaa o dd-mm-aaaa.
+ * No se pide validar que sea una fecha de calendario correcta. 
+ * @param {Event} e 
+ */
+const validarFecha = (e) => {
+
+    let fecha = e.target.value.trim();
+
+    // Hay que tener en cuenta que se exige un 0 a la izquierda para cumplir la especificación.
+    // Grupo día:  ( 0[1-9] | [1-2]\d | 3[0-1] )
+    //      Días del 1 al 9: debe comenzar con un 0.
+    //      Días del 10 al 29: comienzan con 1 o 2 y siguen con otro número.
+    //      Días 30 y 31: comienzan con 3 y uno entre 0 y 1.
+    // Grupo mes:  ( 0[0-9] | 1[0-2] )
+    //      Meses del 1 al 9: 0 seguido de un número del 1 al 9.
+    //      Opciones 2, 3 y 4: los meses 10, 11 y 12.
+    // Grupo año:  ( [0-1][0-9]{3} | 20[0-9][0-5] )
+    //      Opción 1: admite desde el año 0 hasta 1999
+    //      Opción 2: admite desde el año 2000 hasta 2025
+    // El separado admite "/" o "-" y para elegirlo se incluye el mes en la opción.
+
+    let pattern = /^(0[1-9]|[1-2]\d|3[0-1])(\/(0[1-9]|1[0-2])\/|-(0[1-9]|1[0-2])-)([0-1]\d{3}|20\d[0-5])$/;
+
+    if (!fecha.match(pattern)) {
+        imprimirError(`La fecha ${fecha} tiene un formato incorrecto`, e.target);
+    }
+    
+}
+
+/**
  * Validar el NIF. Utilizar una expresión regular que permita solamente 8 números 
  * un guión y una letra. Si se produce algún error mostrar el mensaje en el contenedor 
  * "errores" y poner el foco en el campo NIF. No es necesario validar que la letra 
@@ -263,6 +294,18 @@ const validarNombreApellido = (e) => {
     if (!texto.match(pattern)) {
         imprimirError(`El correo ${texto} tiene un formato incorrecto`, e.target);
     }
+}
+
+/**
+ * 8.	Validar que se haya seleccionado alguna de las PROVINCIAS.
+ * @param {Event} e 
+ */
+const validarProvincia = (e) => {
+
+    if(e.target.value == "0"){
+        imprimirError("Debes seleccionar una provincia", e.target);
+    }
+
 }
 
 const limpiar = () => {
