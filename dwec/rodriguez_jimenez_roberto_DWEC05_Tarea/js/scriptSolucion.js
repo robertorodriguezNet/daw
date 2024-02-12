@@ -1,8 +1,5 @@
 window.onload = () => {
 
-    // Declaración de los componentes
-    const FORMULARIO = document.getElementById('formulario');
-
     // Inputs
     const INP_NOMBRE = document.getElementById('nombre');
     const INP_APELLIDOS = document.getElementById('apellidos');
@@ -12,59 +9,77 @@ window.onload = () => {
     const BTN_ENVIAR = document.getElementById('enviar');
 
     // Eventos
-    INP_NOMBRE.addEventListener('blur', (e) => {
-        toUpper(e);
-    });
+    INP_NOMBRE.addEventListener('blur', (e) => toUpper(e));
+    INP_APELLIDOS.addEventListener('blur', (e) => toUpper(e));
 
-    INP_APELLIDOS.addEventListener('blur', (e) => {
-        toUpper(e);
-    });
+    BTN_ENVIAR.addEventListener('click', (e) => procesarFormulario(e));
 
-    const validar = document.getElementById('hora');
-    validar.addEventListener('blur', (e) => {
-        validarHora(e);
-    });
+    // Limpiar el formulario
+    BTN_LIMPIAR.addEventListener('click', () => limpiar());
 
-    BTN_ENVIAR.addEventListener('click', procesarFormulario);
-    BTN_LIMPIAR.addEventListener('click', limpiar);
+    // Escribe los intentos en la página
+    document.getElementById('intentos').innerHTML = 'Intento de envíos del formualario: ' + getIntentos();
+
 
 }
 
 // Funciones ****************************************************
 
 // Procesa el formulario
-const procesarFormulario = () => {
+const procesarFormulario = (e) => {
 
-    // Establece y actualiza la cookie de intentos de envío del formualario
-    setIntento();
+    e.preventDefault();
 
-    // Escribe los intentos en la página
-    escribirIntentos();
+    // El formulario aún no ha sido enviado
 
-    event.preventDefault();
+    // Borramos los avisos de error 
+    document.getElementById('errores').innerHTML = '';
+
+    // Hay que validar los campos
+    const formulario = document.getElementById('formulario');
+
+    // // Obtener los datos del formulario, no captura los botones
+    // const data = new FormData(formulario);
+    // // Recorrer el formulario
+    // console.clear();
+    // data.forEach((value, key) => {
+    //     console.log(`${key}: ${value}`);
+    // });
+
+    // Validar los campos y guardar los errores
+    let error = [];
+    error.push(validarNombreApellidos(formulario.nombre));
+    error.push(validarNombreApellidos(formulario.apellidos));
+    error.push(validarEdad());
+    error.push(validarNif());
+    error.push(validarEmail());
+    error.push(validarProvincia());
+    error.push(validarFecha());
+    error.push(validarTelefono());
+    error.push(validarHora());
+
+    // Buscamos los errores en el array
+    const err = error.find((element) => element == false);
+
+    // Si no hay errores, err no tiene valor, es undefined
+    if (err != false) {
+
+        // Solicitamos la confirmación y enviamos el formulario
+        if (confirm("¿Enviar el formulario")) {
+
+            // Establece y actualiza la cookie de intentos de envío del formualario
+            setIntento();
+            formulario.submit();
+        }
+    }
 
 };
 
-// Registrar en su cookie el intento de envio del formulario
-function setIntento() {
-
-    // obtener los intentos e incrementarlos
-    let intentos = getIntentos();
-    intentos++;
-
-    // Tiempo de vida de la cookie: 1 día
-    let max_time = 24 * 60 * 60;
-
-    // Establecemos la cookie, útil durante 5 min.
-    document.cookie = `${encodeURIComponent('intentos')}=${encodeURIComponent(intentos)};path=/;max-age=${max_time};`;
-
-}
 
 /**
  * Devuelve el valor de la cookie 'intentos'
  */
 const getIntentos = () => {
-    // function getIntentos(){
 
     // Patrón buscado
     let pattern = /intentos=\d+/;
@@ -94,13 +109,6 @@ const getIntentos = () => {
 }
 
 /**
- * Función que escribe en la pantalla el número de intentos de envío del formualrio.
- */
-function escribirIntentos() {
-    document.getElementById('intentos').innerHTML = 'Intento de envíos del formualario: ' + getIntentos();
-}
-
-/**
  * Imprime los mensajes de error en la pantalla.
  * 
  * @param {string} message 
@@ -116,11 +124,45 @@ function imprimirError(message, component) {
 }
 
 /**
+ * Al limpiar el formulario con reset() se mantiene el estilo de los input.
+ * Si un campo tenía el color del texto en rojo por ser erróneo, sigue 
+ * manteniendo el mismo color.
+ */
+const limpiar = () => {
+
+    // Borramos los avisos de error 
+    document.getElementById('errores').innerHTML = '';
+
+    // Establecemos el color del texto en negro
+    campos = document.querySelectorAll("input, select");
+    campos.forEach(campo => {
+        campo.style.color = "#000";
+    });
+
+}
+
+/**
  * Transforma el texto del input en mayúsclas
  * @param {object} e componente que recibe la acción 
  */
 const toUpper = (e) => {
     e.target.value = e.target.value.toUpperCase();
+}
+
+
+// Registrar en su cookie el intento de envio del formulario
+function setIntento() {
+
+    // obtener los intentos e incrementarlos
+    let intentos = getIntentos();
+    intentos++;
+
+    // Tiempo de vida de la cookie: 1 día
+    let max_time = 24 * 60 * 60;
+
+    // Establecemos la cookie, útil durante 5 min.
+    document.cookie = `${encodeURIComponent('intentos')}=${encodeURIComponent(intentos)};path=/;max-age=${max_time};`;
+
 }
 
 /**
@@ -131,15 +173,17 @@ const toUpper = (e) => {
  * 
  * @author Roberto Rodríguez <roberto.rodjim.1@educa.jcyl.es>
  * @param {Event} e valor del campo edad 
+ * @returns true si el campo es válido
  */
-const validarEdad = (e) => {
-    let edad = e.target.value;
+const validarEdad = () => {
+    let campo = document.formulario.edad;
+    let valor = campo.value;
     let error = null;  // Nos aseguramos de que error tenga un valor no válido
 
     // Hay dos tipos de error: valor numérico y rango
     let message = [
-        `${edad} no es un valor numérico`,
-        `${edad} está fuera del rango entre 0 y 105 años`
+        `${valor} no es un valor numérico`,
+        `${valor} está fuera del rango entre 0 y 105 años`
     ];
 
     // Usamos el método isFinite(valor) que comprueba si el argumento es número finito.
@@ -149,8 +193,8 @@ const validarEdad = (e) => {
     // parseInt y isFinite devuelven:
     //      parseInt("a35") NaN   isFinite("a35") false
     //      parseInt("35a")  35   isFinite("35a") false
-    if (isFinite(edad)) {
-        if (edad < 0 || edad > 105) {
+    if (isFinite(valor)) {
+        if (valor < 0 || valor > 105) {
             error = 1;
         }
     } else {
@@ -158,22 +202,25 @@ const validarEdad = (e) => {
     }
 
     if (error != null) {
-        imprimirError(message[error], e.target);
+        imprimirError(message[error], campo);
+        return false;
     }
+    campo.style.color = "#000";
+    return true;
 
 }
 
 /**
  * Validar el E-MAIL. Utilizar una expresión regular que nos permita comprobar 
  * que el e-mail sigue un formato correcto. 
- * Si se produce algún error mostrar el mensaje en el contenedor "errores" 
- * y poner el foco en el campo E-MAIL. 
  * @param {Event} e 
+ * @returns true si el campo es válido
  */
-const validarEmail = (e) => {
+const validarEmail = () => {
 
     // Limpiamos los caracteres blancos que pudiera haber al principo y al final
-    let email = e.target.value.trim();
+    let campo = formulario.email;
+    let valor = email.value.trim();
 
     // Se divide el email en cuatro grupos: usuario, @ dominio y extensión de dominio.
     // Grupo 1: usuario
@@ -192,9 +239,12 @@ const validarEmail = (e) => {
     // Patrón buscado
     let pattern = /^[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_]+(\.[a-zA-Z]{2,4}){1,2}$/;
 
-    if (!email.match(pattern)) {
-        imprimirError(`El correo ${email} tiene un formato incorrecto`, e.target);
+    if (!valor.match(pattern)) {
+        imprimirError(`El email ${valor} tiene un formato incorrecto`, campo);
+        return false;
     }
+    campo.style.color = "#000";
+    return true;
 
 }
 
@@ -203,10 +253,12 @@ const validarEmail = (e) => {
  * Debe cumplir alguno de los siguientes formatos: dd/mm/aaaa o dd-mm-aaaa.
  * No se pide validar que sea una fecha de calendario correcta. 
  * @param {Event} e 
+ * @returns true si el campo es válido
  */
-const validarFecha = (e) => {
+const validarFecha = () => {
 
-    let valor = e.target.value.trim();
+    let campo = formulario.fecha;
+    let valor = campo.value.trim();
 
     // Hay que tener en cuenta que se exige un 0 a la izquierda para cumplir la especificación.
     // Grupo día:  ( 0[1-9] | [1-2]\d | 3[0-1] )
@@ -224,18 +276,23 @@ const validarFecha = (e) => {
     let pattern = /^(0[1-9]|[1-2]\d|3[0-1])(\/(0[1-9]|1[0-2])\/|-(0[1-9]|1[0-2])-)([0-1]\d{3}|20\d[0-5])$/;
 
     if (!valor.match(pattern)) {
-        imprimirError(`La fecha ${valor} tiene un formato incorrecto`, e.target);
+        imprimirError(`La fecha ${valor} tiene un formato incorrecto`, campo);
+        return false;
     }
-    
+    campo.style.color = "#000";
+    return true;
 }
 
 /**
  * Validar el campo HORA utilizando una expresión regular. 
  * Debe seguir el patrón de hh:mm. No es necesario validar que sea una hora correcta.
  * @param {Event} e 
+ * @returns true si el campo es válido
  */
-const validarHora = (e) => {
-    let valor = e.target.value.trim();
+const validarHora = () => {
+
+    let campo = formulario.hora;
+    let valor = campo.value.trim();
 
     // Se admite formato 24h, pues no hay selector de modo 12/24h.
     // Las horas van de 00:00 a 23:59
@@ -247,8 +304,11 @@ const validarHora = (e) => {
     let pattern = /^([0-1]\d|2[0-3]):[0-5]\d$/;
 
     if (!valor.match(pattern)) {
-        imprimirError(`La Hora ${valor} tiene un formato incorrecto`, e.target);
+        imprimirError(`La Hora ${valor} tiene un formato incorrecto`, campo);
+        return false;
     }
+    campo.style.color = "#000";
+    return true;
 }
 
 /**
@@ -258,11 +318,13 @@ const validarHora = (e) => {
  * sea correcta. 
  * 
  * @param {Event} e 
+ * @returns true si el campo es válido
  */
-const validarNif = (e) => {
+const validarNif = () => {
 
     // Limpiamos los caracteres blancos que pudiera haber al principo y al final
-    let nif = e.target.value.trim();
+    let campo = document.formulario.nif;
+    let valor = campo.value.trim();
 
     // Patrón buscado
     // Grupo de números: \d{8} indica que debe contener exactamente 8 dígitos
@@ -274,19 +336,24 @@ const validarNif = (e) => {
     let pattern = /^\d{8}-[a-z]{1}$/gi;
 
 
-    if (!nif.match(pattern)) {
-        imprimirError(`El correo ${nif} tiene un formato incorrecto`, e.target);
+    if (!valor.match(pattern)) {
+        imprimirError(`El correo ${valor} tiene un formato incorrecto`, campo);
+        return false;
     }
+
+    campo.style.color = "#000";
+    return true;
 }
 
 /**
- * Validar los campos nombre y apellido.
+ * Valida tanto el nombre como el apellido.
+ * @returns true si el campo es válido
  */
-const validarNombreApellido = (e) => {
+const validarNombreApellidos = (campo) => {
 
     // No puede haber ningún carácter ni antes ni después.
-    // Se pide un conjunto de entre 3 y 12 que debe aparecer exactamente 1 vez.
-    //      /^([a-z]{3-12}){1}$/
+    // Se pide un conjunto de entre 2 y 12 que debe aparecer exactamente 1 vez.
+    //      /^([a-z]{2-12}){1}$/
 
     // Opcionalmente puede haber un segundo nombre con las mismas careterísticas,
     // pero precedido de un espacio en blanco.
@@ -307,26 +374,41 @@ const validarNombreApellido = (e) => {
     //  Benito Boniato
     //  Silvestre el Talones
 
-    // let pattern = /^([a-záéíóú]{3,12}){1}(( [a-z]{1,3}){0,2} [a-záéíóú]{1,12})?$/gi;
-    let pattern = /^([a-záéíóú]{3,12}){1}(( (de|la|del|de la|de las|de los|y){1}){0,1} [a-záéíóú]{1,12})?$/gi;
+    let pattern = /^([a-záéíóú]{2,12}){1}(( (de|la|del|de la|de las|de los|y)){0,1} [a-záéíóú]{1,12})?$/gi;
 
-    // Valor del campo
-    let valor = e.target.value.trim();
+    // Valor del campo 
+    let valor = campo.value.trim();
 
+    // Diferenciamos el campo, ya que se usa la misma validación para el nombre que para el apellido
+    let etiqueta = (campo.name == "nombre")? 'nombre' : 'apellido';
+
+    // Si no se encuentra coincidencia se llama a la fución imprimirError para que imprima el mensaje de error
+    // y establezca el color del texto en rojo.
     if (!valor.match(pattern)) {
-        imprimirError(`El correo ${valor} tiene un formato incorrecto`, e.target);
+        imprimirError(`El ${etiqueta} ${valor} tiene un formato incorrecto`, campo);
+        return false;
     }
+
+    // Para evitar problemas con el color del texto, nos aseguramos de que sea negro
+    campo.style.color = "#000";
+    return true;
 }
 
 /**
- * 8.	Validar que se haya seleccionado alguna de las PROVINCIAS.
+ * Validar que se haya seleccionado alguna de las PROVINCIAS.
  * @param {Event} e 
  */
-const validarProvincia = (e) => {
+const validarProvincia = () => {
 
-    if(e.target.value == "0"){
-        imprimirError("Debes seleccionar una provincia", e.target);
+    let campo = formulario.provincia;
+
+    // Comprobamos que el valor capturado no es "0"
+    if (campo.value == "0") {
+        imprimirError("Debes seleccionar una provincia", campo);
+        return false;
     }
+    campo.style.color = "#000";
+    return true;
 
 }
 
@@ -334,20 +416,20 @@ const validarProvincia = (e) => {
  * Validar el campo TELEFONO utilizando una expresión regular. Debe permitir 9 dígitos obligatorios.
  * @param {Event} e 
  */
-const validarTelefono = (e) => {
+const validarTelefono = () => {
 
-        // Valor del campo
-        let valor = e.target.value.trim();
+    // Valor del campo
+    let campo = document.formulario.telefono;
+    let valor = campo.value.trim();
 
-        // Se exigen 9 dígitos: \d{9}
-        // No puede haber nada delante (^) ni detrás($).
-        let pattern = /^\d{9}$/;
+    // Se exigen 9 dígitos: \d{9}
+    // No puede haber nada delante (^) ni detrás($).
+    let pattern = /^\d{9}$/;
 
-        if (!valor.match(pattern)) {
-            imprimirError(`El teléfono ${valor} tiene un formato incorrecto`, e.target);
-        }
-}
-
-const limpiar = () => {
-    alert('limpiar formulario');
+    if (!valor.match(pattern)) {
+        imprimirError(`El teléfono ${valor} tiene un formato incorrecto`, campo);
+        return false;
+    }
+    campo.style.color = "#000";
+    return true;
 }
