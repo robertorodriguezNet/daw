@@ -1,0 +1,26 @@
+{
+    "name": "roberto/ejercicio-170-tienda",
+    "description": "Ejercicio para la inicialización de composer",
+    "type": "project",
+    "license": "GPL",
+    "require": {
+        "philo/laravel-blade": "^3.1"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Clases\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "robertorodriguezNet",
+            "email": "robertorodriguez@robertorodriuez.net"
+        }
+    ]
+}
