@@ -1,5 +1,8 @@
 <?php 
-    require_once '../src/Jugador.php';
+    // autoload de archivos
+    spl_autoload_register(function ($class){
+        require "../src/" . $class . ".php";
+    });
 
     $jugador1 = new Jugador();
     $jugador1->setId(1);
@@ -8,6 +11,7 @@
     $jugador1->setDorsal(1);
     $jugador1->setPoscion("Portero");
     $jugador1->setBarcode("1234567890123");
+
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +25,8 @@
     <h1>JUGADORES</h1>
 
     <p>
-        Portero: <?=$jugador1->__toString()?>
+        Portero: <?=$jugador1?>
     </p>
+
 </body>
 </html>

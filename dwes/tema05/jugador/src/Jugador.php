@@ -1,6 +1,5 @@
 <?php 
 
-require_once '../src/Conexion.php';
 class Jugador extends Conexion
 {
     private $id;
@@ -41,7 +40,7 @@ class Jugador extends Conexion
         $this->barcode = $barcode;
     }
 
-    public function __toString(){
+    public function __toString():string{
         return "Jugador: " . "(" . $this->dorsal . ") " . $this->nombre . " " . $this->apellidos;
     }
 }
