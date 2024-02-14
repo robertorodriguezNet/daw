@@ -1,7 +1,9 @@
 <?php 
 spl_autoload_register(function($class){
-    require "../src/" . $class . ".php";
+    require "../" . $class . ".php";
 });
+
+use Clases\Jugador;
 
 // Comprobar si tenemos jugadores
 $j = new Jugador();
