@@ -1,0 +1,21 @@
+{
+    "name": "roberto/jugador",
+    "description": "DWES Tarea05",
+    "type": "project",
+    "license": "GPL",
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Roberto\\Jugador\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Roberto Rodriguez",
+            "email": "roberto.rodjim.1@educa.jcyl.es"
+        }
+    ],
+    "require": {}
+}
