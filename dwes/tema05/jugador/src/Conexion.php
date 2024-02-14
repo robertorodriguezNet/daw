@@ -9,6 +9,7 @@ class Conexion
     private $dsn;
 
     protected $conexion;
+    protected static $cnx;
 
     public function __construct()
     {
@@ -21,6 +22,7 @@ class Conexion
         $this->dsn = "mysql:host={$this->host};dbname={$this->db};charset=utf8mb4";
 
         $this->conexion = $this->crearConexion();
+        $this->cnx = $this->crearConexion();
 
     }
 
