@@ -4,7 +4,10 @@
     "type": "project",
     "license": "GPL",
     "config": {
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     },
     "autoload": {
         "psr-4": {
@@ -17,5 +20,7 @@
             "email": "roberto.rodjim.1@educa.jcyl.es"
         }
     ],
-    "require": {}
+    "require": {
+        "philo/laravel-blade": "^3.1"
+    }
 }
