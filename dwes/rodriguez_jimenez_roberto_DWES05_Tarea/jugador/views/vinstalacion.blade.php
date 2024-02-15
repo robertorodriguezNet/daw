@@ -1,0 +1,1 @@
+<h1>página de instalación</h1>

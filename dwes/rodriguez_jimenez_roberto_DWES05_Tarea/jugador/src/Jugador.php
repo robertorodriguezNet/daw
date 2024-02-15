@@ -53,7 +53,7 @@ class Jugador extends Conexion
      * Devuelve el conjunto de registros de jugadores.
      * @return PDOStatement resuldato de la consulta.
      */
-    public function getListadoJugadores():PDOStatement{
+    public function getListadoJugadores():array{
 
         $consulta = "SELECT * FROM jugadores ORDER BY dorsal";
             $stmt = $this->conexion->prepare($consulta);
@@ -62,7 +62,7 @@ class Jugador extends Conexion
         }catch(PDOException $e){
             die("Error al recuperar el listado de los jugadores: " . $e->getMessage() );
         }
-        return $stmt;
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
 
     }
 
