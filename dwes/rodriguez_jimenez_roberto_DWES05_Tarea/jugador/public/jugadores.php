@@ -7,7 +7,7 @@
 </head>
 <body>
     
-<h1>JUGADORES</h1>
+<h1>Listado de jugadores</h1>
 
 </body>
 </html>
