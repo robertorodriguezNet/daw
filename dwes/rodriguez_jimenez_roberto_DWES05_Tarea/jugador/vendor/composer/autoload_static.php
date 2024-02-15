@@ -7,20 +7,23 @@ namespace Composer\Autoload;
 class ComposerStaticInitae95603436cf4c6aa28bb9a00d6e70ae
 {
     public static $prefixLengthsPsr4 = array (
-        'R' => 
+        'C' => 
         array (
-            'Roberto\\Jugador\\' => 16,
+            'Clases\\' => 7,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Roberto\\Jugador\\' => 
+        'Clases\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
+        'Clases\\Conexion' => __DIR__ . '/../..' . '/src/Conexion.php',
+        'Clases\\Jugador' => __DIR__ . '/../..' . '/src/Jugador.php',
+        'Clases\\Prueba' => __DIR__ . '/../..' . '/src/Prueba.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
