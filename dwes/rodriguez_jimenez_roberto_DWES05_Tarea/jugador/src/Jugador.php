@@ -71,7 +71,8 @@ class Jugador extends Conexion
      * @return bool true|false si está o no vacía.
      */
     public function isEmptyJugadores():bool{
-        return $this->getListadoJugadores()->rowCount() == 0;
+        // Consultamos el número de registros del array recibido
+        return count($this->getListadoJugadores()) == 0;
     }
 
     public function prueba(){
