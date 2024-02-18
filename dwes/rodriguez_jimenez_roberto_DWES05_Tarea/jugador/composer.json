@@ -25,4 +25,5 @@
         "fakerphp/faker": "^1.23",
         "milon/barcode": "^6.0"
     }
+    
 }

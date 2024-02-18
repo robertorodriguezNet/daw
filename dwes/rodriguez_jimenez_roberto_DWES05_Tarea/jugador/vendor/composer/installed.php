@@ -3,7 +3,7 @@
         'name' => 'roberto/jugador',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'd1221a75e211441bf7ecdacae472a6a15443da92',
+        'reference' => '33a963f5b946b4c1aa1828e29daeff3175bcb22a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -148,7 +148,7 @@
         'roberto/jugador' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'd1221a75e211441bf7ecdacae472a6a15443da92',
+            'reference' => '33a963f5b946b4c1aa1828e29daeff3175bcb22a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -14,26 +14,41 @@
 @endsection
 
 @section('contenido')
+    <section class="container">
 
-    <table class="container table table-striped">
-        <thead>
-            <tr class="text-center">
-                <th scope="col">Nombre Completo</th>
-                <th scope="col">Posición</th>
-                <th scope="col">Dorsal</th>
-                <th scope="col">Código de barras</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($jugadores as $jugador)
-            <tr class="text-center">
-                <td>{{$jugador->apellidos}}, {{$jugador->nombre}}</td>
-                <td>{{$jugador->posicion}}</td>
-                <td>{{$jugador->dorsal}}</td>
-                <td>{{$jugador->barcode}}</td>
-            </tr>
+        {{-- Mensajes al venir del formulario --}}
+        @if (sizeof($mensajes) > 0)
+        <div class="bg-secondary-subtle p-3">
+            @foreach ($mensajes as $mensaje)
+                <p>{{$mensaje}}</p>
             @endforeach
-        </tbody>
-    </table>
+        </div>            
+        @endif
 
+
+        <a href="fcrear.php" class="btn btn-success my-2">
+            <i class="fa-solid fa-plus"></i> Nuevo Jugador
+        </a>
+
+        <table class="table table-dark table-striped">
+            <thead>
+                <tr class="text-center">
+                    <th scope="col">Nombre Completo</th>
+                    <th scope="col">Posición</th>
+                    <th scope="col">Dorsal</th>
+                    <th scope="col">Código de barras</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($jugadores as $jugador)
+                    <tr class="text-center">
+                        <td>{{ $jugador->apellidos }}, {{ $jugador->nombre }}</td>
+                        <td>{{ $jugador->posicion }}</td>
+                        <td>{{ $jugador->dorsal }}</td>
+                        <td>{!! $barcode->getBarcodeSVG($jugador->barcode, 'EAN13', 3, 33, 'white', false) !!}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </section>
 @endsection

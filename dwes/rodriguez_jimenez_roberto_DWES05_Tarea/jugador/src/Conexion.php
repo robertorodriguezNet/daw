@@ -3,7 +3,6 @@ namespace Clases;
 
 use PDO;
 use PDOException;
-use PDOStatement;
 
 class Conexion
 {
@@ -15,6 +14,10 @@ class Conexion
 
     protected $conexion;
 
+    /**
+     * Constructor de la clase.
+     * Requiere los parámetros necesarios para crear una conexión mediante PDO.
+     */
     public function __construct()
     {
 
@@ -29,7 +32,11 @@ class Conexion
 
     }
 
-    private function crearConexion()
+    /**
+     * Crea la conexión con la base de datos.
+     * @return PDO Objeto PDO con la conexión
+     */
+    private function crearConexion():PDO
     {
         try {
 
