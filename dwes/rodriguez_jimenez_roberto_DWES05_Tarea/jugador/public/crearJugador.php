@@ -35,16 +35,16 @@ var_dump($_POST);
 
 // No hay errores, guardamos el jugador
 if (empty($err)) {
-    $jugador->setNombre(trim($_POST['nombre']));
-    $jugador->setApellidos(trim($_POST['apellidos']));
-    $jugador->setDorsal(trim($_POST['dorsal']));
-    $jugador->setApellidos(trim($_POST['apellidos']));
-    $jugador->setPosicion(trim($_POST['posicion']));
-    $jugador->setBarcode(trim($_POST['barcode']));
-
     try {
+        $jugador->setNombre(trim($_POST['nombre']));
+        $jugador->setApellidos(trim($_POST['apellidos']));
+        $jugador->setDorsal(trim($_POST['dorsal']));
+        $jugador->setApellidos(trim($_POST['apellidos']));
+        $jugador->setPosicion(trim($_POST['posicion']));
+        $jugador->setBarcode(trim($_POST['barcode']));
+
         $jugador->create();
-    }catch(Exception $e){
+    } catch (Exception $e) {
         die("Error al guardar el jugador: " . $e->getMessage());
     }
 }
