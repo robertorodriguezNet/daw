@@ -44,7 +44,7 @@
                     <tr class="text-center">
                         <td>{{ $jugador->apellidos }}, {{ $jugador->nombre }}</td>
                         <td>{{ $jugador->posicion }}</td>
-                        <td>{{ $jugador->dorsal }}</td>
+                        <td>{{ ($jugador->dorsal == 0)? 'Sin asignar' : $jugador->dorsal }}</td>
                         <td>{!! $barcode->getBarcodeSVG($jugador->barcode, 'EAN13', 3, 33, 'white', false) !!}</td>
                     </tr>
                 @endforeach

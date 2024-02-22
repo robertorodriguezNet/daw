@@ -1,4 +1,5 @@
 <?php 
+session_start();
 // Cargar los archivos que van a ser necesarios
 require '../vendor/autoload.php';
 

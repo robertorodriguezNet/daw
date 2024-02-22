@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 /**
  * Es el formulario para crear el jugador. 
  * Llama a la vista: "vcrear.blade.php". 
@@ -27,8 +29,13 @@ $posiciones = $jugador->getPosiciones();
 // Destino del formulario
 $action = 'crearJugador.php';
 
+// En el formulario se va a solicitar el código de barras.
+// La sesión se elimina una vez que obtenemos el código.
+$barcode = (isset($_SESSION['barcode']))? $_SESSION['barcode'] : '';
+unset($_SESSION['barcode']);
+
 // Instancia de blade
 $blade = new Blade([$views],$cache);
 
 // Renderizar la vista
-echo $blade->view()->make('vcrear',compact('titulo','h1','posiciones','action'))->render();
+echo $blade->view()->make('vcrear',compact('titulo','h1','posiciones','action','barcode'))->render();

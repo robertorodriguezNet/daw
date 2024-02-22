@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * Esta página debe generar un código de barrar EAN-13 que sea válido y único.
  */
@@ -16,4 +17,6 @@ do {
     $exists = $j->existsBarcode($code);
 } while ($exists);
 
-echo $code;
+$_SESSION['barcode'] = $code;
+header('location:fcrear.php');
+// echo $code;

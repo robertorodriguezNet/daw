@@ -40,7 +40,7 @@
                     <tr class="text-center">
                         <td><?php echo e($jugador->apellidos); ?>, <?php echo e($jugador->nombre); ?></td>
                         <td><?php echo e($jugador->posicion); ?></td>
-                        <td><?php echo e($jugador->dorsal); ?></td>
+                        <td><?php echo e(($jugador->dorsal == 0)? 'Sin asignar' : $jugador->dorsal); ?></td>
                         <td><?php echo $barcode->getBarcodeSVG($jugador->barcode, 'EAN13', 3, 33, 'white', false); ?></td>
                     </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

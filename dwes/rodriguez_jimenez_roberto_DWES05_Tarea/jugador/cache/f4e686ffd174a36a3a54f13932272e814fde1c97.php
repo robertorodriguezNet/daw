@@ -35,7 +35,7 @@
         </div>
         <div class="col-4 mb-3">
             <label for="barcode" class="form-label">Código de barras</label>
-            <input class="form-control bg-light text-end" type="text" name="barcode" id="barcode" placeholder="Código de barras" value="<?php echo e(include "../public/generarCode.php"); ?>" readonly>
+            <input class="form-control bg-light text-end" type="text" name="barcode" id="barcode" placeholder="Código de barras" value="<?php echo e($barcode); ?>" readonly>
         </div>
         <div class="col-12">
             <input type="submit" value="Crear" id="crear" class="btn btn-primary me-3">
