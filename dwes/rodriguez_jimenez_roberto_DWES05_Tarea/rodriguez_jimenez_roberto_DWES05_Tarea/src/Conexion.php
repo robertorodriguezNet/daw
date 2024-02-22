@@ -50,6 +50,5 @@ class Conexion
         return $conexion;
     }
 
-
 }
 

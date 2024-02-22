@@ -1,17 +1,19 @@
-@extends('plantillas.plantilla1')
+<?php $__env->startSection('titulo'); ?>
+    <?php echo e($titulo); ?>
 
-@section('titulo')
-    {{ $titulo }}
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('h1')
-    {{ $h1 }}
-@endsection
+<?php $__env->startSection('h1'); ?>
+    <?php echo e($h1); ?>
 
-@section('contenido')
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('contenido'); ?>
 
 <section class="container">
-    <form action="{{$action}}" method="POST" class="row">
+
+    
+    <form action="<?php echo e($action); ?>" method="POST" class="row">
 
         <div class="col-6 mb-3">
             <label for="nombre" class="form-label">Nombre</label>
@@ -28,18 +30,20 @@
         <div class="col-4 mb-3">
             <label for="posicion" class="form-label">Posición</label>
             <select name="posicion" id="posicion" class="form-control" required>
-                @foreach ($posiciones as $item)
-                    <option value="{{$item}}">{{$item}}</option>
-                @endforeach
+                
+                <?php $__currentLoopData = $posiciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($item); ?>"><?php echo e($item); ?></option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </select>
         </div>
         <div class="col-4 mb-3">
             <label for="barcode" class="form-label">Código de barras</label>
-            <input class="form-control bg-light text-end" type="text" name="barcode" id="barcode" placeholder="Código de barras" value="{{$barcode}}" readonly>
+            <input class="form-control bg-light text-end" type="text" name="barcode" id="barcode" placeholder="Código de barras" value="<?php echo e($barcode); ?>" readonly>
         </div>
         <div class="col-12">
             <input type="submit" value="Crear" id="crear" class="btn btn-primary me-3">
-            <input type="reset" value="Limpiar" class="btn btn-success me-3" id="limpiar">
+            
+            <a href="<?php echo e($_SERVER['PHP_SELF']); ?>" class="btn btn-success me-3">Limpiar</a>
             <a href="jugadores.php" class="btn btn-info me-3">Volver</a>
             <a href="generarCode.php" class="btn btn-secondary">
                 <i class="fa-solid fa-barcode me-3"></i> Generar Barcode
@@ -50,4 +54,5 @@
 </section>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('plantillas.plantilla1', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

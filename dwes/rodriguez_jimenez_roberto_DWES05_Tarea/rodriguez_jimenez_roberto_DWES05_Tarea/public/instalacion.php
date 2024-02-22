@@ -21,4 +21,5 @@ $h1 = "Instalación";
 $blade = new Blade([$views],$cache);
 
 // Cargar la vista
+// Pasamos las variables titulo y h1
 echo $blade->view()->make('vinstalacion',compact('titulo','h1'))->render();

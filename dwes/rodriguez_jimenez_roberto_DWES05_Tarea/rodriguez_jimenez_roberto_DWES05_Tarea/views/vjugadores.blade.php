@@ -17,6 +17,8 @@
     <section class="container">
 
         {{-- Mensajes al venir del formulario --}}
+        {{-- Los mensajes vienen en un array porque es en la vista --
+          -- donde se decide su modo de verse.                     --}}
         @if (sizeof($mensajes) > 0)
         <div class="bg-secondary-subtle p-3">
             @foreach ($mensajes as $mensaje)
@@ -25,11 +27,12 @@
         </div>            
         @endif
 
-
+        {{-- Botón de enlace al formulario para crear nuevos jugadores --}}
         <a href="fcrear.php" class="btn btn-success my-2">
             <i class="fa-solid fa-plus"></i> Nuevo Jugador
         </a>
 
+        {{-- Tabla con el listado de los jugadores --}}
         <table class="table table-dark table-striped">
             <thead>
                 <tr class="text-center">
@@ -40,11 +43,13 @@
                 </tr>
             </thead>
             <tbody>
+                {{-- Recorrer la colección de jugadores y mostrarlos en la tabla --}}
                 @foreach ($jugadores as $jugador)
                     <tr class="text-center">
                         <td>{{ $jugador->apellidos }}, {{ $jugador->nombre }}</td>
                         <td>{{ $jugador->posicion }}</td>
                         <td>{{ ($jugador->dorsal == 0)? 'Sin asignar' : $jugador->dorsal }}</td>
+                        {{-- El código de barras se genera a partir del valor numérico del campo barcode --}}
                         <td>{!! $barcode->getBarcodeSVG($jugador->barcode, 'EAN13', 3, 33, 'white', false) !!}</td>
                     </tr>
                 @endforeach
