@@ -80,7 +80,7 @@ TLSRenegotiate                          required off
 ###########################################Fin /etc/proftpd/tls.conf###############################################
 EOF
 
-# Modificar el archivo tls.conf para que tenga el contenido
+# Modificar el archivo virtuals.conf
 cat > /etc/proftpd/virtuals.conf << EOF
 <VirtualHost 10.0.2.15>
     ServerName "Servidor FTP de empresa tarea"
