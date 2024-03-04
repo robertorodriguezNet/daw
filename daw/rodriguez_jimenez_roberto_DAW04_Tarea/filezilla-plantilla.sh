@@ -10,22 +10,22 @@ rm -rf /var/ftp
 # Actualizar SO
 #apt-get upgrade
 
-# # Crear el directorio para todo-empresa-tarea-daw04
-# mkdir /var/ftp
-# mkdir /var/ftp/todo-empresa-tarea-daw04
+# Crear el directorio para todo-empresa-tarea-daw04
+mkdir /var/ftp
+mkdir /var/ftp/todo-empresa-tarea-daw04
 
-# # Crear algunos archivod
-# touch /var/ftp/todo-empresa-tarea-daw04/index.html
-# touch /var/ftp/todo-empresa-tarea-daw04/texto.txt
+# Crear algunos archivod
+touch /var/ftp/todo-empresa-tarea-daw04/index.html
+touch /var/ftp/todo-empresa-tarea-daw04/texto.txt
 
-# # Propietario y permisos
-# chown ftp /var/ftp/todo-empresa-tarea-daw04
-# chmod 766 -R /var/ftp/todo-empresa-tarea-daw04
+# Propietario y permisos
+chown ftp /var/ftp/todo-empresa-tarea-daw04
+chmod 766 -R /var/ftp/todo-empresa-tarea-daw04
 
-# # Directorio para el usuario user-empresa
-# mkdir /var/ftp/empresa
-# chown ftp /var/ftp/empresa
-# chmod 766 -R /var/ftp/empresa
+# Directorio para el usuario user-empresa
+mkdir /var/ftp/empresa
+chown ftp /var/ftp/empresa
+chmod 766 -R /var/ftp/empresa
 
 
 # --- ProFTPD -----------------------------
@@ -41,15 +41,18 @@ apt-get install proftpd
 # Comprobar el estado del servicio
 #systemctl status proftpd
 
+# Crear un usuario virtual
+ftpasswd --passwd --name user-empresa /etc/passwd.usuarios.virtuales --uid 129 --home /var/ftp/empresa --shell /bin/false 
+
 # Modificar el archivo de configuración proftpd.conf para descomentar el archivo tls.conf
 TEMPORAL=`mktemp`
 cat /etc/proftpd/proftpd.conf | sed "s/\#Include \/etc\/proftpd\/tls.conf/Include \/etc\/proftpd\/tls.conf/g" > $TEMPORAL
 mv $TEMPORAL /etc/proftpd/proftpd.conf
 
 # Modificar el archivo de configuración proftpd.conf para descomentar el archivo virtuals.conf
-# TEMPORAL_VIRTUAL=`mktemp`
-# cat /etc/proftpd/proftpd.conf | sed "s/\#Include \/etc\/proftpd\/virtuals.conf/Include \/etc\/proftpd\/virtuals.conf/g" > $TEMPORAL_VIRTUAL
-# mv $TEMPORAL_VIRTUAL /etc/proftpd/proftpd.conf
+TEMPORAL_VIRTUAL=`mktemp`
+cat /etc/proftpd/proftpd.conf | sed "s/\#Include \/etc\/proftpd\/virtuals.conf/Include \/etc\/proftpd\/virtuals.conf/g" > $TEMPORAL_VIRTUAL
+mv $TEMPORAL_VIRTUAL /etc/proftpd/proftpd.conf
 
 
 # Modificar el archivo tls.conf para que tenga el contenido
@@ -75,6 +78,16 @@ TLSRenegotiate                          required off
 
 </IfModule>
 ###########################################Fin /etc/proftpd/tls.conf###############################################
+EOF
+
+# Modificar el archivo tls.conf para que tenga el contenido
+cat > /etc/proftpd/virtuals.conf << EOF
+<VirtualHost 10.0.2.15>
+    ServerName "Servidor FTP de empresa tarea"
+    DefaultRoot /var/ftp/todo-empresa-tarea-daw04
+    RequireValidShell off
+    AuthUserFile /etc/passwd.usuarios.virtuales
+</VirtualHost>
 EOF
 
 # Generar el certificado
