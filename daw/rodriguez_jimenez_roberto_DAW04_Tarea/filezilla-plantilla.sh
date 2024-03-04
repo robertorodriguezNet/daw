@@ -5,10 +5,10 @@ clear
 rm -rf /var/ftp
 
 # Actualizar repositorios
-#apt-get update
+apt-get update
 
 # Actualizar SO
-#apt-get upgrade
+apt-get upgrade
 
 # Crear el directorio para todo-empresa-tarea-daw04
 mkdir /var/ftp
@@ -36,10 +36,10 @@ apt-get search proftpd
 apt-get install proftpd
 
 # Directorio de configuración de ProFTPD
-#ls -l /etc/proftpd
+ls -l /etc/proftpd
 
 # Comprobar el estado del servicio
-#systemctl status proftpd
+systemctl status proftpd
 
 # Crear un usuario virtual
 ftpasswd --passwd --name user-empresa /etc/passwd.usuarios.virtuales --uid 129 --home /var/ftp/empresa --shell /bin/false 
@@ -100,10 +100,10 @@ systemctl restart proftpd
 
 # --- FILEZILLA -----------------------------
 # Buscar el paquete filezilla
-#apt-cache search filezilla
+apt-cache search filezilla
 
 # Instalar filezilla
-#apt-get install filezilla
+apt-get install filezilla
 
 # Arrancar filezilla con un usuario del sistema
-# su -c filezilla roberto
+su -c filezilla roberto
