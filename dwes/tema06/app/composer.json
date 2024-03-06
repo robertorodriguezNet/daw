@@ -1,0 +1,25 @@
+{
+    "name": "roberto/app",
+    "description": "App SOAP",
+    "type": "project",
+    "license": "GPL",
+    "config": {
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Clases\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "robertorodriguezNet",
+            "email": "robertorodriguez@robertorodriguez.net"
+        }
+    ],
+    "require": {},
+    "minimum-stability": "dev"
+}
