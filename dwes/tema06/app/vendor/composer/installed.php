@@ -3,7 +3,7 @@
         'name' => 'roberto/app',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '806f5a77f0a10166a25252c3e9ebfc5df4c5a655',
+        'reference' => '3cb559657de591ba10986c70543fd0c98cdd3164',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'roberto/app' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '806f5a77f0a10166a25252c3e9ebfc5df4c5a655',
+            'reference' => '3cb559657de591ba10986c70543fd0c98cdd3164',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
