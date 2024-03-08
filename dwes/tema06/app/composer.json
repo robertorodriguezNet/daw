@@ -1,14 +1,8 @@
 {
     "name": "roberto/app",
-    "description": "App SOAP",
+    "description": "Ejemplo de uso de SOAP",
     "type": "project",
     "license": "GPL",
-    "config": {
-        "optimize-autoloader": true,
-        "allow-plugins": {
-            "kylekatarnls/update-helper": true
-        }
-    },
     "autoload": {
         "psr-4": {
             "Clases\\": "src/"
@@ -20,6 +14,13 @@
             "email": "robertorodriguez@robertorodriguez.net"
         }
     ],
-    "require": {},
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require": {
+        "wsdl2phpgenerator/wsdl2phpgenerator": "^3.5@dev"
+    },
+    "config": {
+        "platform": {
+            "php":"7.2.33"
+        }
+    }
 }
