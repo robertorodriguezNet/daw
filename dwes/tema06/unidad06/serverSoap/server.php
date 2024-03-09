@@ -2,22 +2,9 @@
 /**
  * Servicio web con las funciones resta, sume y saludo.
  */
-class Operaciones
-{
-    public function resta($a, $b){
-        return $a - $b;
-    }
+require '../vendor/autoload.php';
 
-    public function suma($a,$b){
-        return $a + $b;
-    }
-
-    public function saludo($texto){
-        return "Hola $texto";
-    }
-}
-
-$uri = "http://localhost" . substr( 
+$uri = substr( 
     $_SERVER['PHP_SELF'], 
     0, 
     strrpos(
