@@ -20,6 +20,10 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
     );
 
     public static $prefixLengthsPsr4 = array (
+        'W' => 
+        array (
+            'Wingu\\OctopusCore\\Reflection\\' => 29,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Php81\\' => 23,
@@ -47,6 +51,7 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Container\\' => 14,
+            'PHP2WSDL\\' => 9,
         ),
         'J' => 
         array (
@@ -67,6 +72,10 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
     );
 
     public static $prefixDirsPsr4 = array (
+        'Wingu\\OctopusCore\\Reflection\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wingu/reflection/src',
+        ),
         'Symfony\\Polyfill\\Php81\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php81',
@@ -142,6 +151,10 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
+        ),
+        'PHP2WSDL\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php2wsdl/php2wsdl/src',
         ),
         'JsonSchema\\' => 
         array (
@@ -545,6 +558,8 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
         'JsonSchema\\Uri\\UriRetriever' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Uri/UriRetriever.php',
         'JsonSchema\\Validator' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Validator.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
+        'PHP2WSDL\\PHPClass2WSDL' => __DIR__ . '/..' . '/php2wsdl/php2wsdl/src/PHPClass2WSDL.php',
+        'PHP2WSDL\\WSDL' => __DIR__ . '/..' . '/php2wsdl/php2wsdl/src/WSDL.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
@@ -764,6 +779,34 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
         'Symfony\\Polyfill\\Php81\\Php81' => __DIR__ . '/..' . '/symfony/polyfill-php81/Php81.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\AnnotationDefinition' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/AnnotationDefinition.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\AnnotationsCollection' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/AnnotationsCollection.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Exceptions\\Exception' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Exceptions/Exception.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Exceptions\\InvalidArgumentException' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Exceptions/InvalidArgumentException.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Exceptions\\OutOfBoundsException' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Exceptions/OutOfBoundsException.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Exceptions\\RuntimeException' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Exceptions/RuntimeException.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Parser' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Parser.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\TagMapper' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/TagMapper.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Tags\\BaseTag' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Tags/BaseTag.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Tags\\ParamTag' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Tags/ParamTag.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Tags\\ReturnTag' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Tags/ReturnTag.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Tags\\TagInterface' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Tags/TagInterface.php',
+        'Wingu\\OctopusCore\\Reflection\\Annotation\\Tags\\VarTag' => __DIR__ . '/..' . '/wingu/reflection/src/Annotation/Tags/VarTag.php',
+        'Wingu\\OctopusCore\\Reflection\\Exceptions\\Exception' => __DIR__ . '/..' . '/wingu/reflection/src/Exceptions/Exception.php',
+        'Wingu\\OctopusCore\\Reflection\\Exceptions\\InvalidArgumentException' => __DIR__ . '/..' . '/wingu/reflection/src/Exceptions/InvalidArgumentException.php',
+        'Wingu\\OctopusCore\\Reflection\\Exceptions\\RuntimeException' => __DIR__ . '/..' . '/wingu/reflection/src/Exceptions/RuntimeException.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionClass' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionClass.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionClassUse' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionClassUse.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionConstant' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionConstant.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionDocComment' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionDocComment.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionDocCommentTrait' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionDocCommentTrait.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionExtension' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionExtension.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionFile' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionFile.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionFunction' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionFunction.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionMethod' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionMethod.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionObject' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionObject.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionParameter' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionParameter.php',
+        'Wingu\\OctopusCore\\Reflection\\ReflectionProperty' => __DIR__ . '/..' . '/wingu/reflection/src/ReflectionProperty.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

@@ -3,7 +3,8 @@
     "description": "Servicios SOAP",
     "type": "project",
     "require": {
-        "composer/composer": "2.7.x-dev"
+        "composer/composer": "2.7.x-dev",
+        "php2wsdl/php2wsdl": "dev-master"
     },
     "license": "GPL",
     "autoload": {
