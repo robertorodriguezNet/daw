@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ddef22206d25ca50addcd55480fd7ed4",
+    "content-hash": "353bbd1c681669c2c7c5ce1ee6de37f4",
     "packages": [
         {
             "name": "php2wsdl/php2wsdl",
@@ -551,11 +551,15 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "php2wsdl/php2wsdl": 20
+        "php2wsdl/php2wsdl": 20,
+        "wsdl2phpgenerator/wsdl2phpgenerator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.2.33"
+    },
     "plugin-api-version": "2.6.0"
 }
