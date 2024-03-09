@@ -5,7 +5,7 @@
     "license": "GPL",
     "autoload": {
         "psr-4": {
-            "Roberto\\Tarea6\\": "src/"
+            "Clases\\": "src/"
         }
     },
     "authors": [
@@ -20,6 +20,9 @@
         "wsdl2phpgenerator/wsdl2phpgenerator": "^3.5@dev"
     },
     "config": {
+        "platform": {
+            "php":"7.2.33"
+        },
         "optimize-autoloader": true
     }
 }

@@ -26,13 +26,13 @@ class ComposerStaticInit4af02cc64c6a239f6b23a313be1db7ce
             'Symfony\\Polyfill\\Iconv\\' => 23,
             'Symfony\\Component\\OptionsResolver\\' => 34,
         ),
-        'R' => 
-        array (
-            'Roberto\\Tarea6\\' => 15,
-        ),
         'P' => 
         array (
             'PHP2WSDL\\' => 9,
+        ),
+        'C' => 
+        array (
+            'Clases\\' => 7,
         ),
     );
 
@@ -62,18 +62,19 @@ class ComposerStaticInit4af02cc64c6a239f6b23a313be1db7ce
         array (
             0 => __DIR__ . '/..' . '/symfony/options-resolver',
         ),
-        'Roberto\\Tarea6\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
         'PHP2WSDL\\' => 
         array (
             0 => __DIR__ . '/..' . '/php2wsdl/php2wsdl/src',
+        ),
+        'Clases\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'Clases\\Operaciones' => __DIR__ . '/../..' . '/src/Operaciones.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'PHP2WSDL\\PHPClass2WSDL' => __DIR__ . '/..' . '/php2wsdl/php2wsdl/src/PHPClass2WSDL.php',

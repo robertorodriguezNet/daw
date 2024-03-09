@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'Clases\\Operaciones' => $baseDir . '/src/Operaciones.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'PHP2WSDL\\PHPClass2WSDL' => $vendorDir . '/php2wsdl/php2wsdl/src/PHPClass2WSDL.php',

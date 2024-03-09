@@ -12,6 +12,6 @@ return array(
     'Symfony\\Polyfill\\Php73\\' => array($vendorDir . '/symfony/polyfill-php73'),
     'Symfony\\Polyfill\\Iconv\\' => array($vendorDir . '/symfony/polyfill-iconv'),
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
-    'Roberto\\Tarea6\\' => array($baseDir . '/src'),
     'PHP2WSDL\\' => array($vendorDir . '/php2wsdl/php2wsdl/src'),
+    'Clases\\' => array($baseDir . '/src'),
 );
