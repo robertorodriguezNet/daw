@@ -25,16 +25,12 @@ class Conexion
             $dsn = $dsn = "mysql:host=".self::$host.";dbname=".self::$db.";charset=utf8mb4";
             $conexion = new PDO($dsn, self::$user, self::$pass);
             $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
+
         } catch (PDOException $e) {
             die("Error al conectar con la base de datos: " . $e->getMessage());
         }
 
         return $conexion;
-    }
-
-    public static function getHost(){
-        return self::$host;
     }
 
 }
