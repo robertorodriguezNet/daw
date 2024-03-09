@@ -1,0 +1,24 @@
+{
+    "name": "roberto/unidad06",
+    "description": "Servicios SOAP",
+    "type": "project",
+    "require": {
+        "composer/composer": "2.7.x-dev"
+    },
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Class\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "robertorodriguezNet",
+            "email": "robertorodriguez@robertorodriguez.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "config": {
+        "optimize-autoloader": true
+    }
+}
