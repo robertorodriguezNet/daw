@@ -9,7 +9,7 @@
     "license": "GPL",
     "autoload": {
         "psr-4": {
-            "Class\\": "src/"
+            "Clases\\": "src/"
         }
     },
     "authors": [

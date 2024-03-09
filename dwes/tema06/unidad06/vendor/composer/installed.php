@@ -3,7 +3,7 @@
         'name' => 'roberto/unidad06',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'cca57958e9fe7bda0df792e3abe55eed0ed65cfd',
+        'reference' => 'd1d6e51173a8e55d2d21a882ee732637dd87a838',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -150,7 +150,7 @@
         'roberto/unidad06' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'cca57958e9fe7bda0df792e3abe55eed0ed65cfd',
+            'reference' => 'd1d6e51173a8e55d2d21a882ee732637dd87a838',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

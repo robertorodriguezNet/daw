@@ -36,5 +36,5 @@ return array(
     'Composer\\ClassMapGenerator\\' => array($vendorDir . '/composer/class-map-generator/src'),
     'Composer\\CaBundle\\' => array($vendorDir . '/composer/ca-bundle/src'),
     'Composer\\' => array($vendorDir . '/composer/composer/src/Composer'),
-    'Class\\' => array($baseDir . '/src'),
+    'Clases\\' => array($baseDir . '/src'),
 );

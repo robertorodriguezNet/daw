@@ -67,7 +67,7 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
             'Composer\\ClassMapGenerator\\' => 27,
             'Composer\\CaBundle\\' => 18,
             'Composer\\' => 9,
-            'Class\\' => 6,
+            'Clases\\' => 7,
         ),
     );
 
@@ -192,7 +192,7 @@ class ComposerStaticInitf5774eb8bf16da1f219d4bc6440349b5
         array (
             0 => __DIR__ . '/..' . '/composer/composer/src/Composer',
         ),
-        'Class\\' => 
+        'Clases\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
