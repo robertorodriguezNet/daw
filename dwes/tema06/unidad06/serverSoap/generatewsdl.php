@@ -10,12 +10,11 @@
  */
 
  require "../vendor/autoload.php";
- require "../src/Operaciones.php";
 
  use PHP2WSDL\PHPClass2WSDL;
 
  // Clase que gestiona el servicio
- $class = "Operaciones";
+ $class = "Clases\\Operaciones";
 
  // URI que ofrece el servicio
  $uri = 'http://localhost/unidad6/serverSoap/server.php';

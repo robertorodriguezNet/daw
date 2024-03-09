@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost/unidad6/serverSoap/server.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Operaciones" targetNamespace="http://localhost/unidad6/serverSoap/server.php">
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://localhost/unidad6/serverSoap/server.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Clases.Operaciones" targetNamespace="http://localhost/unidad6/serverSoap/server.php">
   <types>
     <xsd:schema targetNamespace="http://localhost/unidad6/serverSoap/server.php">
       <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
     </xsd:schema>
   </types>
-  <portType name="OperacionesPort">
+  <portType name="Clases.OperacionesPort">
     <operation name="resta">
       <input message="tns:restaIn"/>
       <output message="tns:restaOut"/>
@@ -19,7 +19,7 @@
       <output message="tns:saludoOut"/>
     </operation>
   </portType>
-  <binding name="OperacionesBinding" type="tns:OperacionesPort">
+  <binding name="Clases.OperacionesBinding" type="tns:Clases.OperacionesPort">
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="resta">
       <soap:operation soapAction="http://localhost/unidad6/serverSoap/server.php#resta"/>
@@ -69,8 +69,8 @@
   <message name="saludoOut">
     <part name="return" type="xsd:string"/>
   </message>
-  <service name="OperacionesService">
-    <port name="OperacionesPort" binding="tns:OperacionesBinding">
+  <service name="Clases.OperacionesService">
+    <port name="Clases.OperacionesPort" binding="tns:Clases.OperacionesBinding">
       <soap:address location="http://localhost/unidad6/serverSoap/server.php"/>
     </port>
   </service>
