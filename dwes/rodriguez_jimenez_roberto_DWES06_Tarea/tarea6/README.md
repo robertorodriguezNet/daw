@@ -2,6 +2,13 @@
 
 ## SERVICIOS WEB CON SOAP
 
+### Previo
+- **SO**: Windows 10 sobre VirtualBox 7.0
+- **Plataforma**: XAMPP
+- **Versión de PHP**: 7.2.33
+- **Editor**: Visual Studio Code
+- **Composer**: 2.7.1
+
 ## Enunciado
 
 Se utilizará "PHP SOAP" para crear un servicio web con cuatro funciones que expongan información de la base de datos de la tienda online. 
@@ -23,3 +30,37 @@ Este servicio no tendrá asociado ningún archivo **WSDL** y oferce los servicio
 - `getStock`:  Esta función recibirá dos parámetros: el código de un producto y el código de una tienda. Devolverá el **stock** existente en dicha tienda del producto.
 - `getFamilias`: No recibe parámetros y devuelve un array con los códigos de todas las familias existentes.
 - `getProductosFamilia`. Recibe como parámetro el código de una familia y devuelve un array con los códigos de todos los productos de esa familia.
+
+
+## GENERACIÓN DE LA ESTRUCTURA CON *COMPOSER*
+
+Archivo `composer.json`.
+
+```json
+{
+    "name": "roberto/tarea6",
+    "description": "DWES06 Tarea",
+    "type": "project",
+    "license": "GPL",
+    "autoload": {
+        "psr-4": {
+            "Clases\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Roberto Rodríguez",
+            "email": "roberto.rodjim.1@educa.jcyl.es"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "config": {
+        "optimize-autoloader": true
+    }
+}
+```
+
+## Creación del servicio web
+
+En el archivo `Operaciones.php` implementamos las funciones para cada servicio.
