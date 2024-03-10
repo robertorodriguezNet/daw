@@ -1,0 +1,22 @@
+{
+    "name": "roberto/tarea6",
+    "description": "DWES06 Tarea",
+    "type": "project",
+    "license": "gnu/gpl",
+    "config": {
+        "optimize-autoloader": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Clases\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Roberto Rodríguez",
+            "email": "roberto.rodjim.1@educa.jcyl.es"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
