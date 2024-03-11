@@ -34,6 +34,7 @@ class Conexion
 
     /**
      * Crea la conexión con la base de datos.
+     * 
      * @return PDO Objeto PDO con la conexión
      */
     private function crearConexion():PDO
@@ -48,6 +49,14 @@ class Conexion
         }
 
         return $conexion;
+    }
+
+    private function cerrarConexion(){
+        $this->conexion = null;
+    }
+
+    public function getConexion(){
+        return $this->conexion;
     }
 
 }

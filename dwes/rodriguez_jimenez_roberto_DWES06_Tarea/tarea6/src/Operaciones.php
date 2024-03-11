@@ -3,11 +3,12 @@ namespace Clases;
 
 use Clases\Producto;
 use Clases\Stock;
+use Clases\Familia;
 
 class Operaciones
 {
     
-    public function getPVP($idProducto)
+    public function getPVP($idProducto):string
     {
         // Creamos un objeto Producto
         $producto = new Producto($idProducto);
@@ -18,7 +19,7 @@ class Operaciones
         return $pvp;
     }
 
-    public function getStock($idProducto, $idTienda)
+    public function getStock($idProducto, $idTienda):int
     {
         $stock = new Stock($idProducto, $idTienda);        
         return $stock->getUnidades();
@@ -26,11 +27,11 @@ class Operaciones
 
     public function getFamilias()
     {
-        return "Familias";
+        return Familia::getFamilias();
     }
     
     public function getProductoFamilia($codFamilia)
     {
-        return "Hola";
+        return Familia::getProductosFamilia($codFamilia);
     }
 }
