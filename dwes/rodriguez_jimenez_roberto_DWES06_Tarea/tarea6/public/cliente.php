@@ -3,10 +3,10 @@
 $uri='http://localhost/daw/dwes/rodriguez_jimenez_roberto_DWES06_Tarea/tarea6/servidorSoap';
 $url = $uri . '/servicio.php';
 
-$paramPVP              = ['idProducto' => 2];
-$paramStock            = ['codProducto' => 5, 'codTienda' => 2];
+$paramPVP              = ['idProducto' => 26];
+$paramStock            = ['idProducto' => 26, 'idTienda' => 2];
 $paramFamilias         = [];
-$paramProductosFamilia = ['codFamilia' => 5];
+$paramProductosFamilia = ['idFamilia' => 5];
 
 try {
     $cliente = new SoapClient(null, ['location' => $url, 'uri' => $uri, 'trace'=>true]);

@@ -3,17 +3,55 @@ namespace Clases;
 
 use PDO;
 
+/**
+ * Representa un producto.
+ * 
+ * @method void setProducto()
+ */
 class Producto extends Conexion
 {
+    /**#@+
+     * @access private
+     */
+    /**
+     * @var int
+     */
     private $id;
+    /**
+     * @var string
+     */
     private $nombre;
+    /**
+     * @var string
+     */
     private $nombre_corto;
+    /**
+     * @var string
+     */
     private $descripcion;
+    /**
+     * @var float
+     */
     private $pvp;
+    /**
+     * @var string
+     */
     private $familia;
+    /**#@-*/
 
-    public function __construct(){
+    /**
+     * Constructor de la clase
+     * 
+     * @param int $idProducto
+     */
+    public function __construct(int $idProducto = null){
         parent::__construct();
+
+        // Recibimos el id de un producto
+        if($idProducto != null){
+            $this->id = $idProducto;
+            $this->setProducto();
+        }
     }
 
     // -- GETTERS ----------------------------------------------------- 
@@ -40,19 +78,22 @@ class Producto extends Conexion
 
     /**
      * Recupera los datos del producto desde la base de datos.
+     * 
+     * @access private
      */
-    public function setProducto(int $id):void{
+    private function setProducto():void{
 
-        $consulta = "SELECT * FROM productos WHERE id = $id";
-        $resultado = $this->conexion->query($consulta);
+        $consulta = "SELECT * FROM productos WHERE id = " .$this->id;
+        $conexion = $this->conexion;
+        $resultado = $conexion->query($consulta);
         $producto = $resultado->fetch(PDO::FETCH_OBJ);
+        $conexion = null;
 
         $this->nombre = $producto->nombre;
         $this->nombre_corto = $producto->nombre_corto;
         $this->descripcion = $producto->descripcion;
         $this->pvp = $producto->pvp;
         $this->familia = $producto->familia;
-
     }
 
     public function setId(int $arg):void{
