@@ -32,6 +32,6 @@ class Operaciones
     
     public function getProductoFamilia($codFamilia)
     {
-        return Familia::getProductosFamilia($codFamilia);
+        return Producto::getProductosFamilia($codFamilia);
     }
 }

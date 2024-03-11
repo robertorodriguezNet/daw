@@ -1,4 +1,5 @@
 <?php
+
 namespace Clases;
 
 use PDO;
@@ -7,6 +8,7 @@ use PDO;
  * Representa un producto.
  * 
  * @method void setProducto()
+ * @method array getProductosFamilia()
  */
 class Producto extends Conexion
 {
@@ -44,33 +46,40 @@ class Producto extends Conexion
      * 
      * @param int $idProducto
      */
-    public function __construct(int $idProducto = null){
+    public function __construct(int $idProducto = null)
+    {
         parent::__construct();
 
         // Recibimos el id de un producto
-        if($idProducto != null){
+        if ($idProducto != null) {
             $this->id = $idProducto;
             $this->setProducto();
         }
     }
 
     // -- GETTERS ----------------------------------------------------- 
-    public function getId():int{
+    public function getId(): int
+    {
         return $this->id;
     }
-    public function getNombre():string{
+    public function getNombre(): string
+    {
         return $this->nombre;
     }
-    public function getNombrCorto():string{
+    public function getNombrCorto(): string
+    {
         return $this->nombre_corto;
     }
-    public function getDescripcion():string{
+    public function getDescripcion(): string
+    {
         return $this->descripcion;
     }
-    public function getPvp():float{
+    public function getPvp(): float
+    {
         return $this->pvp;
     }
-    public function getFamilia():string{
+    public function getFamilia(): string
+    {
         return $this->familia;
     }
 
@@ -81,9 +90,10 @@ class Producto extends Conexion
      * 
      * @access private
      */
-    private function setProducto():void{
+    private function setProducto(): void
+    {
 
-        $consulta = "SELECT * FROM productos WHERE id = " .$this->id;
+        $consulta = "SELECT * FROM productos WHERE id = " . $this->id;
         $conexion = $this->conexion;
         $resultado = $conexion->query($consulta);
         $producto = $resultado->fetch(PDO::FETCH_OBJ);
@@ -96,31 +106,60 @@ class Producto extends Conexion
         $this->familia = $producto->familia;
     }
 
-    public function setId(int $arg):void{
+    public function setId(int $arg): void
+    {
         $this->id = $arg;
     }
-    public function setNombre(string $arg):void{
+    public function setNombre(string $arg): void
+    {
         $this->nombre = $arg;
     }
-    public function setNombreCorto(string $arg):void{
+    public function setNombreCorto(string $arg): void
+    {
         $this->nombre_corto = $arg;
     }
-    public function setDescripcion(string $arg):void{
+    public function setDescripcion(string $arg): void
+    {
         $this->descripcion = $arg;
     }
-    public function setPvp(float $arg):void{
+    public function setPvp(float $arg): void
+    {
         $this->pvp = $arg;
     }
-    public function setFamilia(string $arg):void{
+    public function setFamilia(string $arg): void
+    {
         $this->familia = $arg;
     }
 
-    public function __toString(){
-        return $this->id . ' ' . 
-            $this->nombre . ' ' . 
-            '(' . $this->nombre_corto . ') ' . 
-            $this->descripcion . ' ' . 
-            $this->pvp . ' € ' . 
+    public function __toString()
+    {
+        return $this->id . ' ' .
+            $this->nombre . ' ' .
+            '(' . $this->nombre_corto . ') ' .
+            $this->descripcion . ' ' .
+            $this->pvp . ' € ' .
             $this->familia;
+    }
+
+    /**
+     * Recibe como parámetro el código de una familia y devuelve un array 
+     * con los códigos de todos los productos de esa familia.
+     * 
+     * @param string $codFamilia
+     * @return array
+     */
+    public static function getProductosFamilia(string $codFamilia): array
+    {
+
+        $consulta = "SELECT * FROM productos WHERE familia = '" . $codFamilia . "'";
+
+        $clase = new Conexion();
+        $conexion = $clase->getConexion();
+        $resultado = $conexion->query($consulta);
+        $conexion = null;
+
+        $productos = $resultado->fetchAll(PDO::FETCH_ASSOC);
+
+        return $productos;
     }
 }
