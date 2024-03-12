@@ -19,6 +19,7 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php2wsdl/php2wsdl": "dev-master"
+        "php2wsdl/php2wsdl": "dev-master",
+        "wsdl2phpgenerator/wsdl2phpgenerator": "^3.5@dev"
     }
 }
