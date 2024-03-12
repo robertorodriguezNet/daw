@@ -7,11 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-    'Clases\\Conexion' => $baseDir . '/src/Conexion.php',
-    'Clases\\Familia' => $baseDir . '/src/Familia.php',
-    'Clases\\Operaciones' => $baseDir . '/src/Operaciones.php',
-    'Clases\\Producto' => $baseDir . '/src/Producto.php',
-    'Clases\\Stock' => $baseDir . '/src/Stock.php',
+    'Clases\\ClasesOperacionesService' => $baseDir . '/src/Clases1/ClasesOperacionesService.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'PHP2WSDL\\PHPClass2WSDL' => $vendorDir . '/php2wsdl/php2wsdl/src/PHPClass2WSDL.php',
