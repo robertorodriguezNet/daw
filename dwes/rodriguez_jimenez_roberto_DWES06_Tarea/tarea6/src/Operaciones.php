@@ -7,8 +7,14 @@ use Clases\Familia;
 
 class Operaciones
 {
-    
-    public function getPVP($idProducto):string
+    /**
+     * Esta función recibirá como parámetro el código de un producto, y devolverá el PVP correspondiente al mismo.
+     * 
+     * @soap 
+     * @param  int $idProducto
+     * @return string 
+     */
+    public function getPVP(int $idProducto):string
     {
         // Creamos un objeto Producto
         $producto = new Producto($idProducto);
@@ -19,18 +25,39 @@ class Operaciones
         return $pvp;
     }
 
+    /**
+     * Esta función recibirá dos parámetros: el código de un producto y el código de una tienda. Devolverá el stock existente en dicha tienda del producto.
+     * 
+     * @soap 
+     * @param  int    $idProducto
+     * @param  int    $idTienda
+     * @return string
+     */
     public function getStock($idProducto, $idTienda):int
     {
         $stock = new Stock($idProducto, $idTienda);        
         return $stock->getUnidades();
     }
 
-    public function getFamilias()
+    /**
+     * Devuelve un array con los códigos de todas las familias existentes.
+     * 
+     * @soap 
+     * @return string[]
+     */
+    public function getFamilias():array
     {
         return Familia::getFamilias();
     }
     
-    public function getProductoFamilia($codFamilia)
+    /**
+     * Devuelve un array con los códigos de todos los productos de esa familia.
+     * 
+     * @soap 
+     * @param  string   $codFamilia
+     * @return string[]
+     */
+    public function getProductoFamilia($codFamilia):array
     {
         return Producto::getProductosFamilia($codFamilia);
     }

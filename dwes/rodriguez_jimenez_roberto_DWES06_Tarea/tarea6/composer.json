@@ -18,5 +18,7 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require": {
+        "php2wsdl/php2wsdl": "dev-master"
+    }
 }
