@@ -3,7 +3,7 @@
         'name' => 'roberto/tarea6',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3fded28e624a7b24e15e1065a306c720685d2502',
+        'reference' => '9c96b9d5ec657ddb25b32469ccaf35fcb341b54a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'roberto/tarea6' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '3fded28e624a7b24e15e1065a306c720685d2502',
+            'reference' => '9c96b9d5ec657ddb25b32469ccaf35fcb341b54a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -68,13 +68,17 @@ class ComposerStaticInit10045c4da2046916e534cbbb0ee1e582
         ),
         'Clases\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/src/Clases1',
+            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
-        'Clases\\ClasesOperacionesService' => __DIR__ . '/../..' . '/src/Clases1/ClasesOperacionesService.php',
+        'Clases\\Conexion' => __DIR__ . '/../..' . '/src/Conexion.php',
+        'Clases\\Familia' => __DIR__ . '/../..' . '/src/Familia.php',
+        'Clases\\Operaciones' => __DIR__ . '/../..' . '/src/Operaciones.php',
+        'Clases\\Producto' => __DIR__ . '/../..' . '/src/Producto.php',
+        'Clases\\Stock' => __DIR__ . '/../..' . '/src/Stock.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'PHP2WSDL\\PHPClass2WSDL' => __DIR__ . '/..' . '/php2wsdl/php2wsdl/src/PHPClass2WSDL.php',

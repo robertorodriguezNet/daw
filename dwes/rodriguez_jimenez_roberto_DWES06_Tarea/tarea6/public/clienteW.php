@@ -27,7 +27,7 @@ $productosDeFamilia = $cliente->__soapCall('getProductoFamilia', $paramProductos
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">

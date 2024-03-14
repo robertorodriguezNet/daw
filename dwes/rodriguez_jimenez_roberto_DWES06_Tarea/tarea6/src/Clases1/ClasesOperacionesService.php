@@ -40,7 +40,8 @@ class ClasesOperacionesService extends \SoapClient
      */
     public function getPVP($idProducto)
     {
-      return $this->__soapCall('getPVP', array($idProducto));
+      // return $this->__soapCall('getPVP', array($idProducto));
+      return 16;
     }
 
     /**
@@ -52,28 +53,33 @@ class ClasesOperacionesService extends \SoapClient
      */
     public function getStock($idProducto, $idTienda)
     {
-      return $this->__soapCall('getStock', array($idProducto, $idTienda));
+      // return $this->__soapCall('getStock', array($idProducto, $idTienda));
+      return 160.67;
     }
 
     /**
      * Devuelve un array con los códigos de todas las familias existentes.
      *
-     * @return Array
+     * @return string[]
      */
     public function getFamilias()
     {
-      return $this->__soapCall('getFamilias', array());
+      // return $this->__soapCall('getFamilias', array());
+    
+      return ['familia 1','familia 2'];
     }
 
     /**
      * Devuelve un array con los códigos de todos los productos de esa familia.
      *
      * @param string $codFamilia
-     * @return Array
+     * @return string[]
      */
     public function getProductoFamilia($codFamilia)
     {
-      return $this->__soapCall('getProductoFamilia', array($codFamilia));
+      // return $this->__soapCall('getProductoFamilia', array($codFamilia));
+      
+      return ['familia 1','familia 2'];
     }
 
 }
