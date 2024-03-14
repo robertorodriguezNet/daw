@@ -1,6 +1,7 @@
 <?php
 
 namespace Clases1;
+namespace Clases;
 
 class ClasesOperacionesService extends \SoapClient
 {

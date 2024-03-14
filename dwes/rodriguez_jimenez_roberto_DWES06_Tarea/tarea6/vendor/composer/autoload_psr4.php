@@ -14,4 +14,5 @@ return array(
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
     'PHP2WSDL\\' => array($vendorDir . '/php2wsdl/php2wsdl/src'),
     'Clases\\' => array($baseDir . '/src'),
+    'Clases1\\' => array($baseDir . '/src/Clases1'),
 );

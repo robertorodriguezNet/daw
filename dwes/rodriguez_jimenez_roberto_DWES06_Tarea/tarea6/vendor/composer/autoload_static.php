@@ -33,6 +33,7 @@ class ComposerStaticInit10045c4da2046916e534cbbb0ee1e582
         'C' => 
         array (
             'Clases\\' => 7,
+            'Clases1\\' => 8,
         ),
     );
 
@@ -69,6 +70,10 @@ class ComposerStaticInit10045c4da2046916e534cbbb0ee1e582
         'Clases\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Clases1\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Clases1',
         ),
     );
 
