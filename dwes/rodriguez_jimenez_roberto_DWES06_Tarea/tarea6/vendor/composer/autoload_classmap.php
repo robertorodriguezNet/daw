@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Attribute' => $vendorDir . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+    'Clases1\\ClasesOperacionesService' => $baseDir . '/src/Clases1/ClasesOperacionesService.php',
     'Clases\\Conexion' => $baseDir . '/src/Conexion.php',
     'Clases\\Familia' => $baseDir . '/src/Familia.php',
     'Clases\\Operaciones' => $baseDir . '/src/Operaciones.php',

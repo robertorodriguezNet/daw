@@ -15,6 +15,7 @@ require '../vendor/autoload.php';
  use Wsdl2PhpGenerator\Config;
 
  $generator = new Generator();
+
  $generator->generate(
     new Config([
         'inputFile'     => "http://127.0.0.1/daw/dwes/rodriguez_jimenez_roberto_DWES06_Tarea/tarea6/servidorSoap/servicioW.php?wsdl",
