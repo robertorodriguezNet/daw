@@ -12,14 +12,12 @@ $paramProductosFamilia = ['codFamilia' => 'CAMARA'];
 
 // Creamos el cliente, pasándole el archivo WSDL
 try {
-
     $cliente = new SoapClient($url);
 } catch (SoapFault $f) {
     die("Error en el cliente: " . $f->getMessage());
 }
 
-
-
+// Solocitar los datos al servicio
 $pvp = $cliente->__soapCall('getPVP', $paramPVP);
 $stock = $cliente->__soapCall('getStock', $paramStock);
 $familias = $cliente->__soapCall('getFamilias', $paramFamilias);

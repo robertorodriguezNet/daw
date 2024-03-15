@@ -1,19 +1,25 @@
 <?php
 
+// Ruta del servidor SOAP
 $uri = 'http://localhost/daw/dwes/rodriguez_jimenez_roberto_DWES06_Tarea/tarea6/servidorSoap';
+
+// Ruta del servicio
 $url = $uri . '/servicio.php';
 
+// Preparamos los parámetros para las solicitudes
 $paramPVP              = ['idProducto' => 26];
 $paramStock            = ['idProducto' => 26, 'idTienda' => 2];
 $paramFamilias         = [];
 $paramProductosFamilia = ['codFamilia' => 'CONSOL'];
 
+// Generar el cliente de SOAP
 try {
     $cliente = new SoapClient(null, ['location' => $url, 'uri' => $uri, 'trace' => true]);
 } catch (SoapFault $ex) {
     echo "Error: " . $ex->getMessage();
 }
 
+// Solocitar los datos al servicio
 $pvp = $cliente->__soapCall('getPVP', $paramPVP);
 $stock = $cliente->__soapCall('getStock', $paramStock);
 $familias = $cliente->__soapCall('getFamilias', $paramFamilias);

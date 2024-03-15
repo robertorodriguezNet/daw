@@ -16,6 +16,7 @@ require '../vendor/autoload.php';
 
  $generator = new Generator();
 
+ // El espacio de nombres se dejado en 'Clases', por lo que añadiremos Clases1 a composer.json
  $generator->generate(
     new Config([
         'inputFile'     => "http://127.0.0.1/daw/dwes/rodriguez_jimenez_roberto_DWES06_Tarea/tarea6/servidorSoap/servicioW.php?wsdl",
