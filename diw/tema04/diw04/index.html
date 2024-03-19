@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DIW04 - Tarea</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- header -------------------------------- -->
+  <header>
+    <div id="logo">
+      <h1>TodoFP</h1>
+      <a href="http://www.educacion.gob.es">www.educacion.gob.es</a>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Inicio</a></li>
+        <li><a href="#">Información</a></li>
+        <li><a href="#">Cursos</a></li>
+        <li><a href="#">Alumnos</a></li>
+        <li><a href="#">Ayuda</a></li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Fin del header ------------------------ -->
+
+  <!-- main ---------------------------------- -->
+  <main>
+
+    <!-- Bloque izquierdo --------- -->
+    <aside id="aside-i">
+
+      <div class="bloque">
+        <div class="cabecera"><p>ÁREA DE USUARIOS</p></div>
+        <form action="" id="form-acceso" name="form-acceso" method="post">
+          <label for="usuario">ID de Usuario:</label>
+          <input type="text" name="usuario" id="usuario">
+          <label for="pass">Contraseña:</label>
+          <input type="password" name="pass" id="pass">
+          <button type="submit">Acceder</button>
+          <br>
+          <a href="#">¿Olvidaste la contraseña?</a>
+        </form>
+      </div>
+
+      <div class="bloque">
+        <div class="cabecera"><p>UNIDADES DE TRABAJO</p></div>
+        <div>
+          <p>
+            <span class="unidad">DIW01, 2011</span>
+            <br>
+            <span class="titulo-unidad">Planificación de interfaces gráficas...</span>
+          </p>
+        </div>
+        <div>
+          <p>
+            <span class="unidad">DIW02, 2011</span>
+            <br>
+            <span class="titulo-unidad">Accesibilidad en la web...</span>
+          </p>
+        </div>
+        <div>
+          <p>
+            <span class="unidad">DIW03, 2011</span>
+            <br>
+            <span class="titulo-unidad">Usabilidad en la web</span>
+          </p>
+        </div>
+        <div>
+          <p>
+            <span class="unidad">DIW04, 2011</span>
+            <br>
+            <span class="titulo-unidad">Hojas de estilo...</span>
+          </p>
+        </div>
+        <div>
+          <p>
+            <span class="unidad">DIW05, 2011</span>
+            <br>
+            <span class="titulo-unidad">Contenidos multimedia en la web: imágenes...</span>
+          </p>
+        </div>
+      </div>
+    </aside>
+    <!-- Fin del bloque izquierdo --- -->
+
+    <!-- Contenido central ---------- -->
+    <article>
+
+      <section>
+        <div class="cabecera">
+          <p>¡BIENVENIDO A TODOFP!</p>
+          <p>Oct. 10, 2011</p>
+        </div>
+        <div class="texto">
+          <img src="img/fp.png" alt="Logo de FP">
+          <p>
+            <strong>FP a distancia.</strong> Esta oferta está dirigida especialmente a aquellas personas que, por diferentes razones (no solo laborales), no pueden cursar en los centros educativos y en el horario presencia, la <a href="#">Formación Profesional</a>.<br> 
+            Por tanto, mayoritariamente será el colectivo de personas adultas el destinatario de esta modalidad de enseñanza.<br>
+            Toda la Información desde la web: <a href="#">FP online</a>. ¡¡Matricúlate!!
+          </p>
+        </div>
+        <div class="pie">
+          <p>Realizado por Manuel Vicites <a href="#">DWI</a> | <a href="#">TodoFP</a></p>
+        </div>
+      </section>
+
+      <section>
+        <div class="cabecera">
+          <p>DIW04. HOJAS DE ESTILO</p>
+          <p>Oct. 10, 2011</p>
+        </div>
+        <div class="texto">
+          <p class="blockquote">
+            <blockqoute><i>"Orden EDU//2887/2010, de 2 de noviembre, por la que se establece el currículo formativo de Grado Superior correspondiente al título de Técnico Superior en Desarrollo de Aplicaciones Web."</i></blockqoute>
+          </p>
+          <p>
+            Téctincas, procedimientos y actitudes relacionadas: 
+            <ol>
+              <li>Crear y vincular hojas de estilo</li>
+              <li>Crear y vincular hojas de estilo en cascada externa</li>
+            </ol>
+          </p>
+          <p>
+            Conceptos relacionados:
+            <ol>
+              <li>Estilos en línea basados en etiquetas y en clases</li>
+              <li>Hojas de estilo auditivas</li>
+              <li>Hojas de estilo para imprimir</li>
+              <li>Herramientas y test de verificación</li>
+            </ol>
+          </p>
+        </div>
+        <div class="pie">
+          <p>Realizado por Manuel Vicites <a href="#">DWI</a> | <a href="#">TodoFP</a></p>
+        </div>
+      </section>
+
+    </article>
+    <!-- Fin del contenido central -- -->
+
+    <!-- Bloque derecho ------------- -->
+    <aside id="aside-d">
+      <div class="bloque">
+        <div class="cabecera"><p>WEBS DE INTERÉS</p></div>
+        <div>
+          <ul>
+            <li><a href="#">TodoFP</a></li>
+            <li><a href="#">FP online</a></li>
+            <li><a href="#">Platega</a></li>
+            <li><a href="#">IES San Clemente</a></li>
+          </ul>
+        </div> 
+        <div class="bloque banner">
+          <img src="img/banner.png" alt="banner indefinido">
+        </div>    
+      </div>
+    </aside>
+    <!-- Fin del bloque derecho --- -->
+
+  </main>
+  <!-- fin del main -------------------------- -->
+
+  <!--footer --------------------------------- -->
+  <footer>
+    <p>
+      Copyright &copy; 2011 TodoFP. Todos los derechos reservados. Diseñado
+      por Roberto Rodríguez.
+    </p>
+  </footer>
+  <!-- fin del footer ------------------------ -->
+
+</body>
+
+</html>

@@ -1,0 +1,202 @@
+/* Colores */
+:root {
+    --color-gris: #666666;
+    --color-osucro: #333333;
+    --color-verde: #3e9722;
+    --color-naranja: #e58c24;
+    --color-azul: #3c74e6;
+    --color-lima: #cae646;
+}
+
+h1{
+    padding: 0;
+    margin: 0;
+    text-align: left;
+    line-height: 0.6em;
+}
+
+body {
+    display: grid;
+    width: 960px;
+    min-height: calc(100vh - 10px);
+    margin: 0 auto;
+    padding-top: 10px;
+
+    /* Establecer 3 columnas*/
+    grid-template-areas: 'header'
+        'content'
+        'footer';
+    grid-template-rows: 100px auto 80px;
+
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+}
+
+a, .titulo-unidad{
+    color: var(--color-verde)
+}
+
+.blockquote{
+    padding: 0 20px;
+}
+
+/* Áreas */
+
+/* ** header ********************************************** */
+header {
+    grid-area: header;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 20px 20px 2px 20px;
+    background: linear-gradient( var(--color-lima), white );
+    border-radius: 15px;
+}
+
+header ul{
+    display: flex;
+    list-style: none;
+    margin: 0;
+}
+header li{
+    width: 100px;
+    background-color: white;
+    margin: 0 2px 0 2px;
+    padding: 5px 0 5px 0;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+header li:first-child,
+header li:hover{
+    background-color: var(--color-naranja);
+}
+
+#logo{
+    padding: 0 0 15px 0;
+}
+
+header a{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ** main **************************************************** */
+main {
+    grid-area: content;
+    display: grid;
+    grid-template-columns: 220px auto 180px;
+    grid-template-areas: 'aside-i article aside-d';
+    margin: 5px 0;
+    width: 100%;
+    min-height: 110px;
+    box-sizing: border-box;
+    border: solid 2px transparent;
+    border-radius: 15px;
+
+    /* -- Dibujar el borde superior -----------*/
+
+    /* El primer argumento se corresponde con el contenido y
+       el segundo con el borde. */
+    background-image: 
+        linear-gradient(white, white),
+        linear-gradient(var(--color-lima) 100px, transparent 100px);
+
+    /* Especifica el área de origen del fondo.
+       En este caso el área se extiende al borde exterior.*/
+    background-origin: border-box;
+
+    /* Especifica si el fondo se extiende por debajo del borde. 
+        content-box: el fonde se inicia desde donde inicia el contenido.
+        border-box: el fondo se extiende hasta el borde exterior del contenedor.
+    */
+    background-clip: content-box, border-box;
+}
+
+#aside-i,#aside-d{
+    padding: 0 20px;
+}
+
+#aside-i, article, #aside-d{
+    padding-top: 10px;
+}
+
+#aside-i{
+    grid-area: aside-i;
+}
+
+.bloque{
+    margin-bottom: 30px;
+}
+.bloque form{
+    margin: 10px 0;
+}
+.bloque form, .bloque div{
+    padding: 0 10px;
+}
+.bloque input, .bloque button{
+    margin-bottom: 10px;
+    max-width: 100%;
+}
+.bloque .banner{
+    text-align: center;
+}
+.bloque img{
+    max-width: 80%;
+}
+.unidad, .titulo-unidad, .bloque a{
+    font-size: 0.9em;
+}
+.unidad{
+    font-weight: bold;
+}
+.bloque ul{
+    padding-left: 20px;
+}
+
+article{
+    grid-area: article;
+}
+
+section{
+    margin-bottom: 30px;
+}
+.cabecera{
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-azul);
+    color: white;
+    padding: 0 10px;
+    font-size: 0.8em;
+}
+section .texto{
+    padding: 0 20px 0 20px;
+    line-height: 1.3em;
+    text-align: justify;
+}
+
+section img{
+    float: left;
+    max-width: 80px;
+    padding-right: 20px;
+}
+section .pie{
+    font-size: 0.9em;
+    border-top: dotted 1px var(--color-osucro);
+    padding: 0 20px;
+}
+
+#aside-d{
+    grid-area: aside-d;
+}
+
+/* ** footer ****************************************************** */
+footer {
+    grid-area: footer;
+    border: solid 2px var(--color-lima);
+    border-radius: 15px 15px 0 0;
+    border-bottom-width: 0;
+    text-align: center;
+    padding: 10px 0 0 0;
+}
